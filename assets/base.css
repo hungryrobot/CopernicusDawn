@@ -8,25 +8,8 @@
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
-/* === B2B: hide native Dawn price/CTA shells so "Unavailable" never shows === */
-body.b2b .price,
-body.b2b .product-form,
-body.b2b .card-information .price,
-body.b2b .card-information .quick-add,
-html.is-b2b .price,
-html.is-b2b .product-form,
-html.is-b2b .card-information .price,
-html.is-b2b .card-information .quick-add,
-body[data-b2b="true"] .price,
-body[data-b2b="true"] .product-form,
-body[data-b2b="true"] .card-information .price,
-body[data-b2b="true"] .card-information .quick-add {
-  display: none !important;
-}
-
-/* Reserve space so the layout doesn't jump before SparkLayer mounts */
-#sprkl-pdp,
-.sprkl-product-card {
+/* Reserve space so the layout doesn't jump before SparkLayer mounts (testing) */
+#sprkl-pdp {
   min-height: 48px;
 }
 
@@ -3599,8 +3582,4 @@ details-disclosure > details {
   }
 }
 
-/* TEMP: ensure PDP mount is visible and occupies space while testing */
-#sprkl-pdp {
-  min-height: 64px;
-  outline: 2px dashed rgba(0, 0, 0, 0.35);
-}
+
