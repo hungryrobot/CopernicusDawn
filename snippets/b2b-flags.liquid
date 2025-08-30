@@ -1,13 +1,18 @@
 {%- comment -%} Centralized B2B flag and window helper {%- endcomment -%}
-{%- assign is_b2b = false -%}
-{%- if customer -%}
-  {% if customer.b2b? or customer.company %}
-    {%- assign is_b2b = true -%}
-  {% elsif customer.tags contains 'b2b' %}
-    {%- assign is_b2b = true -%}
-  {% endif %}
-{%- endif -%}
+{%- liquid
+  unless is_b2b
+    assign is_b2b = false
+    if customer
+      if customer.b2b? or customer.company
+        assign is_b2b = true
+      elsif customer.tags contains 'b2b'
+        assign is_b2b = true
+      endif
+    endif
+  endunless
+-%}
 <script>
   window.SPRKL = Object.assign(window.SPRKL || {}, { is_b2b: {{ is_b2b | json }} });
   document.documentElement.classList.toggle('is-b2b', {{ is_b2b | json }});
+  document.body?.setAttribute('data-b2b', String({{ is_b2b | json }}));
 </script>

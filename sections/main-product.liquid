@@ -1,6 +1,16 @@
-{% assign productTags = product.tags | join: ', ' %}
+{% liquid
+  assign is_b2b = false
+  if customer
+    if customer.b2b? or customer.company
+      assign is_b2b = true
+    elsif customer.tags contains 'b2b'
+      assign is_b2b = true
+    endif
+  endif
+%}
+{% render 'b2b-flags', is_b2b: is_b2b %}
 
-{% render 'b2b-flags' %}
+{% assign productTags = product.tags | join: ', ' %}
 
 
 {% if productTags contains 'b2b-only' %}

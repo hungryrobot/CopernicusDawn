@@ -1,3 +1,15 @@
+{% liquid
+  assign is_b2b = false
+  if customer
+    if customer.b2b? or customer.company
+      assign is_b2b = true
+    elsif customer.tags contains 'b2b'
+      assign is_b2b = true
+    endif
+  endif
+%}
+{% render 'b2b-flags', is_b2b: is_b2b %}
+
 {% comment %}
   Renders a product card
 
@@ -28,7 +40,7 @@
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
-{% render 'b2b-flags' %}
+ 
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1

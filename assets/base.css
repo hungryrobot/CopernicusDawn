@@ -12,7 +12,15 @@
 body.b2b .price,
 body.b2b .product-form,
 body.b2b .card-information .price,
-body.b2b .card-information .quick-add {
+body.b2b .card-information .quick-add,
+html.is-b2b .price,
+html.is-b2b .product-form,
+html.is-b2b .card-information .price,
+html.is-b2b .card-information .quick-add,
+body[data-b2b="true"] .price,
+body[data-b2b="true"] .product-form,
+body[data-b2b="true"] .card-information .price,
+body[data-b2b="true"] .card-information .quick-add {
   display: none !important;
 }
 
