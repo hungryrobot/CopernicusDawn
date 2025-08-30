@@ -8,6 +8,20 @@
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
+/* === B2B: hide native Dawn price/CTA shells so "Unavailable" never shows === */
+body.b2b .price,
+body.b2b .product-form,
+body.b2b .card-information .price,
+body.b2b .card-information .quick-add {
+  display: none !important;
+}
+
+/* Reserve space so the layout doesn't jump before SparkLayer mounts */
+#sprkl-pdp,
+.sprkl-product-card {
+  min-height: 48px;
+}
+
 .product-card-wrapper .card,
 .contains-card--product {
   --border-radius: var(--product-card-corner-radius);

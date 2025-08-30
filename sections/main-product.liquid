@@ -368,16 +368,6 @@
                                   {%- break -%}
                                 {%- endif -%}
                               {%- endfor -%}
-          {% if is_b2b %}
-            {% comment %} === SPARKLAYER PDP MOUNT (B2B) === {% endcomment %}
-            <div id="sprkl-pdp"
-                 data-sprkl="pdp"
-                 data-product-id="{{ product.id }}"
-                 data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-            </div>
-          {% endif %}
-
-          
                             {%- endif -%}
                           </div>
                         {%- else -%}
@@ -698,6 +688,14 @@
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
           {%- endfor -%}
+          {% if is_b2b %}
+            {% comment %} === SPARKLAYER PDP MOUNT (B2B) === {% endcomment %}
+            <div id="sprkl-pdp"
+                 data-sprkl="pdp"
+                 data-product-id="{{ product.id }}"
+                 data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+            </div>
+          {% endif %}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
             {% render 'icon-arrow' %}

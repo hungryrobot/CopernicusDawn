@@ -28,6 +28,8 @@
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
+{% render 'b2b-flags' %}
+{% assign is_b2b = customer and customer.tags contains 'b2b' %}
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -204,9 +206,11 @@
               </p>
             {%- endif -%}
 
-            <div style="position: relative; z-index: 1;">
-              <spark-product-card parent-id="{{ card_product.id }}"></spark-product-card>
-            </div>
+            {% if is_b2b %}
+              {% comment %} === SPARKLAYER PRODUCT CARD MOUNT (B2B) === {% endcomment %}
+              <div class="sprkl-product-card" data-sprkl="product-card" data-product-id="{{ card_product.id }}"></div>
+            {% endif %}
+            {% unless is_b2b %}
             <div data-spark="b2c-only">
               {% assign hidePricesLoggedOut = false %}
               {%- if hidePricesLoggedOut == true -%}
@@ -250,6 +254,7 @@
                               {{- 'products.product.quantity.multiples_of' | t: quantity: quantity_rule.increment -}}
                             </span>
                           {%- endif -%}
+            {% endunless %}
                           {%- if quantity_rule.min > 1 -%}
                             <span class="divider">
                               {{- 'products.product.quantity.min_of' | t: quantity: quantity_rule.min -}}
@@ -299,8 +304,9 @@
                {%- endif -%}
           </div>
         </div>
-        {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
-        {% if quick_add == 'standard' %}
+        {% unless is_b2b %}
+          {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
+          {% if quick_add == 'standard' %}
           <div data-spark="b2c-only" class="quick-add no-js-hidden">
             {%- liquid
               assign qty_rules = false
@@ -555,6 +561,7 @@
             </div>
           {% endif %}
         {% endif %}
+        {% endunless %}
         <div class="card__badge {{ settings.badge_position }}">
           {%- if card_product.available == false -%}
             <span
