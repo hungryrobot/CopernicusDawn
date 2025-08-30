@@ -12,7 +12,20 @@
   endunless
 -%}
 <script>
-  window.SPRKL = Object.assign(window.SPRKL || {}, { is_b2b: {{ is_b2b | json }} });
-  document.documentElement.classList.toggle('is-b2b', {{ is_b2b | json }});
-  document.body?.setAttribute('data-b2b', String({{ is_b2b | json }}));
-</script>
+  (function () {
+    var IS_B2B = {{ is_b2b | default: false | json }};
+    // expose flag
+    window.SPRKL = Object.assign(window.SPRKL || {}, { is_b2b: IS_B2B });
+    document.documentElement.classList.toggle('is-b2b', IS_B2B);
+
+    // harden: ensure <body> reflects B2B even if the Liquid class wasn't appended
+    if (IS_B2B && document.body) {
+      if (!document.body.classList.contains('b2b')) {
+        document.body.classList.add('b2b');
+      }
+      if (document.body.getAttribute('data-b2b') !== 'true') {
+        document.body.setAttribute('data-b2b', 'true');
+      }
+    }
+  })();
+  </script>
