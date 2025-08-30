@@ -3602,5 +3602,5 @@ details-disclosure > details {
 /* TEMP: ensure PDP mount is visible and occupies space while testing */
 #sprkl-pdp {
   min-height: 64px;
-  outline: 2px dashed rgba(0, 0, 0, 0.25);
+  outline: 2px dashed rgba(0, 0, 0, 0.35);
 }

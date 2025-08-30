@@ -538,6 +538,32 @@ window.sparkOptions = {
       {%- if 'sprkl-core.js' | asset_url -%}
         {{ 'sprkl-core.js' | asset_url | script_tag }}
       {%- endif -%}
+
+      <script>
+      (function() {
+        function mountPDP() {
+          var el = document.querySelector('#sprkl-pdp[data-sprkl="pdp"]');
+          if (!el || !window.SPRKL || typeof window.SPRKL.mount !== 'function') return false;
+          try { window.SPRKL.mount(el); } catch(e) { console.error('SPRKL mount error', e); }
+          return !!document.querySelector('#sprkl-pdp [data-sprkl-component]');
+        }
+
+        function tryUntilMounted(attempts) {
+          if (mountPDP()) return;
+          if (attempts <= 0) return;
+          setTimeout(function(){ tryUntilMounted(attempts - 1); }, 150);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+          tryUntilMounted(20); // ~3 seconds of retries
+        });
+
+        // For Shopify editor / dynamic section reloads
+        document.addEventListener('shopify:section:load', function () {
+          tryUntilMounted(20);
+        });
+      })();
+      </script>
   {% comment %} END {% endcomment %}
   </body>
 </html>
