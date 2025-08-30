@@ -1,15 +1,3 @@
-{% liquid
-  assign is_b2b = false
-  if customer
-    if customer.b2b? or customer.company
-      assign is_b2b = true
-    elsif customer.tags contains 'b2b'
-      assign is_b2b = true
-    endif
-  endif
-%}
-{% render 'b2b-flags', is_b2b: is_b2b %}
-
 {% assign productTags = product.tags | join: ', ' %}
 
 
@@ -108,15 +96,6 @@
           id="ProductInfo-{{ section.id }}"
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
-          {% if is_b2b %}
-            <!-- SparkLayer PDP mount (placed early so it's never hidden by accordions/forms) -->
-            <div id="sprkl-pdp"
-                 data-sprkl="pdp"
-                 data-product-id="{{ product.id }}"
-                 data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-            </div>
-          {% endif %}
-
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
           {%- for block in section.blocks -%}
@@ -149,46 +128,44 @@
                     </div>
                   {%- endif -%}
                 {%- endif -%}
-                
+                <spark-pdp parent-id="{{ product.id }}"></spark-pdp> 
               {%- when 'price' -%}
-                {% unless is_b2b %}
-                  {%- if hidePricesLoggedOut == false or is_b2b -%}
-                  <div data-spark="b2c-only" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                    {%- render 'price',
-                      product: product,
-                      use_variant: true,
-                      show_badges: true,
-                      price_class: 'price--large'
-                    -%}
+                {%- if hidePricesLoggedOut == false or customer.tags contains 'b2b' -%}
+                <div data-spark="b2c-only" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  {%- render 'price',
+                    product: product,
+                    use_variant: true,
+                    show_badges: true,
+                    price_class: 'price--large'
+                  -%}
+                </div>
+                {%- if product.quantity_price_breaks_configured? -%}
+                  <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
+                    <span>{{ 'products.product.volume_pricing.note' | t }}</span>
                   </div>
-                  {%- if product.quantity_price_breaks_configured? -%}
-                    <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
-                      <span>{{ 'products.product.volume_pricing.note' | t }}</span>
-                    </div>
-                  {%- endif -%}
-                  {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                    <div data-spark="b2c-only" class="product__tax caption rte">
-                      {%- if cart.duties_included and cart.taxes_included -%}
-                        {{ 'products.product.duties_and_taxes_included' | t }}
-                      {%- elsif cart.taxes_included -%}
-                        {{ 'products.product.taxes_included' | t }}
-                      {%- elsif cart.duties_included -%}
-                        {{ 'products.product.duties_included' | t }}
-                      {%- endif -%}
-                      {%- if shop.shipping_policy.body != blank -%}
-                        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                      {%- endif -%}
-                    </div>
-                  {%- endif -%}
-                  <div {{ block.shopify_attributes }}>
-                    {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
-                    {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
-                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                      {{ form | payment_terms }}
-                    {%- endform -%}
+                {%- endif -%}
+                {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
+                  <div data-spark="b2c-only" class="product__tax caption rte">
+                    {%- if cart.duties_included and cart.taxes_included -%}
+                      {{ 'products.product.duties_and_taxes_included' | t }}
+                    {%- elsif cart.taxes_included -%}
+                      {{ 'products.product.taxes_included' | t }}
+                    {%- elsif cart.duties_included -%}
+                      {{ 'products.product.duties_included' | t }}
+                    {%- endif -%}
+                    {%- if shop.shipping_policy.body != blank -%}
+                      {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                    {%- endif -%}
                   </div>
-                  {%- endif -%}
-                {% endunless %}
+                {%- endif -%}
+                <div {{ block.shopify_attributes }}>
+                  {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+                  {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    {{ form | payment_terms }}
+                  {%- endform -%}
+                </div>
+              {%- endif -%}
               {%- when 'inventory' -%}
                 <p
                   data-spark="b2c-only"
@@ -516,15 +493,11 @@
                 %}
 
                   {%- when 'variant_picker' -%}
-                    {% unless is_b2b %}
-                      {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
-                    {% endunless %}
+                    {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
                   {%- when 'buy_buttons' -%}
-                    {% unless is_b2b %}
-                      {%- if hidePricesLoggedOut == false or is_b2b -%}
-                        {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
-                      {%- endif -%}
-                    {% endunless %}
+                    {%- if hidePricesLoggedOut == false or customer.tags contains 'b2b' -%}
+                      {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+                    {%- endif -%}
                   {%- when 'rating' -%}
                     {%- if product.metafields.reviews.rating.value != blank -%}
                       <div class="rating-wrapper">
