@@ -29,7 +29,6 @@
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
 {% render 'b2b-flags' %}
-{% assign is_b2b = customer and customer.tags contains 'b2b' %}
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
