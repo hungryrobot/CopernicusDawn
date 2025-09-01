@@ -28,6 +28,25 @@
       <a class="wh-btn" href="{{ section.settings.b2b_url | default: '/pages/wholesale-apply' }}">
         {{ section.settings.direct_button_label | default: 'Apply for access' }}
       </a>
+      {%- comment -%} Secondary login + catalog buttons {%- endcomment -%}
+      <div class="mt-2 space-y-2">
+        {%- if customer and customer.tags contains 'b2b' -%}
+          <a href="{{ section.settings.direct_start_url | default: '/' }}"
+             class="button button--secondary">
+            {{ section.settings.direct_start_label }}
+          </a>
+        {%- else -%}
+          <a href="{{ section.settings.direct_login_url | default: '/pages/b2b-login#login' }}"
+             class="button button--secondary">
+            {{ section.settings.direct_login_label }}
+          </a>
+        {%- endif -%}
+
+        <a href="{{ section.settings.catalog_signup_url | default: '/pages/catalog-signup' }}"
+           class="button button--tertiary">
+          {{ section.settings.catalog_signup_label }}
+        </a>
+      </div>
       <h2>Register to buy direct</h2>
 
       {% if section.settings.direct_terms != blank %}
@@ -91,6 +110,12 @@
 
     { "type": "text", "id": "faire_button_label", "label": "Faire button text", "default": "Shop on Faire" },
     { "type": "text", "id": "direct_button_label", "label": "Direct button text", "default": "Apply for access" },
+    { "type": "text", "id": "direct_login_label", "label": "Login button label", "default": "Already registered? Log in" },
+    { "type": "url", "id": "direct_login_url", "label": "Login button URL", "default": "/pages/b2b-login#login" },
+    { "type": "text", "id": "direct_start_label", "label": "Approved (B2B) button label", "default": "Start shopping" },
+    { "type": "url", "id": "direct_start_url", "label": "Approved (B2B) start URL", "default": "/" },
+    { "type": "text", "id": "catalog_signup_label", "label": "Catalog mailing list button label", "default": "Get on our print catalog mailing list" },
+    { "type": "url", "id": "catalog_signup_url", "label": "Catalog signup page URL", "default": "/pages/catalog-signup" },
 
     { "type": "richtext", "id": "faire_terms", "label": "Faire incentives (left card)" },
     { "type": "richtext", "id": "direct_terms", "label": "Direct B2B terms (right card)" }

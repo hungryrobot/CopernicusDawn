@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "catalog-signup-form",
+      "settings": {
+        "heading": "Print Catalog Mailing List",
+        "subheading": "Add your store’s mailing address and we’ll send the next edition.",
+        "button_label": "Join the mailing list",
+        "success_message": "Thanks! You’re on the mailing list."
+      }
+    }
+  },
+  "order": ["main"]
+}

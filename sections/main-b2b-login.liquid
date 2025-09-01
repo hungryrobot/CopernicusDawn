@@ -53,6 +53,7 @@
         </div>
       </div>
 
+      <a id="login"></a>
       <div class="b2b-card">
         <a class="wh-btn" href="{{ login_url }}">
           {{ section.settings.login_button_label | default: 'Log in' }}
@@ -64,6 +65,26 @@
       </div>
     </div>
   {%- endif -%}
+
+  {%- comment -%} Secondary login + catalog buttons {%- endcomment -%}
+  <div class="mt-2 space-y-2">
+    {%- if customer and customer.tags contains 'b2b' -%}
+      <a href="{{ section.settings.direct_start_url | default: '/' }}"
+         class="button button--secondary">
+        {{ section.settings.direct_start_label }}
+      </a>
+    {%- else -%}
+      <a href="{{ section.settings.direct_login_url | default: '/pages/b2b-login#login' }}"
+         class="button button--secondary">
+        {{ section.settings.direct_login_label }}
+      </a>
+    {%- endif -%}
+
+    <a href="{{ section.settings.catalog_signup_url | default: '/pages/catalog-signup' }}"
+       class="button button--tertiary">
+      {{ section.settings.catalog_signup_label }}
+    </a>
+  </div>
 
   {%- if section.settings.terms != blank -%}
     <div class="b2b-card" style="margin-top:2rem">
@@ -133,6 +154,13 @@
     { "type": "text", "id": "start_shopping_label", "label": "Start shopping (approved) button text", "default": "Start shopping" },
     { "type": "text", "id": "account_label", "label": "Account button text", "default": "My account" },
     { "type": "text", "id": "switch_user_label", "label": "Switch user button text", "default": "Log out & switch user" },
+
+    { "type": "text", "id": "direct_start_url", "label": "Secondary: approved start URL", "default": "/" },
+    { "type": "text", "id": "direct_start_label", "label": "Secondary: approved start label", "default": "Start shopping" },
+    { "type": "text", "id": "direct_login_url", "label": "Secondary: login URL", "default": "/pages/b2b-login#login" },
+    { "type": "text", "id": "direct_login_label", "label": "Secondary: login label", "default": "Log in" },
+    { "type": "text", "id": "catalog_signup_url", "label": "Secondary: catalog signup URL", "default": "/pages/catalog-signup" },
+    { "type": "text", "id": "catalog_signup_label", "label": "Secondary: catalog signup label", "default": "Request a catalog" },
 
     { "type": "richtext", "id": "terms", "label": "Wholesale Terms / Policies", "default": "<ul><li>Minimum order: $200</li><li>5% discount on orders over $500</li><li>Orders ship within 2–3 days of receipt</li><li>Most orders prepaid; Net 30 for approved customers</li></ul>" }
   ],
