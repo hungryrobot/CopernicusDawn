@@ -1,16 +1,4 @@
-{%- liquid
-  assign is_b2b = false
-  if render 'b2b-flags' != ''
-    comment
-      If your b2b-flags snippet sets a global 'is_b2b' variable, we trust it.
-    endcomment
-  endif
-  if is_b2b == false
-    if customer and customer.tags contains 'b2b'
-      assign is_b2b = true
-    endif
-  endif
--%}
+{%- assign is_b2b = customer and customer.tags contains 'b2b' -%}
 
 <section class="section section--wholesale-hub page-width">
   <header class="wholesale-hero">
