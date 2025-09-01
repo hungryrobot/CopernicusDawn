@@ -9,7 +9,7 @@
         "contact_email": "sales@copernicustoys.com",
         "shop_b2b_url": "/",
         "login_url": "/account/login",
-        "register_url": "/account/register",
+        "register_url": "/pages/wholesale-apply",
         "register_button_label": "Apply / Register",
         "login_button_label": "Log in",
         "start_shopping_label": "Start shopping",
