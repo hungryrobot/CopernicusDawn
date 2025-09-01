@@ -1,14 +1,14 @@
-{%- assign is_b2b = customer and customer.tags contains 'b2b' -%}
+{% assign is_b2b = customer and customer.tags contains 'b2b' %}
 
 <section class="section section--wholesale-hub page-width">
   <header class="wholesale-hero">
     <h1 class="wholesale-hero__title">{{ section.settings.hero_heading | escape }}</h1>
-    {%- if section.settings.hero_subheading != blank -%}
+    {% if section.settings.hero_subheading != blank %}
       <p class="wholesale-hero__subtitle">{{ section.settings.hero_subheading }}</p>
-    {%- endif -%}
+    {% endif %}
   </header>
 
-  {%- if is_b2b -%}
+  {% if is_b2b %}
     <div class="wh-grid">
       <div class="wh-card">
         <h2>Quick Order</h2>
@@ -19,19 +19,19 @@
       <div class="wh-card">
         <h2>Browse Wholesale Collections</h2>
         <p>Jump straight to curated collections configured for B2B.</p>
-        {%- if section.settings.collections_list != blank -%}
+        {% if section.settings.collections_list != blank %}
           <div class="wh-links">
-            {%- assign links = section.settings.collections_list | split: ',' -%}
-            {%- for raw in links -%}
-              {%- assign pair = raw | strip | split: '|' -%}
-              {%- assign label = pair[0] | strip -%}
-              {%- assign url = pair[1] | strip -%}
+            {% assign links = section.settings.collections_list | split: ',' %}
+            {% for raw in links %}
+              {% assign pair = raw | strip | split: '|' %}
+              {% assign label = pair[0] | strip %}
+              {% assign url = pair[1] | strip %}
               <a class="link" href="{{ url }}">{{ label }}</a>
-            {%- endfor -%}
+            {% endfor %}
           </div>
-        {%- else -%}
+        {% else %}
           <a class="link" href="/collections">All collections →</a>
-        {%- endif -%}
+        {% endif %}
       </div>
 
       <div class="wh-card">
@@ -46,28 +46,28 @@
       </div>
     </div>
 
-    {%- if section.settings.show_orders_widget -%}
+    {% if section.settings.show_orders_widget %}
       <div class="wh-widget">
         <h3>Your Orders</h3>
         <div data-sparklayer-widget="orders"></div>
       </div>
-    {%- endif -%}
+    {% endif %}
 
-    {%- if section.settings.show_reorder_widget -%}
+    {% if section.settings.show_reorder_widget %}
       <div class="wh-widget">
         <h3>Reorder</h3>
         <div data-sparklayer-widget="reorder"></div>
       </div>
-    {%- endif -%}
+    {% endif %}
 
-    {%- if section.settings.show_account_widget -%}
+    {% if section.settings.show_account_widget %}
       <div class="wh-widget">
         <h3>Account</h3>
         <div data-sparklayer-widget="account"></div>
       </div>
-    {%- endif -%}
+    {% endif %}
 
-  {%- else -%}
+  {% else %}
     <div class="wh-gate">
       <p>This area is for approved wholesale customers.</p>
       <div class="wh-gate__actions">
@@ -76,7 +76,7 @@
       </div>
       <p class="wh-gate__note">If you prefer, you can also order via our Faire portal: <a href="{{ section.settings.faire_url }}">copernicustoys.faire.com</a>.</p>
     </div>
-  {%- endif -%}
+  {% endif %}
 </section>
 
 <style>
