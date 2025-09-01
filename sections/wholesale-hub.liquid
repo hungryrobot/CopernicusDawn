@@ -1,19 +1,12 @@
-{%- comment -%}
-  Wholesale Hub section for Dawn + SparkLayer
-  - Shows B2B content if the customer is approved.
-  - Fallback gate with Apply/Login for retail or pending accounts.
-  - Optional SparkLayer widgets (Orders, Reorder, Account) toggled by settings.
-
-  Dependencies (optional but recommended):
-  - Snippet 'b2b-flags' that sets a variable 'is_b2b'. If not present, we fall back to checking customer.tags.
-{%- endcomment -%}
-
 {%- liquid
   assign is_b2b = false
-  if customer
-    if customer.b2b? or customer.company
-      assign is_b2b = true
-    elsif customer.tags contains 'b2b'
+  if render 'b2b-flags' != ''
+    comment
+      If your b2b-flags snippet sets a global 'is_b2b' variable, we trust it.
+    endcomment
+  endif
+  if is_b2b == false
+    if customer and customer.tags contains 'b2b'
       assign is_b2b = true
     endif
   endif
@@ -118,19 +111,11 @@
   "settings": [
     { "type": "text", "id": "hero_heading", "label": "Heading", "default": "Wholesale Hub" },
     { "type": "textarea", "id": "hero_subheading", "label": "Subheading", "default": "Approved buyers: quick links, tools, and resources." },
-
-    { "type": "url", "id": "apply_page_url", "label": "Apply page URL", "default": "/pages/wholesale-apply" },
-    { "type": "url", "id": "login_url", "label": "Login URL", "default": "/account/login" },
-    { "type": "url", "id": "faire_url", "label": "Faire URL", "default": "https://copernicustoys.faire.com" },
-    { "type": "url", "id": "quick_order_url", "label": "Quick Order URL", "default": "/apps/sparklayer/quick-order" },
-
-    {
-      "type": "textarea",
-      "id": "collections_list",
-      "label": "Collections list (comma-separated ‘Label|/collections/handle’)",
-      "info": "Example: ‘Bestsellers|/collections/bestsellers, New for 2025|/collections/new-2025’"
-    },
-
+    { "type": "url", "id": "apply_page_url", "label": "Apply page URL" },
+    { "type": "url", "id": "login_url", "label": "Login URL" },
+    { "type": "url", "id": "faire_url", "label": "Faire URL" },
+    { "type": "url", "id": "quick_order_url", "label": "Quick Order URL" },
+    { "type": "textarea", "id": "collections_list", "label": "Collections list (comma-separated ‘Label|/collections/handle’)", "info": "Example: ‘Bestsellers|/collections/bestsellers, New for 2025|/collections/new-2025’" },
     { "type": "checkbox", "id": "show_orders_widget", "label": "Show SparkLayer Orders widget", "default": true },
     { "type": "checkbox", "id": "show_reorder_widget", "label": "Show SparkLayer Reorder widget", "default": true },
     { "type": "checkbox", "id": "show_account_widget", "label": "Show SparkLayer Account widget", "default": true }

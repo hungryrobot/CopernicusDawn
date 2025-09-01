@@ -9,7 +9,7 @@
         "login_url": "/account/login",
         "faire_url": "https://copernicustoys.faire.com",
         "quick_order_url": "/apps/sparklayer/quick-order",
-        "collections_list": "",
+        "collections_list": "Bestsellers|/collections/bestsellers, New for 2025|/collections/new-2025",
         "show_orders_widget": true,
         "show_reorder_widget": true,
         "show_account_widget": true

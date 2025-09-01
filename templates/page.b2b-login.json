@@ -1,1 +1,13 @@
-{"sections":{"main":{"type":"main-b2b-login","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-b2b-login",
+      "settings": {
+        "apply_url": "/pages/wholesale-apply",
+        "login_url": "/account/login",
+        "contact_email": "sales@copernicustoys.com"
+      }
+    }
+  },
+  "order": ["main"]
+}
