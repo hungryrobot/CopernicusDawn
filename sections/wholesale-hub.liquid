@@ -1,0 +1,145 @@
+{%- comment -%}
+  Wholesale Hub section for Dawn + SparkLayer
+  - Shows B2B content if the customer is approved.
+  - Fallback gate with Apply/Login for retail or pending accounts.
+  - Optional SparkLayer widgets (Orders, Reorder, Account) toggled by settings.
+
+  Dependencies (optional but recommended):
+  - Snippet 'b2b-flags' that sets a variable 'is_b2b'. If not present, we fall back to checking customer.tags.
+{%- endcomment -%}
+
+{%- liquid
+  assign is_b2b = false
+  if render 'b2b-flags' != ''
+    comment
+      If your b2b-flags snippet sets a global 'is_b2b' variable, we trust it.
+    endcomment
+  endif
+  if is_b2b == false
+    if customer and customer.tags contains 'b2b'
+      assign is_b2b = true
+    endif
+  endif
+-%}
+
+<section class="section section--wholesale-hub page-width">
+  <header class="wholesale-hero">
+    <h1 class="wholesale-hero__title">{{ section.settings.hero_heading | escape }}</h1>
+    {%- if section.settings.hero_subheading != blank -%}
+      <p class="wholesale-hero__subtitle">{{ section.settings.hero_subheading }}</p>
+    {%- endif -%}
+  </header>
+
+  {%- if is_b2b -%}
+    <div class="wh-grid">
+      <div class="wh-card">
+        <h2>Quick Order</h2>
+        <p>Build large orders fast with case-pack rules and live stock.</p>
+        <a class="button button--primary" href="{{ section.settings.quick_order_url }}">Open Quick Order</a>
+      </div>
+
+      <div class="wh-card">
+        <h2>Browse Wholesale Collections</h2>
+        <p>Jump straight to curated collections configured for B2B.</p>
+        {%- if section.settings.collections_list != blank -%}
+          <div class="wh-links">
+            {%- assign links = section.settings.collections_list | split: ',' -%}
+            {%- for raw in links -%}
+              {%- assign pair = raw | strip | split: '|' -%}
+              {%- assign label = pair[0] | strip -%}
+              {%- assign url = pair[1] | strip -%}
+              <a class="link" href="{{ url }}">{{ label }}</a>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <a class="link" href="/collections">All collections →</a>
+        {%- endif -%}
+      </div>
+
+      <div class="wh-card">
+        <h2>Resources</h2>
+        <ul class="wh-list">
+          <li><a href="/pages/wholesale-pricing">Wholesale price list</a></li>
+          <li><a href="/pages/case-packs">Case packs & MOQs</a></li>
+          <li><a href="/pages/net-terms">Net terms & invoicing</a></li>
+          <li><a href="/pages/shipping">Shipping & lead times</a></li>
+          <li><a href="{{ section.settings.faire_url }}">Order via Faire (backup)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    {%- if section.settings.show_orders_widget -%}
+      <div class="wh-widget">
+        <h3>Your Orders</h3>
+        <div data-sparklayer-widget="orders"></div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_reorder_widget -%}
+      <div class="wh-widget">
+        <h3>Reorder</h3>
+        <div data-sparklayer-widget="reorder"></div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_account_widget -%}
+      <div class="wh-widget">
+        <h3>Account</h3>
+        <div data-sparklayer-widget="account"></div>
+      </div>
+    {%- endif -%}
+
+  {%- else -%}
+    <div class="wh-gate">
+      <p>This area is for approved wholesale customers.</p>
+      <div class="wh-gate__actions">
+        <a class="button button--primary" href="{{ section.settings.apply_page_url }}">Apply for a Wholesale Account</a>
+        <a class="button" href="{{ section.settings.login_url }}">Log in</a>
+      </div>
+      <p class="wh-gate__note">If you prefer, you can also order via our Faire portal: <a href="{{ section.settings.faire_url }}">copernicustoys.faire.com</a>.</p>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  .section--wholesale-hub { margin-top: var(--spacing-8, 2rem); }
+  .wholesale-hero__title { margin: 0 0 .25rem 0; }
+  .wholesale-hero__subtitle { opacity: .8; margin: 0 0 1.25rem; }
+  .wh-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin: 1rem 0 1.5rem; }
+  .wh-card { border: 1px solid rgb(0 0 0 / 10%); border-radius: 1rem; padding: 1rem; }
+  .wh-card .button { margin-top: .5rem; }
+  .wh-links { display: grid; gap: .25rem; }
+  .wh-list { margin: 0; padding-left: 1.25rem; }
+  .wh-widget { margin: 1.5rem 0; padding: 1rem; border: 1px dashed rgb(0 0 0 / 15%); border-radius: 1rem; }
+  .wh-gate { border: 1px solid rgb(0 0 0 / 10%); border-radius: 1rem; padding: 1.25rem; text-align: center; }
+  .wh-gate__actions { display: flex; gap: .75rem; justify-content: center; margin: .75rem 0; flex-wrap: wrap; }
+</style>
+
+{% schema %}
+{
+  "name": "Wholesale Hub",
+  "settings": [
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "Wholesale Hub" },
+    { "type": "textarea", "id": "hero_subheading", "label": "Subheading", "default": "Approved buyers: quick links, tools, and resources." },
+
+    { "type": "url", "id": "apply_page_url", "label": "Apply page URL", "default": "/pages/wholesale-apply" },
+    { "type": "url", "id": "login_url", "label": "Login URL", "default": "/account/login" },
+    { "type": "url", "id": "faire_url", "label": "Faire URL", "default": "https://copernicustoys.faire.com" },
+    { "type": "url", "id": "quick_order_url", "label": "Quick Order URL", "default": "/apps/sparklayer/quick-order" },
+
+    {
+      "type": "textarea",
+      "id": "collections_list",
+      "label": "Collections list (comma-separated ‘Label|/collections/handle’)",
+      "info": "Example: ‘Bestsellers|/collections/bestsellers, New for 2025|/collections/new-2025’"
+    },
+
+    { "type": "checkbox", "id": "show_orders_widget", "label": "Show SparkLayer Orders widget", "default": true },
+    { "type": "checkbox", "id": "show_reorder_widget", "label": "Show SparkLayer Reorder widget", "default": true },
+    { "type": "checkbox", "id": "show_account_widget", "label": "Show SparkLayer Account widget", "default": true }
+  ],
+  "presets": [
+    { "name": "Wholesale Hub" }
+  ]
+}
+{% endschema %}
