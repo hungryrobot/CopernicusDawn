@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "image_banner_nNhfym": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_hg4fbR": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Become a Copernicus Toys' retailer!</strong>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": ["heading_hg4fbR"],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Dawn-BannerDesktop-02.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "main": {
+      "type": "wholesale-hub-v2",
+      "settings": {
+        "heading": "Wholesale",
+        "intro": "<p><strong>Choose how you’d like to order wholesale.</strong></p>",
+        "faire_link": "https://copernicustoys.faire.com",
+        "faire_embed": "",
+        "b2b_url": "shopify://pages/b2b-login",
+        "faire_button_label": "Shop on Faire",
+        "direct_button_label": "Apply for access",
+        "faire_terms": "<ul><li>Personalized recommendations &amp; easy online checkout</li><li>60-day payment terms for eligible retailers</li><li>Free returns on first orders</li><li>50% off first order &amp; 1 year of free shipping for new referrals</li></ul>",
+        "direct_terms": "<ul><li>Minimum order: $200</li><li>5% discount on orders over $500</li><li>Ships in 2–3 days from receipt</li><li>Prepaid by default; Net 30 for approved customers</li></ul>"
+      }
+    }
+  },
+  "order": ["image_banner_nNhfym", "main"]
+}

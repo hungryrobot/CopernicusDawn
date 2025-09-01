@@ -1,0 +1,102 @@
+<section class="page-width">
+  <div class="rte">
+    <h1>{{ section.settings.heading }}</h1>
+    {{ section.settings.intro }}
+  </div>
+
+  <div class="wh-grid">
+    <div class="wh-card">
+      <a class="wh-btn" href="{{ section.settings.faire_link | default: '#' }}" target="_blank" rel="noopener">
+        {{ section.settings.faire_button_label | default: 'Shop on Faire' }}
+      </a>
+      <h2>Order on Faire</h2>
+
+      {% if section.settings.faire_terms != blank %}
+        <div class="wh-terms">
+          <div class="rte">{{ section.settings.faire_terms }}</div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.faire_embed != blank %}
+        <div class="wh-faire-embed">
+          {{ section.settings.faire_embed }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="wh-card">
+      <a class="wh-btn" href="{{ section.settings.b2b_url | default: '/account/register' }}">
+        {{ section.settings.direct_button_label | default: 'Apply for access' }}
+      </a>
+      <h2>Register to buy direct</h2>
+
+      {% if section.settings.direct_terms != blank %}
+        <div class="wh-terms">
+          <div class="rte">{{ section.settings.direct_terms }}</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wh-faire-embed { margin: 1rem 0; }
+  .wh-card { padding: 1.5rem; border: 1px solid rgba(0,0,0,.08); border-radius: 14px; }
+  .wh-grid { display:grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .wh-terms { margin:.75rem 0 1rem; }
+  @media (min-width: 768px) {
+    .wh-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .wh-btn,
+  .wh-btn:link,
+  .wh-btn:visited,
+  .wh-btn:focus,
+  .wh-btn:focus-visible,
+  .wh-btn:hover,
+  .wh-btn:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    appearance: none;
+    text-decoration: none;
+  }
+  .wh-btn {
+    display: inline-block;
+    padding: .75rem 1.25rem;
+    border-radius: 999px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    margin-bottom: .75rem;
+  }
+  .wh-btn:hover { background-color: #333; }
+  .wh-btn:active { transform: translateY(1px); }
+  .wh-btn::before, .wh-btn::after { content: none !important; }
+</style>
+
+{% schema %}
+{
+  "name": "Wholesale Hub (v2)",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wholesale" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Choose how you’d like to order wholesale.</p>" },
+
+    { "type": "url", "id": "faire_link", "label": "Faire Direct link (button link)" },
+    { "type": "textarea", "id": "faire_embed", "label": "Faire embed code (optional widget)" },
+    { "type": "url", "id": "b2b_url", "label": "B2B registration URL" },
+
+    { "type": "text", "id": "faire_button_label", "label": "Faire button text", "default": "Shop on Faire" },
+    { "type": "text", "id": "direct_button_label", "label": "Direct button text", "default": "Apply for access" },
+
+    { "type": "richtext", "id": "faire_terms", "label": "Faire incentives (left card)" },
+    { "type": "richtext", "id": "direct_terms", "label": "Direct B2B terms (right card)" }
+  ],
+  "presets": [
+    { "name": "Wholesale Hub (v2)" }
+  ]
+}
+{% endschema %}

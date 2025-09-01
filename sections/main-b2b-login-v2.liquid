@@ -1,0 +1,143 @@
+<section class="page-width b2b-login-wrap">
+  <header class="rte">
+    <h1>{{ section.settings.heading }}</h1>
+    {{ section.settings.intro }}
+  </header>
+
+  {%- assign required_tag = section.settings.required_tag | default: 'b2b' -%}
+  {%- assign login_url = section.settings.login_url | default: '/account/login' -%}
+  {%- assign register_url = section.settings.register_url | default: '/account/register' -%}
+
+  {%- if customer -%}
+    <div class="b2b-card">
+      <a class="wh-btn" href="{{ section.settings.shop_b2b_url | default: '/' }}">
+        {{ section.settings.start_shopping_label | default: 'Start shopping' }}
+      </a>
+      <h2>Welcome, {{ customer.first_name | default: customer.email }}</h2>
+
+      {%- if customer.tags contains required_tag -%}
+        <p class="rte">
+          {{ section.settings.approved_message | default: 'Your account is approved for wholesale pricing. You can browse with B2B pricing now.' }}
+        </p>
+        <div class="b2b-actions">
+          <a class="wh-btn" href="/account">
+            {{ section.settings.account_label | default: 'My account' }}
+          </a>
+        </div>
+      {%- else -%}
+        <p class="rte">
+          {{ section.settings.pending_message | default: 'Your account is created but not yet approved for wholesale. We’ll review shortly.' }}
+        </p>
+        {%- if section.settings.contact_email != blank -%}
+          <p>Questions? <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a></p>
+        {%- endif -%}
+        <div class="b2b-actions">
+          <a class="wh-btn" href="/account">
+            {{ section.settings.account_label | default: 'My account' }}
+          </a>
+          <a class="wh-btn" href="{{ login_url }}">
+            {{ section.settings.switch_user_label | default: 'Log out & switch user' }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    <div class="b2b-grid">
+      <div class="b2b-card">
+        <a class="wh-btn" href="{{ register_url }}">
+          {{ section.settings.register_button_label | default: 'Apply / Register' }}
+        </a>
+        <h2>New wholesale customer</h2>
+        <div class="rte">
+          {{ section.settings.apply_copy | default: '<p>Apply for a wholesale account to see B2B pricing and place orders directly on our site.</p>' }}
+        </div>
+      </div>
+
+      <div class="b2b-card">
+        <a class="wh-btn" href="{{ login_url }}">
+          {{ section.settings.login_button_label | default: 'Log in' }}
+        </a>
+        <h2>Returning wholesale customer</h2>
+        <div class="rte">
+          <p>Already have an account? Log in to access your wholesale pricing.</p>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.terms != blank -%}
+    <div class="b2b-card" style="margin-top:2rem">
+      <h2>Wholesale Terms</h2>
+      <div class="rte">{{ section.settings.terms }}</div>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  .b2b-login-wrap .b2b-grid { display:grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .b2b-card { padding: 1.5rem; border: 1px solid rgba(0,0,0,.08); border-radius: 14px; }
+  .b2b-actions { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.5rem; }
+
+  .wh-btn,
+  .wh-btn:link,
+  .wh-btn:visited,
+  .wh-btn:focus,
+  .wh-btn:focus-visible,
+  .wh-btn:hover,
+  .wh-btn:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    appearance: none;
+    text-decoration: none;
+  }
+  .wh-btn {
+    display: inline-block;
+    padding: .75rem 1.25rem;
+    border-radius: 999px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    margin-bottom: .75rem;
+  }
+  .wh-btn:hover { background-color: #333; }
+  .wh-btn:active { transform: translateY(1px); }
+
+  @media (min-width: 768px){
+    .b2b-login-wrap .b2b-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "B2B Login / Apply (v2)",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wholesale Login & Registration" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Log in if you already have a wholesale account, or apply below.</p>" },
+
+    { "type": "text", "id": "required_tag", "label": "Required approval tag", "default": "b2b" },
+
+    { "type": "richtext", "id": "apply_copy", "label": "Apply/Register copy", "default": "<p>Apply for wholesale access. We’ll review and approve eligible businesses.</p>" },
+    { "type": "text", "id": "contact_email", "label": "Contact email (optional)" },
+
+    { "type": "text", "id": "shop_b2b_url", "label": "Approved shoppers: destination URL", "default": "/" },
+    { "type": "text", "id": "login_url", "label": "Login URL (fallback)", "default": "/account/login" },
+    { "type": "text", "id": "register_url", "label": "Register URL (fallback)", "default": "/account/register" },
+
+    { "type": "text", "id": "register_button_label", "label": "Register button text", "default": "Apply / Register" },
+    { "type": "text", "id": "login_button_label", "label": "Login button text", "default": "Log in" },
+    { "type": "text", "id": "start_shopping_label", "label": "Start shopping (approved) button text", "default": "Start shopping" },
+    { "type": "text", "id": "account_label", "label": "Account button text", "default": "My account" },
+    { "type": "text", "id": "switch_user_label", "label": "Switch user button text", "default": "Log out & switch user" },
+
+    { "type": "richtext", "id": "terms", "label": "Wholesale Terms / Policies", "default": "<ul><li>Minimum order: $200</li><li>5% discount on orders over $500</li><li>Orders ship within 2–3 days of receipt</li><li>Most orders prepaid; Net 30 for approved customers</li></ul>" }
+  ],
+  "presets": [
+    { "name": "B2B Login / Apply (v2)" }
+  ]
+}
+{% endschema %}

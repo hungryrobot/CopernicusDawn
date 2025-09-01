@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-b2b-login-v2",
+      "settings": {
+        "heading": "Wholesale Login & Registration",
+        "intro": "<p>Log in if you already have a wholesale account, or apply below.</p>",
+        "required_tag": "b2b",
+        "contact_email": "sales@copernicustoys.com",
+        "shop_b2b_url": "/",
+        "login_url": "/account/login",
+        "register_url": "/account/register",
+        "register_button_label": "Apply / Register",
+        "login_button_label": "Log in",
+        "start_shopping_label": "Start shopping",
+        "account_label": "My account",
+        "switch_user_label": "Log out & switch user",
+        "terms": "<ul><li>Minimum order: $200</li><li>5% discount on orders over $500</li><li>Orders ship within 2–3 days of receipt</li><li>Most orders prepaid; Net 30 for approved customers</li></ul>"
+      }
+    }
+  },
+  "order": ["main"]
+}
