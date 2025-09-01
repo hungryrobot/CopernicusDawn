@@ -28,7 +28,7 @@
       }
     },
     "main": {
-      "type": "wholesale-hub-v2",
+      "type": "wholesale-hub",
       "settings": {
         "heading": "Wholesale",
         "intro": "<p><strong>Choose how you’d like to order wholesale.</strong></p>",

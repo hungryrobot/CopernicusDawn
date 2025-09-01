@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-b2b-login-v2",
+      "type": "main-b2b-login",
       "settings": {
         "heading": "Wholesale Login & Registration",
         "intro": "<p>Log in if you already have a wholesale account, or apply below.</p>",
