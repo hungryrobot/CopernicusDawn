@@ -4,11 +4,6 @@
     {{ section.settings.intro }}
   </div>
 
-  {%- comment -%} DEBUG BADGE — remove after verification {%- endcomment -%}
-  <div style="background:#111;color:#fff;font:600 12px/1.2 system-ui;display:inline-block;padding:.25rem .5rem;border-radius:.25rem;margin:.5rem 0;">
-    WHOLESALE-HUB v15 ACTIVE • {{ 'now' | date: '%Y-%m-%d %H:%M' }}
-  </div>
-
   <div class="wh-grid">
     <div class="wh-card">
       <a class="wh-btn" href="{{ section.settings.faire_link | default: '#' }}" target="_blank" rel="noopener">

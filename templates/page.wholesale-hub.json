@@ -1,55 +1,50 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "image_banner_nNhfym": {
-      "type": "image-banner",
+    "cards": {
+      "type": "wholesale-hub-cards",
+      "settings": {
+        "heading": "Wholesale options",
+        "subheading": "<p>Choose the path that fits your business.</p>",
+        "columns": 2,
+        "image_scale": 80,
+        "hover_highlight": true,
+        "show_dividers": false
+      },
       "blocks": {
-        "heading_hg4fbR": {
-          "type": "heading",
+        "card-1": {
+          "type": "card",
           "settings": {
-            "heading": "<strong>Become a Copernicus Toys' retailer!</strong>",
-            "heading_size": "h1"
+            "title": "Shop on Faire",
+            "body": "<p>Fast onboarding, Net terms, and all your Faire perks.</p>",
+            "button_label": "Visit our Faire shop",
+            "button_url": "https://copernicustoys.faire.com"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "title": "Buy Direct (B2B)",
+            "body": "<p>Apply, get approved, and shop wholesale pricing on this site.</p>",
+            "button_label": "Apply / Log in",
+            "button_url": "/pages/b2b-login#login"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "title": "Print Catalog",
+            "body": "<p>Prefer a paper catalog? Tell us where to mail it.</p>",
+            "button_label": "Join mailing list",
+            "button_url": "/pages/catalog-signup"
           }
         }
       },
-      "block_order": ["heading_hg4fbR"],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/Dawn-BannerDesktop-02.webp",
-        "image_overlay_opacity": 0,
-        "image_height": "small",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
+      "block_order": ["card-1", "card-2", "card-3"]
     },
-    "main": {
+    "legacy": {
       "type": "wholesale-hub",
-      "settings": {
-        "heading": "Wholesale",
-        "intro": "<p><strong>Choose how you’d like to order wholesale.</strong></p>",
-        "faire_link": "https://copernicustoys.faire.com",
-        "faire_embed": "",
-        "b2b_url": "shopify://pages/wholesale-apply",
-        "faire_button_label": "Shop on Faire",
-        "direct_button_label": "Apply for access",
-        "faire_terms": "<ul><li>Personalized recommendations &amp; easy online checkout</li><li>60-day payment terms for eligible retailers</li><li>Free returns on first orders</li><li>50% off first order &amp; 1 year of free shipping for new referrals</li></ul>",
-        "direct_terms": "<ul><li>Minimum order: $200</li><li>5% discount on orders over $500</li><li>Ships in 2–3 days from receipt</li><li>Prepaid by default; Net 30 for approved customers</li></ul>"
-      }
+      "settings": {}
     }
   },
-  "order": ["image_banner_nNhfym", "main"]
+  "order": ["cards", "legacy"]
 }
