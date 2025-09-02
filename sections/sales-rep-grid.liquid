@@ -1,9 +1,9 @@
 {% comment %}
 Sales Rep Grid (Dawn 15+)
 - Displays ALL reps as cards, grouped by "Group"
-- Card fields: photo (optional), GROUP, NAME, EMAIL, TERRITORY
+- Card fields: square photo (optional), GROUP, NAME, EMAIL, TERRITORY
 - NAME and TERRITORY are uppercased in UI
-- Multicolumn-esque look: rounded, hover-lift
+- Multicolumn-esque styling (rounded, hover-lift)
 {% endcomment %}
 
 <section class="rep-grid section-{{ section.id }}-padding">
@@ -15,7 +15,7 @@ Sales Rep Grid (Dawn 15+)
       <div class="rte mb-4">{{ section.settings.subheading }}</div>
     {% endif %}
 
-    {%- comment -%} Build unique list of groups {%- endcomment -%}
+    {%- comment -%} Build unique list of groups (agency names) {%- endcomment -%}
     {% assign _groups = "" %}
     {% for block in section.blocks %}
       {% if block.type == 'rep' %}
@@ -58,9 +58,7 @@ Sales Rep Grid (Dawn 15+)
                     <div class="rep-card__group text-subdued">{{ grp | upcase }}</div>
                     <h4 class="rep-card__title">{{ block.settings.name | upcase }}</h4>
                     {% if block.settings.email != blank %}
-                      <div class="rep-card__line">
-                        <a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email }}</a>
-                      </div>
+                      <div class="rep-card__line"><a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email }}</a></div>
                     {% endif %}
                     {% if block.settings.territory != blank %}
                       <div class="rep-card__line"><strong>Territory:</strong> {{ block.settings.territory | upcase }}</div>
