@@ -1,0 +1,264 @@
+{% doc %}
+  Renders a wholesale hub cards grid with 1–4 columns.
+
+  Each card is a block with optional square image, headline, rich text body, and a button.
+  Section settings control layout, image scale, hover highlight, and hairline dividers.
+{% enddoc %}
+
+{% assign uid = section.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .wholesale-hub-{{ uid }} {
+    padding: {{ section.settings.section_padding }}px 0;
+  }
+
+  .wholesale-hub-{{ uid }}__grid {
+    display: grid;
+    gap: {{ section.settings.column_gap }}px;
+    grid-template-columns: repeat({{ section.settings.columns_desktop | plus: 0 }}, 1fr);
+  }
+
+  @media screen and (max-width: 749px) {
+    .wholesale-hub-{{ uid }}__grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile | plus: 0 }}, 1fr);
+      gap: {{ section.settings.column_gap | times: 0.75 }}px;
+    }
+    .wholesale-hub-{{ uid }} {
+      padding: {{ section.settings.section_padding | times: 0.75 }}px 0;
+    }
+  }
+
+  .wholesale-hub-{{ uid }}__card {
+    display: flex;
+    flex-direction: column;
+    text-align: {{ section.settings.text_alignment }};
+    padding: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    {% if section.settings.show_separators %}
+      border: {{ section.settings.separator_width }}px solid {{ section.settings.separator_color }};
+    {% endif %}
+  }
+
+  .wholesale-hub-{{ uid }}__card:hover {
+    background-color: {{ section.settings.hover_background_color }};
+    transform: translateY({{ section.settings.hover_lift }}px);
+    box-shadow: 0 {{ section.settings.hover_shadow_blur }}px {{ section.settings.hover_shadow_spread }}px rgba(0,0,0, {{ section.settings.hover_shadow_opacity | divided_by: 100.0 }});
+  }
+
+  .wholesale-hub-{{ uid }}__image-wrap {
+    position: relative;
+    width: {{ section.settings.image_width }}%;
+    max-width: {{ section.settings.image_max_width }}px;
+    aspect-ratio: 1;
+    margin: 0 auto 12px;
+    overflow: hidden;
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  .wholesale-hub-{{ uid }}__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .wholesale-hub-{{ uid }}__card:hover .wholesale-hub-{{ uid }}__image {
+    transform: scale({{ section.settings.image_hover_scale | divided_by: 100.0 }});
+  }
+
+  @media screen and (max-width: 749px) {
+    .wholesale-hub-{{ uid }}__image-wrap {
+      width: {{ section.settings.image_width_mobile }}%;
+      max-width: {{ section.settings.image_max_width | times: 0.8 }}px;
+    }
+  }
+
+  .wholesale-hub-{{ uid }}__headline {
+    font-size: {{ section.settings.headline_size }}px;
+    font-weight: 600;
+    color: {{ section.settings.headline_color }};
+    margin: 0 0 8px;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+  }
+
+  .wholesale-hub-{{ uid }}__card:hover .wholesale-hub-{{ uid }}__headline {
+    color: {{ section.settings.headline_hover_color }};
+  }
+
+  .wholesale-hub-{{ uid }}__body {
+    font-size: {{ section.settings.body_size }}px;
+    color: {{ section.settings.body_color }};
+    margin: 0 0 12px;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+  }
+
+  .wholesale-hub-{{ uid }}__card:hover .wholesale-hub-{{ uid }}__body {
+    color: {{ section.settings.body_hover_color }};
+  }
+
+  .wholesale-hub-{{ uid }}__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ section.settings.button_padding }}px {{ section.settings.button_padding | times: 1.5 }}px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: {{ section.settings.button_text_size }}px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    margin-top: auto;
+  }
+
+  .wholesale-hub-{{ uid }}__button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+  }
+
+  .wholesale-hub-{{ uid }}__button:focus {
+    outline: 2px solid {{ section.settings.button_background }};
+    outline-offset: 2px;
+  }
+{% endstyle %}
+
+<section class="page-width wholesale-hub-{{ uid }}">
+  <div class="wholesale-hub-{{ uid }}__grid">
+    {% for block in section.blocks %}
+      <div class="wholesale-hub-{{ uid }}__card" {{ block.shopify_attributes }}>
+        {% if block.settings.show_image %}
+          <div class="wholesale-hub-{{ uid }}__image-wrap">
+            {% if block.settings.image %}
+              <img
+                src="{{ block.settings.image | image_url: width: 600 }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                class="wholesale-hub-{{ uid }}__image"
+                loading="lazy"
+                width="600"
+                height="600"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if block.settings.headline != blank %}
+          <h3 class="wholesale-hub-{{ uid }}__headline">{{ block.settings.headline }}</h3>
+        {% endif %}
+
+        {% if block.settings.body != blank %}
+          <div class="wholesale-hub-{{ uid }}__body">{{ block.settings.body }}</div>
+        {% endif %}
+
+        {% if block.settings.button_text != blank %}
+          <a href="{{ block.settings.button_link | default: '#' }}" class="wholesale-hub-{{ uid }}__button">{{ block.settings.button_text }}</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wholesale hub cards",
+  "enabled_on": { "templates": ["*"] },
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    { "type": "range", "id": "section_padding", "label": "Section padding", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 40 },
+    { "type": "range", "id": "column_gap", "label": "Column spacing", "min": 8, "max": 60, "step": 4, "unit": "px", "default": 24 },
+    { "type": "select", "id": "text_alignment", "label": "Text alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "center" },
+
+    { "type": "header", "content": "Dividers" },
+    { "type": "checkbox", "id": "show_separators", "label": "Show hairline dividers", "default": false },
+    { "type": "range", "id": "separator_width", "label": "Divider width", "min": 1, "max": 3, "step": 1, "unit": "px", "default": 1 },
+    { "type": "color", "id": "separator_color", "label": "Divider color", "default": "#e0e0e0" },
+
+    { "type": "header", "content": "Hover" },
+    { "type": "color", "id": "hover_background_color", "label": "Hover background", "default": "#f8f8f8" },
+    { "type": "range", "id": "hover_lift", "label": "Hover lift", "min": 0, "max": 10, "step": 1, "unit": "px", "default": 3 },
+    { "type": "range", "id": "hover_shadow_blur", "label": "Hover shadow blur", "min": 0, "max": 30, "step": 5, "unit": "px", "default": 15 },
+    { "type": "range", "id": "hover_shadow_spread", "label": "Hover shadow spread", "min": 0, "max": 10, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "hover_shadow_opacity", "label": "Hover shadow opacity", "min": 0, "max": 50, "step": 5, "unit": "%", "default": 15 },
+
+    { "type": "header", "content": "Image" },
+    { "type": "range", "id": "image_width", "label": "Image width (desktop)", "min": 30, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "range", "id": "image_width_mobile", "label": "Image width (mobile)", "min": 30, "max": 100, "step": 5, "unit": "%", "default": 80 },
+    { "type": "range", "id": "image_max_width", "label": "Max image width", "min": 100, "max": 400, "step": 20, "unit": "px", "default": 300 },
+    { "type": "range", "id": "image_border_radius", "label": "Image border radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 8 },
+    { "type": "range", "id": "image_hover_scale", "label": "Image hover scale", "min": 100, "max": 120, "step": 5, "unit": "%", "default": 105 },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "headline_size", "label": "Headline size", "min": 14, "max": 32, "step": 2, "unit": "px", "default": 20 },
+    { "type": "color", "id": "headline_color", "label": "Headline color", "default": "#000000" },
+    { "type": "color", "id": "headline_hover_color", "label": "Headline hover color", "default": "#333333" },
+    { "type": "range", "id": "body_size", "label": "Body size", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "body_color", "label": "Body color", "default": "#666666" },
+    { "type": "color", "id": "body_hover_color", "label": "Body hover color", "default": "#333333" },
+
+    { "type": "header", "content": "Button" },
+    { "type": "color", "id": "button_background", "label": "Background", "default": "#000000" },
+    { "type": "color", "id": "button_hover_background", "label": "Hover background", "default": "#333333" },
+    { "type": "color", "id": "button_text_color", "label": "Text color", "default": "#ffffff" },
+    { "type": "color", "id": "button_hover_text_color", "label": "Hover text color", "default": "#ffffff" },
+    { "type": "color", "id": "button_border_color", "label": "Border color", "default": "#000000" },
+    { "type": "range", "id": "button_border_width", "label": "Border width", "min": 0, "max": 5, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "button_border_radius", "label": "Border radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 6 },
+    { "type": "range", "id": "button_padding", "label": "Button padding", "min": 8, "max": 24, "step": 2, "unit": "px", "default": 12 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "checkbox", "id": "show_image", "label": "Show image", "default": true },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "headline", "label": "Headline", "default": "Feature title" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Share details about your wholesale options.</p>" },
+        { "type": "text", "id": "button_text", "label": "Button text", "default": "Learn more" },
+        { "type": "text", "id": "button_link", "label": "Button link", "default": "#" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wholesale hub cards",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
