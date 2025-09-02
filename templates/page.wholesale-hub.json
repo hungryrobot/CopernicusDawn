@@ -159,7 +159,7 @@
         "card_T7fnE7": {
           "type": "card",
           "settings": {
-            "show_image": false,
+            "show_image": true,
             "headline": "Get our Print Catalog",
             "body": "<p>Get on our snail mail mailing list for your annual dose of quirky science with our once-a-year printed catalog!</p>",
             "button_text": "Please send me your catalog",
@@ -180,7 +180,7 @@
         "show_separators": false,
         "separator_width": 1,
         "separator_color": "#e0e0e0",
-        "hover_background_color": "#fcb72a",
+        "hover_background_color": "#fae0a9",
         "hover_lift": 3,
         "hover_shadow_blur": 15,
         "hover_shadow_spread": 0,
@@ -196,7 +196,7 @@
         "body_size": 14,
         "body_color": "#666666",
         "body_hover_color": "#333333",
-        "button_background": "#000000",
+        "button_background": "#fcb72a",
         "button_hover_background": "#333333",
         "button_text_color": "#ffffff",
         "button_hover_text_color": "#ffffff",
