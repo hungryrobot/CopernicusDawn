@@ -1,0 +1,209 @@
+{% comment %}
+Sales Rep Finder (Dawn 15+)
+- Shows ONE rep at a time based on territory dropdown selection
+- Big banner (image_picker) before any territory is selected
+- Each rep as a block: name, group, coverage (codes + display), optional photo (picker or URL)
+- No email/call buttons (per spec)
+- Pre-populated via presets so you can see it immediately
+
+Author: Copernicus
+{% endcomment %}
+
+<section class="rep-finder section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="rep-finder__header">
+      <h2 class="title">{{ section.settings.heading | default: "Find the sales representative in your territory." }}</h2>
+    </div>
+
+    {% assign banner_img = section.settings.banner_image %}
+    {% assign banner_url = section.settings.banner_url %}
+    <div id="RepBanner-{{ section.id }}" class="rep-finder__banner" {% if banner_img == blank and banner_url == blank %}style="display:none"{% endif %}>
+      {% if banner_img != blank %}
+        {{ banner_img | image_url: width: 1600 | image_tag: loading: 'lazy', alt: 'Sales representatives' }}
+      {% elsif banner_url != blank %}
+        <img src="{{ banner_url | escape }}" alt="Sales representatives" loading="lazy">
+      {% endif %}
+    </div>
+
+    <div class="rep-finder__controls">
+      <label class="visually-hidden" for="RepSelect-{{ section.id }}">Select territory</label>
+      <select id="RepSelect-{{ section.id }}" class="select">
+        <option value="__none__">{{ section.settings.placeholder | default: "— Select state or province —" }}</option>
+      </select>
+    </div>
+
+    <div id="RepCards-{{ section.id }}" class="rep-cards">
+      {% for block in section.blocks %}
+        {% if block.type == 'rep' %}
+          {% assign codes = block.settings.coverage_codes | default: '' | strip %}
+          {% assign display = block.settings.coverage_display | default: '' | strip %}
+
+          <article class="rep-card" data-coverage-codes="{{ codes | escape }}" id="rep-{{ block.id }}" {{ block.shopify_attributes }} style="display:none;">
+            <div class="rep-card__photo">
+              {% if block.settings.photo != blank %}
+                {{ block.settings.photo | image_url: width: 300 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}
+              {% elsif block.settings.photo_url != blank %}
+                <img src="{{ block.settings.photo_url | escape }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              {% else %}
+                <div class="rep-card__initials" aria-hidden="true">
+                  {% assign initials = '' %}
+                  {% assign parts = block.settings.name | upcase | split: ' ' %}
+                  {% if parts.size > 0 %}{% assign initials = parts[0] | slice: 0,1 %}{% endif %}
+                  {% if parts.size > 1 %}{% assign initials = initials | append: parts[1] | slice: 0,1 %}{% endif %}
+                  {{ initials | default: "–" }}
+                </div>
+              {% endif %}
+            </div>
+            <div class="rep-card__body">
+              <h3 class="rep-card__name">{{ block.settings.name | default: "Sales Rep" }}</h3>
+              {% if block.settings.group != blank %}
+                <div class="rep-card__group text-subdued">{{ block.settings.group }}</div>
+              {% endif %}
+              {% if display != blank %}
+                <div class="rep-card__territory"><strong>Territory:</strong> {{ display }}</div>
+              {% endif %}
+              <div class="rep-card__help text-subdued">Choose a different territory from the menu to switch representatives.</div>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .rep-finder__banner{margin:0 0 1rem;border-radius:12px;overflow:hidden}
+  .rep-finder__controls{margin:0 0 1rem}
+  .rep-cards{position:relative;min-height:140px}
+  .rep-card{display:flex;gap:1rem;align-items:flex-start;border:1px solid #e5e5e5;border-radius:12px;padding:1rem;background:#fff}
+  .rep-card__photo{width:88px;height:88px;border-radius:10px;overflow:hidden;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .rep-card__photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .rep-card__initials{font-size:1.25rem}
+  .rep-card__name{margin:.25rem 0 .25rem;font-size:1.25rem}
+  .rep-card__group{margin:.15rem 0 .35rem}
+  .rep-card__territory{margin:.1rem 0 .25rem}
+  .text-subdued{color:#6b7280}
+  .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+</style>
+
+<script>
+(function(){
+  var rootId = "{{ section.id }}";
+  var selectEl = document.getElementById("RepSelect-" + rootId);
+  var cardsWrap = document.getElementById("RepCards-" + rootId);
+  var banner = document.getElementById("RepBanner-" + rootId);
+  if(!selectEl || !cardsWrap) return;
+
+  // Extract unique codes from all rep cards' data-coverage-codes
+  var codeSet = new Set();
+  cardsWrap.querySelectorAll(".rep-card").forEach(function(card){
+    var codes = (card.getAttribute("data-coverage-codes") || "").split(",");
+    codes.forEach(function(c){
+      var v=(c||"").trim();
+      if(v){ codeSet.add(v); }
+    });
+  });
+
+  // Populate dropdown (sorted)
+  Array.from(codeSet).sort().forEach(function(code){
+    var opt = document.createElement("option");
+    opt.value = code;
+    opt.textContent = code;
+    selectEl.appendChild(opt);
+  });
+
+  function showByCode(code){
+    var shown = false;
+    cardsWrap.querySelectorAll(".rep-card").forEach(function(card){
+      var codes = (card.getAttribute("data-coverage-codes") || "").split(",").map(function(x){ return (x||"").trim(); });
+      var match = codes.indexOf(code) !== -1;
+      if(!shown && match){
+        card.style.display = "";
+        shown = true;
+      } else {
+        card.style.display = "none";
+      }
+    });
+    // Banner visibility
+    if(code === "__none__" || !shown){
+      if(banner) banner.style.display = "";
+    } else {
+      if(banner) banner.style.display = "none";
+    }
+  }
+
+  selectEl.addEventListener("change", function(){ showByCode(this.value); });
+  showByCode("__none__");
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Sales rep finder",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find the sales representative in your territory." },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image (shown before selection)" },
+    { "type": "text", "id": "banner_url", "label": "Banner fallback URL (optional)" },
+    { "type": "text", "id": "placeholder", "label": "Dropdown placeholder", "default": "— Select state or province —" }
+  ],
+  "blocks": [
+    {
+      "type": "rep",
+      "name": "Rep",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Sales Rep" },
+        { "type": "text", "id": "group", "label": "Group / Company (optional)" },
+        { "type": "text", "id": "coverage_codes", "label": "Coverage codes (comma-separated, e.g., CA,OR,WA)", "default": "" },
+        { "type": "text", "id": "coverage_display", "label": "Coverage (display text)", "default": "" },
+        { "type": "image_picker", "id": "photo", "label": "Square photo (optional)" },
+        { "type": "text", "id": "photo_url", "label": "Photo URL (optional, used if no image chosen)" }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["*"] },
+  "presets": [
+    {
+      "name": "Sales rep finder (preloaded)",
+      "settings": {},
+      "blocks": {
+        "rep-1": { "type": "rep", "settings": { "name": "Andrea Friedman", "group": "Andrea Friedman", "coverage_codes": "CT", "coverage_display": "Connecticut", "photo_url": "" } },
+        "rep-2": { "type": "rep", "settings": { "name": "Anna Rainone", "group": "Anna Rainone", "coverage_codes": "MA,ME,NH,RI,VT", "coverage_display": "Massachusetts, Maine, New Hampshire, Rhode Island, Vermont", "photo_url": "" } },
+        "rep-3": { "type": "rep", "settings": { "name": "Betsy Armentrout", "group": "Betsy Armentrout", "coverage_codes": "AL,FL,GA,MS,TN", "coverage_display": "Alabama, Florida, Georgia, Mississippi, Tennessee", "photo_url": "" } },
+        "rep-4": { "type": "rep", "settings": { "name": "Cameron Long", "group": "Cameron Long", "coverage_codes": "OK,TX", "coverage_display": "Oklahoma, Texas", "photo_url": "" } },
+        "rep-5": { "type": "rep", "settings": { "name": "Carolyn Greco", "group": "Carolyn Greco", "coverage_codes": "IN,MI,OH", "coverage_display": "Indiana, Michigan, Ohio", "photo_url": "" } },
+        "rep-6": { "type": "rep", "settings": { "name": "Chris Umbel", "group": "Chris Umbel", "coverage_codes": "PA", "coverage_display": "Pennsylvania", "photo_url": "" } },
+        "rep-7": { "type": "rep", "settings": { "name": "Cindy Staggs", "group": "Cindy Staggs", "coverage_codes": "AR,LA,NM", "coverage_display": "Arkansas, Louisiana, New Mexico", "photo_url": "" } },
+        "rep-8": { "type": "rep", "settings": { "name": "Dawn Scott", "group": "Dawn Scott", "coverage_codes": "NJ,NY", "coverage_display": "New Jersey, New York", "photo_url": "" } },
+        "rep-9": { "type": "rep", "settings": { "name": "Debra Buckner", "group": "Debra Buckner", "coverage_codes": "NC,SC,VA", "coverage_display": "North Carolina, South Carolina, Virginia", "photo_url": "" } },
+        "rep-10": { "type": "rep", "settings": { "name": "Donna Reilly", "group": "Donna Reilly", "coverage_codes": "MD,VA,DC", "coverage_display": "Maryland, Virginia, District of Columbia", "photo_url": "" } },
+        "rep-11": { "type": "rep", "settings": { "name": "Ellen Self", "group": "Ellen Self", "coverage_codes": "AL,GA,MS,TN", "coverage_display": "Alabama, Georgia, Mississippi, Tennessee", "photo_url": "" } },
+        "rep-12": { "type": "rep", "settings": { "name": "Jeffrey Shaffer", "group": "Jeffrey Shaffer", "coverage_codes": "DE,MD,NJ,PA", "coverage_display": "Delaware, Maryland, New Jersey, Pennsylvania", "photo_url": "" } },
+        "rep-13": { "type": "rep", "settings": { "name": "Jennifer Neal", "group": "Jennifer Neal", "coverage_codes": "AR,LA", "coverage_display": "Arkansas, Louisiana", "photo_url": "" } },
+        "rep-14": { "type": "rep", "settings": { "name": "Joanna Fallon", "group": "Joanna Fallon", "coverage_codes": "ME,NH,VT", "coverage_display": "Maine, New Hampshire, Vermont", "photo_url": "" } },
+        "rep-15": { "type": "rep", "settings": { "name": "Joel Witz", "group": "Joel Witz", "coverage_codes": "IL,IN,MI,OH,WI", "coverage_display": "Illinois, Indiana, Michigan, Ohio, Wisconsin", "photo_url": "" } },
+        "rep-16": { "type": "rep", "settings": { "name": "Kathleen R. Harney", "group": "Kathleen R. Harney", "coverage_codes": "CT,MA,ME,NH,RI,VT", "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont", "photo_url": "" } },
+        "rep-17": { "type": "rep", "settings": { "name": "Kellye Hilson", "group": "Kellye Hilson", "coverage_codes": "AL,GA,TN", "coverage_display": "Alabama, Georgia, Tennessee", "photo_url": "" } },
+        "rep-18": { "type": "rep", "settings": { "name": "Lisa M. DeLeo", "group": "Lisa M. DeLeo", "coverage_codes": "CT,MA,ME,NH,RI,VT", "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont", "photo_url": "" } },
+        "rep-19": { "type": "rep", "settings": { "name": "Nancy Baker", "group": "Nancy Baker", "coverage_codes": "IL,WI", "coverage_display": "Illinois, Wisconsin", "photo_url": "" } },
+        "rep-20": { "type": "rep", "settings": { "name": "Nancy Gordon", "group": "Nancy Gordon", "coverage_codes": "IL,WI", "coverage_display": "Illinois, Wisconsin", "photo_url": "" } },
+        "rep-21": { "type": "rep", "settings": { "name": "Philip Blum", "group": "Philip Blum", "coverage_codes": "CT,MA,ME,NH,RI,VT", "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont", "photo_url": "" } },
+        "rep-22": { "type": "rep", "settings": { "name": "Ralph Franceschini", "group": "Ralph Franceschini", "coverage_codes": "CT,MA,ME,NH,RI,VT", "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont", "photo_url": "" } },
+        "rep-23": { "type": "rep", "settings": { "name": "Ronda Kinard-Nichols", "group": "Ronda Kinard-Nichols", "coverage_codes": "NC,SC,VA", "coverage_display": "North Carolina, South Carolina, Virginia", "photo_url": "" } },
+        "rep-24": { "type": "rep", "settings": { "name": "Sharan Stroschein", "group": "Sharan Stroschein", "coverage_codes": "MN,ND,SD", "coverage_display": "Minnesota, North Dakota, South Dakota", "photo_url": "" } },
+        "rep-25": { "type": "rep", "settings": { "name": "Sharon Van Pelt", "group": "Sharon Van Pelt", "coverage_codes": "ID,MT,OR,WA,WY", "coverage_display": "Idaho, Montana, Oregon, Washington, Wyoming", "photo_url": "" } },
+        "rep-26": { "type": "rep", "settings": { "name": "Stacy Erskine", "group": "Stacy Erskine", "coverage_codes": "IA,KS,MO,NE", "coverage_display": "Iowa, Kansas, Missouri, Nebraska", "photo_url": "" } },
+        "rep-27": { "type": "rep", "settings": { "name": "Steve Kuta", "group": "Steve Kuta", "coverage_codes": "CO,UT", "coverage_display": "Colorado, Utah", "photo_url": "" } },
+        "rep-28": { "type": "rep", "settings": { "name": "Susan Elkin", "group": "Susan Elkin", "coverage_codes": "AZ,NM", "coverage_display": "Arizona, New Mexico", "photo_url": "" } },
+        "rep-29": { "type": "rep", "settings": { "name": "Teri Colacchio", "group": "Teri Colacchio", "coverage_codes": "CT,MA,ME,NH,RI,VT", "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont", "photo_url": "" } },
+        "rep-30": { "type": "rep", "settings": { "name": "Theresa Davis", "group": "Theresa Davis", "coverage_codes": "FL", "coverage_display": "Florida", "photo_url": "" } },
+        "rep-31": { "type": "rep", "settings": { "name": "Tim Stasz", "group": "Tim Stasz", "coverage_codes": "CA,NV", "coverage_display": "California, Nevada", "photo_url": "" } },
+        "rep-32": { "type": "rep", "settings": { "name": "Tracy Sacks", "group": "Tracy Sacks", "coverage_codes": "CA,NV", "coverage_display": "California, Nevada", "photo_url": "" } },
+        "rep-33": { "type": "rep", "settings": { "name": "Zachary Levin", "group": "Zachary Levin", "coverage_codes": "CT,MA,ME,NH,RI,VT", "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont", "photo_url": "" } }
+      },
+      "block_order": [
+        "rep-1","rep-2","rep-3","rep-4","rep-5","rep-6","rep-7","rep-8","rep-9","rep-10","rep-11","rep-12","rep-13","rep-14","rep-15","rep-16","rep-17","rep-18","rep-19","rep-20","rep-21","rep-22","rep-23","rep-24","rep-25","rep-26","rep-27","rep-28","rep-29","rep-30","rep-31","rep-32","rep-33"
+      ]
+    }
+  ]
+}
+{% endschema %}
