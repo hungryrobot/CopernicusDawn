@@ -127,7 +127,7 @@
 {% endstyle %}
 
 <section class="page-width wholesale-hub-{{ uid }}">
-  <div class="wholesale-hub-{{ uid }}__grid">
+  <div class="wholesale-hub-{{ uid }}__grid" style="grid-template-columns: repeat({{ section.settings.columns_desktop | plus: 0 }}, 1fr);">
     {% for block in section.blocks %}
       <div class="wholesale-hub-{{ uid }}__card" {{ block.shopify_attributes }}>
         {% if block.settings.show_image %}
