@@ -1,0 +1,186 @@
+{% comment %}
+Multicolumn Cards (Dawn 15+)
+- Up to 4 columns
+- Optional image per column
+- Image size slider (percent)
+- Optional hover highlight + hairline separators
+- Button per column (label/url as text for validator compatibility)
+
+Author: Copernicus — Wholesale Hub utility
+{% endcomment %}
+
+<section class="multicolumn-cards section-{{ section.id }}-padding">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="title inline-richtext">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <div class="rte mb-4">{{ section.settings.subheading }}</div>
+    {% endif %}
+
+    {% assign columns = section.settings.columns | default: 2 %}
+    {% assign hover_on = section.settings.hover_highlight %}
+    {% assign show_dividers = section.settings.show_dividers %}
+
+    <div
+      class="mc-grid"
+      style="
+        --mc-cols: {{ columns | plus: 0 }};
+        --mc-gap: 1.25rem;
+        --mc-img-scale: {{ section.settings.image_scale | default: 80 | plus: 0 }}%;
+      "
+    >
+      {% for block in section.blocks %}
+        {% assign has_img = false %}
+        {% if block.settings.image != blank %}
+          {% assign has_img = true %}
+        {% endif %}
+
+        <article
+          class="mc-card {% if hover_on %}mc-card--hover{% endif %}{% if show_dividers %} mc-card--dividers{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {% if has_img %}
+            <div class="mc-card__media">
+              {%- assign img = block.settings.image -%}
+              {{ img | image_url: width: 1000 | image_tag:
+                loading: 'lazy',
+                alt: block.settings.title | escape,
+                style: 'width: var(--mc-img-scale); max-width: 100%; height: auto;'
+              }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+            <h3 class="mc-card__title">{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.body != blank %}
+            <div class="mc-card__body rte">{{ block.settings.body }}</div>
+          {% endif %}
+
+          {% if block.settings.button_label != blank %}
+            <div class="mc-card__actions">
+              <a
+                class="button"
+                href="{{ block.settings.button_url | default: '#' }}"
+              >
+                {{ block.settings.button_label }}
+              </a>
+            </div>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .mc-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--mc-cols, 2), minmax(0, 1fr));
+    gap: var(--mc-gap, 1rem);
+  }
+  @media (max-width: 990px) {
+    .mc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 750px) {
+    .mc-grid { grid-template-columns: 1fr; }
+  }
+  .mc-card {
+    position: relative;
+    padding: 1.25rem;
+    border-radius: 12px;
+    background: var(--color-background, #fff);
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  }
+  .mc-card--hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,.08);
+    background: rgba(0,0,0,.02);
+  }
+  .mc-card--dividers:not(:last-child) {
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.08);
+  }
+  .mc-card__media {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: .75rem;
+  }
+  .mc-card__title {
+    margin: .25rem 0 .5rem;
+    font-size: 1.125rem;
+    line-height: 1.3;
+  }
+  .mc-card__body {
+    margin-bottom: .75rem;
+  }
+  .mc-card__actions .button {
+    margin-top: .25rem;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Multicolumn cards",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wholesale options" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Choose the path that fits your business.</p>" },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 1, "max": 4, "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "image_scale",
+      "label": "Image width (percent)",
+      "min": 30, "max": 100, "step": 5,
+      "default": 80
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_highlight",
+      "label": "Enable hover highlight",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show hairline separators",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Square image (optional)" },
+        { "type": "text", "id": "title", "label": "Headline", "default": "Direct B2B" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Apply for a wholesale account or log in if you’re already approved.</p>" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Apply / Log in" },
+        { "type": "text", "id": "button_url", "label": "Button URL", "default": "/pages/b2b-login" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multicolumn cards",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Shop on Faire", "body": "<p>Fast onboarding, Net terms, and all your Faire perks.</p>", "button_label": "Visit our Faire shop", "button_url": "/pages/b2b-login" } },
+        { "type": "card", "settings": { "title": "Buy Direct (B2B)", "body": "<p>Apply, get approved, and shop wholesale pricing on this site.</p>", "button_label": "Apply / Log in", "button_url": "/pages/b2b-login#login" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{%- comment -%}
+Notes:
+I used | plus: 0 to coerce numeric settings (prevents the “Integer vs String” comparison error).
+URLs are type: "text" to avoid the picky validator that yelled at type: "url" defaults.
+Images are optional and size is controlled by the Image width (percent) slider.
+{%- endcomment -%}
