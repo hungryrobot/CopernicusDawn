@@ -127,8 +127,8 @@
         "show_separators": false,
         "separator_width": 1,
         "separator_color": "#e0e0e0",
-        "hover_background_color": "#f8f8f8",
-        "hover_lift": 3,
+        "hover_background_color": "#fcb72a",
+        "hover_lift": 5,
         "hover_shadow_blur": 15,
         "hover_shadow_spread": 0,
         "hover_shadow_opacity": 15,
@@ -172,7 +172,7 @@
       ],
       "name": "Wholesale hub cards",
       "settings": {
-        "columns_desktop": "1",
+        "columns_desktop": "3",
         "columns_mobile": "1",
         "section_padding": 40,
         "column_gap": 24,
@@ -205,12 +205,23 @@
         "button_border_radius": 6,
         "button_padding": 12
       }
+    },
+    "custom_liquid_JBBe3b": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  .rep-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}\n  .rep-card{border:1px solid #e5e5e5;border-radius:12px;padding:1rem;background:#fff}\n  .rep-card h3{margin:0 0 .25rem}\n  .rep-card__meta{margin:.25rem 0 .5rem;color:#6b7280;font-size:.95rem}\n  .rep-card__actions a{margin:.25rem .5rem .25rem 0;display:inline-block}\n  .rep-toolbar{display:flex;gap:.5rem;align-items:center;margin:1rem 0 1.25rem}\n  .rep-toolbar label{font-weight:600}\n  @media (max-width:750px){.rep-toolbar{flex-wrap:wrap}}\n</style>\n\n<div class=\"rep-toolbar\">\n  <label for=\"RepSelect\">Select state/province:</label>\n  <select id=\"RepSelect\">\n    <option value=\"__all__\">— Show all —</option>\n    <!-- quick list: add/remove as needed -->\n    <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>\n    <option>CA</option><option>CO</option><option>CT</option><option>DC</option>\n    <option>DE</option><option>FL</option><option>GA</option><option>HI</option>\n    <option>IA</option><option>ID</option><option>IL</option><option>IN</option>\n    <option>KS</option><option>KY</option><option>LA</option><option>MA</option>\n    <option>MD</option><option>ME</option><option>MI</option><option>MN</option>\n    <option>MO</option><option>MS</option><option>MT</option><option>NC</option>\n    <option>ND</option><option>NE</option><option>NH</option><option>NJ</option>\n    <option>NM</option><option>NV</option><option>NY</option><option>OH</option>\n    <option>OK</option><option>OR</option><option>PA</option><option>RI</option>\n    <option>SC</option><option>SD</option><option>TN</option><option>TX</option>\n    <option>UT</option><option>VA</option><option>VT</option><option>WA</option>\n    <option>WI</option><option>WV</option>\n    <!-- Canada -->\n    <option>AB</option><option>BC</option><option>MB</option><option>NB</option>\n    <option>NL</option><option>NS</option><option>NT</option><option>NU</option>\n    <option>ON</option><option>PE</option><option>QC</option><option>SK</option>\n    <option>YT</option>\n  </select>\n  <button type=\"button\" class=\"button button--secondary\" id=\"RepClear\">Show all</button>\n</div>\n\n<div id=\"RepResults\" class=\"rep-grid\">\n  <!-- SAMPLE REPS — duplicate and edit coverage/name/contacts -->\n  <div class=\"rep-card\" data-coverage=\"CA, NV, OR, WA\">\n    <h3>Pacific Reps</h3>\n    <div class=\"rep-card__meta\"><strong>Territory:</strong> CA, NV, OR, WA</div>\n    <div>Email: <a href=\"mailto:pacific@example.com\">pacific@example.com</a></div>\n    <div>Phone: <a href=\"tel:+15551001000\">(555) 100-1000</a></div>\n    <div class=\"rep-card__actions\">\n      <a class=\"button\" href=\"mailto:pacific@example.com\">Email</a>\n      <a class=\"button button--secondary\" href=\"tel:+15551001000\">Call</a>\n    </div>\n  </div>\n\n  <div class=\"rep-card\" data-coverage=\"NY, NJ, CT, MA, RI, NH, VT, ME\">\n    <h3>Northeast Group</h3>\n    <div class=\"rep-card__meta\"><strong>Territory:</strong> NY, NJ, CT, MA, RI, NH, VT, ME</div>\n    <div>Email: <a href=\"mailto:ne@example.com\">ne@example.com</a></div>\n    <div>Phone: <a href=\"tel:+15552002000\">(555) 200-2000</a></div>\n    <div class=\"rep-card__actions\">\n      <a class=\"button\" href=\"mailto:ne@example.com\">Email</a>\n      <a class=\"button button--secondary\" href=\"tel:+15552002000\">Call</a>\n    </div>\n  </div>\n\n  <div class=\"rep-card\" data-coverage=\"TX, OK, AR, LA\">\n    <h3>Southern Reps</h3>\n    <div class=\"rep-card__meta\"><strong>Territory:</strong> TX, OK, AR, LA</div>\n    <div>Email: <a href=\"mailto:south@example.com\">south@example.com</a></div>\n    <div>Phone: <a href=\"tel:+15553003000\">(555) 300-3000</a></div>\n    <div class=\"rep-card__actions\">\n      <a class=\"button\" href=\"mailto:south@example.com\">Email</a>\n      <a class=\"button button--secondary\" href=\"tel:+15553003000\">Call</a>\n    </div>\n  </div>\n</div>\n\n<script>\n(function(){\n  var sel=document.getElementById('RepSelect');\n  var clear=document.getElementById('RepClear');\n  var results=document.getElementById('RepResults');\n  function filter(){\n    var val=(sel.value||'').toLowerCase();\n    results.querySelectorAll('.rep-card').forEach(function(card){\n      var cov=(card.getAttribute('data-coverage')||'').toLowerCase();\n      var show=(val==='__all__'||val===''||cov.indexOf(val)>-1);\n      card.style.display=show?'':'none';\n    });\n  }\n  sel.addEventListener('change',filter);\n  clear.addEventListener('click',function(){sel.value='__all__';filter();});\n  filter();\n})();\n</script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "image_banner_CUXGFX",
     "rich_text_gaxKkq",
     "cards",
-    "wholesale_hub_cards_QRM6Da"
+    "wholesale_hub_cards_QRM6Da",
+    "custom_liquid_JBBe3b"
   ]
 }
