@@ -1,0 +1,127 @@
+{% comment %}
+Sales Rep Grid (Dawn 15+)
+- Displays ALL reps as cards, grouped by "Group"
+- Card fields: photo (optional), GROUP, NAME, EMAIL, TERRITORY
+- NAME and TERRITORY are uppercased in UI
+- Multicolumn-esque look: rounded, hover-lift
+{% endcomment %}
+
+<section class="rep-grid section-{{ section.id }}-padding">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="title inline-richtext">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <div class="rte mb-4">{{ section.settings.subheading }}</div>
+    {% endif %}
+
+    {%- comment -%} Build unique list of groups {%- endcomment -%}
+    {% assign _groups = "" %}
+    {% for block in section.blocks %}
+      {% if block.type == 'rep' %}
+        {% assign g = block.settings.group | strip %}
+        {% if g != blank %}
+          {% assign key = '|' | append: g | append: '|' %}
+          {% unless _groups contains key %}
+            {% assign _groups = _groups | append: key %}
+          {% endunless %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign groups_list = _groups | remove_first: '|' | split: '|' %}
+
+    {%- comment -%} Render reps grouped by agency {%- endcomment -%}
+    {% for grp in groups_list %}
+      <div class="rep-group">
+        <h3 class="rep-group__title">{{ grp | upcase }}</h3>
+        <div class="rep-group__grid">
+          {% for block in section.blocks %}
+            {% if block.type == 'rep' and block.settings.group == grp %}
+              <article class="rep-card" {{ block.shopify_attributes }}>
+                <div class="rep-card__inner">
+                  <div class="rep-card__media">
+                    {% if block.settings.photo != blank %}
+                      {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.name | escape }}
+                    {% elsif block.settings.photo_url != blank %}
+                      <img src="{{ block.settings.photo_url | escape }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+                    {% else %}
+                      <div class="rep-card__placeholder">
+                        {% assign initials = '' %}
+                        {% assign parts = block.settings.name | upcase | split: ' ' %}
+                        {% if parts.size > 0 %}{% assign initials = parts[0] | slice: 0,1 %}{% endif %}
+                        {% if parts.size > 1 %}{% assign initials = initials | append: parts[1] | slice: 0,1 %}{% endif %}
+                        {{ initials | default: "–" }}
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="rep-card__content">
+                    <div class="rep-card__group text-subdued">{{ grp | upcase }}</div>
+                    <h4 class="rep-card__title">{{ block.settings.name | upcase }}</h4>
+                    {% if block.settings.email != blank %}
+                      <div class="rep-card__line">
+                        <a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email }}</a>
+                      </div>
+                    {% endif %}
+                    {% if block.settings.territory != blank %}
+                      <div class="rep-card__line"><strong>Territory:</strong> {{ block.settings.territory | upcase }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+
+    {% if groups_list.size == 0 %}
+      <p class="text-subdued">No reps added yet. Use the Theme Editor to add Rep blocks.</p>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .rep-group { margin-bottom: 2rem; }
+  .rep-group__title { margin: 0 0 .75rem; font-size: 1rem; letter-spacing: .06em; color: #111; }
+  .rep-group__grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 990px) { .rep-group__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 750px) { .rep-group__grid { grid-template-columns: 1fr; } }
+
+  .rep-card { background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,.08); transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+  .rep-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.08); background: rgba(0,0,0,.02); }
+  .rep-card__inner { display: grid; grid-template-columns: 88px 1fr; gap: 1rem; padding: 1rem; }
+  .rep-card__media img { width: 88px; height: 88px; object-fit: cover; border-radius: 10px; display: block; }
+  .rep-card__placeholder { width: 88px; height: 88px; border-radius: 10px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; }
+  .rep-card__group { margin: .1rem 0 .35rem; }
+  .rep-card__title { margin: 0 0 .2rem; font-size: 1.125rem; line-height: 1.3; }
+  .rep-card__line { margin: .1rem 0; }
+  .text-subdued { color: #6b7280; }
+</style>
+
+{% schema %}
+{
+  "name": "Sales rep grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our sales representatives" },
+    { "type": "richtext", "id": "subheading", "label": "Intro (optional)", "default": "" }
+  ],
+  "blocks": [
+    {
+      "type": "rep",
+      "name": "Rep",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Square photo (optional)" },
+        { "type": "text", "id": "photo_url", "label": "Photo URL (optional, used if no image chosen)" },
+        { "type": "text", "id": "group", "label": "Group name (for grouping)", "default": "PACIFIC NORTHWEST" },
+        { "type": "text", "id": "name", "label": "Sales rep name", "default": "JANE DOE" },
+        { "type": "text", "id": "email", "label": "Email", "default": "rep@example.com" },
+        { "type": "text", "id": "territory", "label": "Territory (display text)", "default": "WA, OR, ID" }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["*"] },
+  "presets": [
+    { "name": "Sales rep grid (blank)" }
+  ]
+}
+{% endschema %}
