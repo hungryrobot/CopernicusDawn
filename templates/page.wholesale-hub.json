@@ -16,6 +16,7 @@
           "type": "card",
           "settings": {
             "show_image": true,
+            "image": "shopify://shop_images/OrderFAIRE.jpg",
             "headline": "Benefits of Faire",
             "body": "<p>Personalized recommendations and easy online checkout</p><p>60‑day payment terms for eligible retailers</p><p>Free returns on first orders, on us</p><p>50% off and 1 year of free shipping for new referrals</p>",
             "button_text": "Buy on FAIRE",
