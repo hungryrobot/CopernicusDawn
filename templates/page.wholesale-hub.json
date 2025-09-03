@@ -124,7 +124,8 @@
             "group": "INDEPENDENT",
             "name": "ANDREA FRIEDMAN",
             "email": "andreafriedman22@gmail.com",
-            "territory": "CONNECTICUT"
+            "territory": "CONNECTICUT",
+            "bg_color": "#e6f5f2"
           }
         },
         "rep_H3BTwp": {
@@ -135,7 +136,8 @@
             "group": "INDEPENDENT / NOTHING BUT THE BEST",
             "name": "PAUL FRANZ",
             "email": "nothingbutthebest@comcast.net",
-            "territory": "VERMONT"
+            "territory": "VERMONT",
+            "bg_color": "#fcf3c0"
           }
         },
         "rep_6MhGLq": {
@@ -146,7 +148,8 @@
             "group": "INDEPENDENT",
             "name": "LISA GRIER",
             "email": "lgriersales@gmail.com",
-            "territory": "DELAWARE"
+            "territory": "DELAWARE",
+            "bg_color": "#e6f5f2"
           }
         },
         "rep_pLnj4c": {
@@ -157,7 +160,8 @@
             "group": "INDEPENDENT",
             "name": "BRUCE KLICKSTEIN",
             "email": "emoments2@verizon.net",
-            "territory": "NORTHERN MASSACHUSETTS, NEW HAMPSHIRE, MAINE, CAPE COD"
+            "territory": "NORTHERN MASSACHUSETTS, NEW HAMPSHIRE, MAINE, CAPE COD",
+            "bg_color": "#e6f5f2"
           }
         },
         "rep_Qyttm7": {
@@ -168,7 +172,8 @@
             "group": "INDEPENDENT",
             "name": "SCOTT KENERLY",
             "email": "sksales.rf1@gmail.com",
-            "territory": "NORTH CAROLINA (WESTERN), SELECT SOUTH CAROLINA, TENNESSEE, GEORGIA"
+            "territory": "NORTH CAROLINA (WESTERN), SELECT SOUTH CAROLINA, TENNESSEE, GEORGIA",
+            "bg_color": "#e6f5f2"
           }
         },
         "rep_c3fFrK": {
@@ -179,7 +184,8 @@
             "group": "INDEPENDENT",
             "name": "KAREN STAHL",
             "email": "kstahl9837@aol.com",
-            "territory": "UPSTATE NEW YORK"
+            "territory": "UPSTATE NEW YORK",
+            "bg_color": "#e6f5f2"
           }
         },
         "rep_UFGNqH": {
@@ -190,7 +196,8 @@
             "group": "INDEPENDENT",
             "name": "MARC STEINSLOFER",
             "email": "repintoys@aol.com",
-            "territory": "PENNSYLVANIA, CONNECTICUT, NEW JERSEY"
+            "territory": "PENNSYLVANIA, CONNECTICUT, NEW JERSEY",
+            "bg_color": "#e6f5f2"
           }
         },
         "rep_X8NcnP": {
@@ -201,7 +208,8 @@
             "group": "KINFETTI SALES DIVISION / ENCHANTED",
             "name": "JOHN GRAVES",
             "email": "john@kinfetti.com",
-            "territory": "IDAHO, MONTANA, WYOMING"
+            "territory": "IDAHO, MONTANA, WYOMING",
+            "bg_color": "#ebf987"
           }
         },
         "rep_VTmGFb": {
@@ -212,7 +220,8 @@
             "group": "KINFETTI SALES DIVISION / ENCHANTED",
             "name": "MARY MORRISON",
             "email": "mary@enchantedmoments.com",
-            "territory": "OREGON"
+            "territory": "OREGON",
+            "bg_color": "#ebf987"
           }
         },
         "rep_hT9QPU": {
@@ -223,7 +232,8 @@
             "group": "KETZ",
             "name": "LU KETZ",
             "email": "lu@ketzassociates.com",
-            "territory": "IOWA, MINNESOTA, NEBRASKA, NORTH DAKOTA, SOUTH DAKOTA"
+            "territory": "IOWA, MINNESOTA, NEBRASKA, NORTH DAKOTA, SOUTH DAKOTA",
+            "bg_color": "#f0e2ff"
           }
         },
         "rep_xfXgFg": {
@@ -234,7 +244,8 @@
             "group": "RBIZ",
             "name": "JERRY PINSKY",
             "email": "rbiz.south@gte.net",
-            "territory": "LOS ANGELES, PHOENIX"
+            "territory": "LOS ANGELES, PHOENIX",
+            "bg_color": "#deffea"
           }
         },
         "rep_6M7YRg": {
@@ -245,7 +256,8 @@
             "group": "RBIZ",
             "name": "SHARLA LLOYD",
             "email": "lloydshar@yahoo.com",
-            "territory": "NORTHERN / CENTRAL CALIFORNIA"
+            "territory": "NORTHERN / CENTRAL CALIFORNIA",
+            "bg_color": "#deffea"
           }
         }
       },
@@ -266,7 +278,8 @@
       "name": "Sales rep grid (12)",
       "settings": {
         "heading": "Our sales representatives",
-        "subheading": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>"
+        "subheading": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>",
+        "card_bg_default": "#ffffff"
       }
     },
     "wholesale_hub_cards_kWCttw": {
