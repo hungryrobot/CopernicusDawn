@@ -31,7 +31,7 @@
   .wholesale-hub-{{ uid }}__card {
     display: flex;
     flex-direction: column;
-    text-align: {{ section.settings.text_alignment }};
+    text-align: {{ section.settings.text_align | default: section.settings.text_alignment | default: 'left' }};
     padding: 16px;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -129,7 +129,7 @@
 <section class="page-width wholesale-hub-{{ uid }}">
   <div class="wholesale-hub-{{ uid }}__grid" style="grid-template-columns: repeat({{ section.settings.columns_desktop | plus: 0 }}, 1fr);">
     {% for block in section.blocks %}
-      <div class="wholesale-hub-{{ uid }}__card" {{ block.shopify_attributes }}>
+      <div class="wholesale-hub-{{ uid }}__card" style="text-align: {{ section.settings.text_align | default: section.settings.text_alignment | default: 'left' }};" {{ block.shopify_attributes }}>
         {% if block.settings.show_image %}
           <div class="wholesale-hub-{{ uid }}__image-wrap">
             {% if block.settings.image %}
@@ -169,6 +169,10 @@
   "enabled_on": { "templates": ["*"] },
   "settings": [
     { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" }
+    ], "default": "left" },
     {
       "type": "select",
       "id": "columns_desktop",
