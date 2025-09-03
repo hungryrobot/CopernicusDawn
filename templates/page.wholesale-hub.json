@@ -268,11 +268,67 @@
         "heading": "Our sales representatives",
         "subheading": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>"
       }
+    },
+    "wholesale_hub_cards_kWCttw": {
+      "type": "wholesale-hub-cards",
+      "blocks": {
+        "card_XkA9zH": {
+          "type": "card",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Catalog.jpg",
+            "headline": "Get our Print Catalog",
+            "body": "<p>Get on our snail mail mailing list for your annual dose of quirky science with our once-a-year printed catalog!</p>",
+            "button_text": "Put us on your mailing list!",
+            "button_link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "card_XkA9zH"
+      ],
+      "name": "Wholesale hub cards",
+      "settings": {
+        "text_align": "left",
+        "columns_desktop": "2",
+        "columns_mobile": "1",
+        "section_padding": 40,
+        "column_gap": 24,
+        "text_alignment": "center",
+        "show_separators": false,
+        "separator_width": 1,
+        "separator_color": "#e0e0e0",
+        "hover_background_color": "#ffc715",
+        "hover_lift": 0,
+        "hover_shadow_blur": 5,
+        "hover_shadow_spread": 0,
+        "hover_shadow_opacity": 15,
+        "image_width": 100,
+        "image_width_mobile": 80,
+        "image_max_width": 300,
+        "image_border_radius": 8,
+        "image_hover_scale": 105,
+        "headline_size": 20,
+        "headline_color": "#000000",
+        "headline_hover_color": "#333333",
+        "body_size": 14,
+        "body_color": "#666666",
+        "body_hover_color": "#333333",
+        "button_background": "#000000",
+        "button_hover_background": "#333333",
+        "button_text_color": "#ffffff",
+        "button_hover_text_color": "#ffffff",
+        "button_border_color": "#000000",
+        "button_border_width": 0,
+        "button_border_radius": 6,
+        "button_padding": 12
+      }
     }
   },
   "order": [
     "image_banner_8a7DCb",
     "wholesale_hub_cards_8x4RWU",
-    "sales_rep_grid_12_qganWE"
+    "sales_rep_grid_12_qganWE",
+    "wholesale_hub_cards_kWCttw"
   ]
 }
