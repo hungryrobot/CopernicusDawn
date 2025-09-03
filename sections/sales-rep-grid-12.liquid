@@ -37,7 +37,8 @@ Sales Rep Grid (Dawn 15+)
         <div class="rep-group__grid">
           {% for block in section.blocks %}
             {% if block.type == 'rep' and block.settings.group == grp %}
-              <article class="rep-card" {{ block.shopify_attributes }}>
+              {% assign card_bg = block.settings.bg_color | default: section.settings.card_bg_default %}
+              <article class="rep-card" style="background-color: {{ card_bg }};" {{ block.shopify_attributes }}>
                 <div class="rep-card__inner">
                   <div class="rep-card__media">
                     {% if block.settings.photo != blank %}
@@ -60,7 +61,9 @@ Sales Rep Grid (Dawn 15+)
                     <div class="rep-card__subtitle text-subdued">{{ block.settings.name | upcase }}</div>
 
                     {% if block.settings.email != blank %}
-                      <div class="rep-card__line"><a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email }}</a></div>
+                      <div class="rep-card__line rep-card__line--email">
+                        <a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email }}</a>
+                      </div>
                     {% endif %}
 
                     {% if block.settings.territory != blank %}
@@ -89,15 +92,23 @@ Sales Rep Grid (Dawn 15+)
   @media (max-width: 1200px) { .rep-group__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 900px) { .rep-group__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-  .rep-card { background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,.08); transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
-  .rep-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.08); background: rgba(0,0,0,.02); }
-  .rep-card__inner { display: grid; grid-template-columns: 112px 1fr; gap: 1rem; padding: 1rem; } /* larger image */
+  .rep-card { border-radius: 12px; border: 1px solid rgba(0,0,0,.08); transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; overflow: hidden; }
+  .rep-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  .rep-card__inner { display: grid; grid-template-columns: 112px 1fr; gap: 1rem; padding: 1rem; min-height: 128px; }
+  .rep-card__media { flex: 0 0 112px; }
   .rep-card__media img { width: 112px; height: 112px; object-fit: cover; border-radius: 12px; display: block; }
   .rep-card__placeholder { width: 112px; height: 112px; border-radius: 12px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; }
+
+  /* Prevent text overflow */
+  .rep-card__content { min-width: 0; }
+  .rep-card__title,
+  .rep-card__subtitle,
+  .rep-card__line { overflow-wrap: anywhere; word-break: break-word; }
+  .rep-card__line--email a { word-break: break-all; }
   .rep-card__title { margin: 0 0 .2rem; font-size: 1.125rem; line-height: 1.3; }
   .rep-card__subtitle { margin: .1rem 0 .35rem; }
   .rep-card__line { margin: .1rem 0; }
-  .text-subdued { color: #6b7280; }
+  .text-subdued { color: #374151; }
 </style>
 
 {% schema %}
@@ -105,7 +116,8 @@ Sales Rep Grid (Dawn 15+)
   "name": "Sales rep grid (12)",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Our sales representatives" },
-    { "type": "richtext", "id": "subheading", "label": "Intro (optional)", "default": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>" }
+    { "type": "richtext", "id": "subheading", "label": "Intro (optional)", "default": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>" },
+    { "type": "color", "id": "card_bg_default", "label": "Default card background", "default": "#ffffff" }
   ],
   "blocks": [
     {
@@ -117,7 +129,8 @@ Sales Rep Grid (Dawn 15+)
         { "type": "text", "id": "group", "label": "Group / Agency", "default": "PACIFIC NORTHWEST" },
         { "type": "text", "id": "name", "label": "Sales rep name", "default": "JANE DOE" },
         { "type": "text", "id": "email", "label": "Email", "default": "rep@example.com" },
-        { "type": "text", "id": "territory", "label": "Territory (long form, e.g., 'CALIFORNIA')", "default": "WA, OR, ID" }
+        { "type": "text", "id": "territory", "label": "Territory (long form, e.g., 'CALIFORNIA')", "default": "WASHINGTON, OREGON, IDAHO" },
+        { "type": "color", "id": "bg_color", "label": "Card background (optional override)" }
       ]
     }
   ],
@@ -127,21 +140,22 @@ Sales Rep Grid (Dawn 15+)
       "name": "Sales rep grid (12)",
       "settings": {
         "heading": "Our sales representatives",
-        "subheading": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>"
+        "subheading": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>",
+        "card_bg_default": "#ffffff"
       },
       "blocks": {
-        "rep-01": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "ANDREA FRIEDMAN", "email": "andreafriedman22@gmail.com", "territory": "CONNECTICUT", "photo_url": "" } },
-        "rep-02": { "type": "rep", "settings": { "group": "INDEPENDENT / NOTHING BUT THE BEST", "name": "PAUL FRANZ", "email": "nothingbutthebest@comcast.net", "territory": "VERMONT", "photo_url": "" } },
-        "rep-03": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "LISA GRIER", "email": "lgriersales@gmail.com", "territory": "DELAWARE", "photo_url": "" } },
-        "rep-04": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "BRUCE KLICKSTEIN", "email": "emoments2@verizon.net", "territory": "NORTHERN MASSACHUSETTS, NEW HAMPSHIRE, MAINE, CAPE COD", "photo_url": "" } },
-        "rep-05": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "SCOTT KENERLY", "email": "sksales.rf1@gmail.com", "territory": "NORTH CAROLINA (WESTERN), SELECT SOUTH CAROLINA, TENNESSEE, GEORGIA", "photo_url": "" } },
-        "rep-06": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "KAREN STAHL", "email": "kstahl9837@aol.com", "territory": "UPSTATE NEW YORK", "photo_url": "" } },
-        "rep-07": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "MARC STEINSLOFER", "email": "repintoys@aol.com", "territory": "PENNSYLVANIA, CONNECTICUT, NEW JERSEY", "photo_url": "" } },
-        "rep-08": { "type": "rep", "settings": { "group": "KINFETTI SALES DIVISION / ENCHANTED", "name": "JOHN GRAVES", "email": "john@kinfetti.com", "territory": "IDAHO, MONTANA, WYOMING", "photo_url": "" } },
-        "rep-09": { "type": "rep", "settings": { "group": "KINFETTI SALES DIVISION / ENCHANTED", "name": "MARY MORRISON", "email": "mary@enchantedmoments.com", "territory": "OREGON", "photo_url": "" } },
-        "rep-10": { "type": "rep", "settings": { "group": "KETZ", "name": "LU KETZ", "email": "lu@ketzassociates.com", "territory": "IOWA, MINNESOTA, NEBRASKA, NORTH DAKOTA, SOUTH DAKOTA", "photo_url": "" } },
-        "rep-11": { "type": "rep", "settings": { "group": "RBIZ", "name": "JERRY PINSKY", "email": "rbiz.south@gte.net", "territory": "LOS ANGELES, PHOENIX", "photo_url": "" } },
-        "rep-12": { "type": "rep", "settings": { "group": "RBIZ", "name": "SHARLA LLOYD", "email": "lloydshar@yahoo.com", "territory": "NORTHERN / CENTRAL CALIFORNIA", "photo_url": "" } }
+        "rep-01": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "ANDREA FRIEDMAN", "email": "andreafriedman22@gmail.com", "territory": "CONNECTICUT", "photo_url": "", "bg_color": "" } },
+        "rep-02": { "type": "rep", "settings": { "group": "INDEPENDENT / NOTHING BUT THE BEST", "name": "PAUL FRANZ", "email": "nothingbutthebest@comcast.net", "territory": "VERMONT", "photo_url": "", "bg_color": "" } },
+        "rep-03": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "LISA GRIER", "email": "lgriersales@gmail.com", "territory": "DELAWARE", "photo_url": "", "bg_color": "" } },
+        "rep-04": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "BRUCE KLICKSTEIN", "email": "emoments2@verizon.net", "territory": "NORTHERN MASSACHUSETTS, NEW HAMPSHIRE, MAINE, CAPE COD", "photo_url": "", "bg_color": "" } },
+        "rep-05": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "SCOTT KENERLY", "email": "sksales.rf1@gmail.com", "territory": "NORTH CAROLINA (WESTERN), SELECT SOUTH CAROLINA, TENNESSEE, GEORGIA", "photo_url": "", "bg_color": "" } },
+        "rep-06": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "KAREN STAHL", "email": "kstahl9837@aol.com", "territory": "UPSTATE NEW YORK", "photo_url": "", "bg_color": "" } },
+        "rep-07": { "type": "rep", "settings": { "group": "INDEPENDENT", "name": "MARC STEINSLOFER", "email": "repintoys@aol.com", "territory": "PENNSYLVANIA, CONNECTICUT, NEW JERSEY", "photo_url": "", "bg_color": "" } },
+        "rep-08": { "type": "rep", "settings": { "group": "KINFETTI SALES DIVISION / ENCHANTED", "name": "JOHN GRAVES", "email": "john@kinfetti.com", "territory": "IDAHO, MONTANA, WYOMING", "photo_url": "", "bg_color": "" } },
+        "rep-09": { "type": "rep", "settings": { "group": "KINFETTI SALES DIVISION / ENCHANTED", "name": "MARY MORRISON", "email": "mary@enchantedmoments.com", "territory": "OREGON", "photo_url": "", "bg_color": "" } },
+        "rep-10": { "type": "rep", "settings": { "group": "KETZ", "name": "LU KETZ", "email": "lu@ketzassociates.com", "territory": "IOWA, MINNESOTA, NEBRASKA, NORTH DAKOTA, SOUTH DAKOTA", "photo_url": "", "bg_color": "" } },
+        "rep-11": { "type": "rep", "settings": { "group": "RBIZ", "name": "JERRY PINSKY", "email": "rbiz.south@gte.net", "territory": "LOS ANGELES, PHOENIX", "photo_url": "", "bg_color": "" } },
+        "rep-12": { "type": "rep", "settings": { "group": "RBIZ", "name": "SHARLA LLOYD", "email": "lloydshar@yahoo.com", "territory": "NORTHERN / CENTRAL CALIFORNIA", "photo_url": "", "bg_color": "" } }
       },
       "block_order": [
         "rep-01","rep-02","rep-03","rep-04","rep-05","rep-06","rep-07","rep-08","rep-09","rep-10","rep-11","rep-12"
