@@ -9,6 +9,43 @@
  */
 {
   "sections": {
+    "image_banner_8a7DCb": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_37XYdi": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>FIND US IN OVER A THOUSAND SPECIALTY STORES</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_W7Ximh": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>For over 30 years, Copernicus Toys has been committed to supporting independent retailers</strong>",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_37XYdi",
+        "text_W7Ximh"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Dawn-BannerDesktop-02.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "desktop_content_position": "bottom-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
     "wholesale_hub_cards_8x4RWU": {
       "type": "wholesale-hub-cards",
       "blocks": {
@@ -234,6 +271,7 @@
     }
   },
   "order": [
+    "image_banner_8a7DCb",
     "wholesale_hub_cards_8x4RWU",
     "sales_rep_grid_12_qganWE"
   ]
