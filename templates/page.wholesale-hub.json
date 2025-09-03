@@ -39,6 +39,7 @@
       ],
       "name": "Wholesale hub cards",
       "settings": {
+        "text_align": "left",
         "columns_desktop": "2",
         "columns_mobile": "1",
         "section_padding": 40,
@@ -72,102 +73,9 @@
         "button_border_radius": 6,
         "button_padding": 12
       }
-    },
-    "main": {
-      "type": "sales-rep-grid",
-      "blocks": {
-        "rep_TjkwJx": {
-          "type": "rep",
-          "settings": {
-            "photo": "shopify://shop_images/rep09.jpg",
-            "photo_url": "",
-            "group": "ANDREA FRIEDMAN",
-            "name": "INDEPENDENT",
-            "email": "andreafriedman22@gmail.com",
-            "territory": "CONNECTICUT"
-          }
-        }
-      },
-      "block_order": [
-        "rep_TjkwJx"
-      ],
-      "settings": {
-        "heading": "Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs",
-        "subheading": ""
-      }
-    },
-    "sales_rep_finder_ryzfkf": {
-      "type": "sales-rep-finder",
-      "blocks": {
-        "rep_aJDPeA": {
-          "type": "rep",
-          "settings": {
-            "territory_group": "Pacific Northwest",
-            "name": "Sharon Van Pelt",
-            "group": "Regional Rep",
-            "coverage_display": "Idaho, Montana, Oregon, Washington, Wyoming",
-            "photo_url": ""
-          }
-        },
-        "rep_LKNx8T": {
-          "type": "rep",
-          "settings": {
-            "territory_group": "Pacific Northwest",
-            "name": "Steve Kuta",
-            "group": "Regional Rep",
-            "coverage_display": "Colorado, Utah",
-            "photo_url": ""
-          }
-        },
-        "rep_DxQVUj": {
-          "type": "rep",
-          "settings": {
-            "territory_group": "New England",
-            "name": "Anna Rainone",
-            "group": "Independent Rep",
-            "coverage_display": "Massachusetts, Maine, New Hampshire, Rhode Island, Vermont",
-            "photo_url": ""
-          }
-        },
-        "rep_9XJwVT": {
-          "type": "rep",
-          "settings": {
-            "territory_group": "New England",
-            "name": "Zachary Levin",
-            "group": "Independent Rep",
-            "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont",
-            "photo_url": ""
-          }
-        },
-        "rep_kX3FCk": {
-          "type": "rep",
-          "settings": {
-            "territory_group": "Mid-Atlantic",
-            "name": "Donna Reilly",
-            "group": "Independent Rep",
-            "coverage_display": "Maryland, Virginia, District of Columbia",
-            "photo_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "rep_aJDPeA",
-        "rep_LKNx8T",
-        "rep_DxQVUj",
-        "rep_9XJwVT",
-        "rep_kX3FCk"
-      ],
-      "name": "Sales rep finder (grouped)",
-      "settings": {
-        "heading": "Find the sales representative in your territory.",
-        "banner_url": "",
-        "placeholder": "— Select your territory —"
-      }
     }
   },
   "order": [
-    "wholesale_hub_cards_8x4RWU",
-    "main",
-    "sales_rep_finder_ryzfkf"
+    "wholesale_hub_cards_8x4RWU"
   ]
 }
