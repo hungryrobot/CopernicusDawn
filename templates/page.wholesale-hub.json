@@ -55,7 +55,7 @@
             "show_image": true,
             "image": "shopify://shop_images/OrderFAIRE.jpg",
             "headline": "Benefits of Faire",
-            "body": "<p>Personalized recommendations and easy online checkout</p><p>60‑day payment terms for eligible retailers</p><p>Free returns on first orders, on us</p><p>50% off and 1 year of free shipping for new referrals</p>",
+            "body": "<ul><li>Personalized recommendations and easy online checkout</li><li>60‑day payment terms for eligible retailers</li><li>Free returns on first orders, on us</li><li>50% off and 1 year of free shipping for new referrals</li></ul>",
             "button_text": "Buy on FAIRE",
             "button_link": "#"
           }
@@ -103,8 +103,8 @@
         "body_size": 14,
         "body_color": "#666666",
         "body_hover_color": "#333333",
-        "button_background": "#000000",
-        "button_hover_background": "#333333",
+        "button_background": "#334fb4",
+        "button_hover_background": "#ffc715",
         "button_text_color": "#ffffff",
         "button_hover_text_color": "#ffffff",
         "button_border_color": "#000000",
@@ -277,7 +277,7 @@
           "settings": {
             "show_image": true,
             "image": "shopify://shop_images/Catalog.jpg",
-            "headline": "Get our Print Catalog",
+            "headline": "Get our Wholesale Print Catalog",
             "body": "<p>Get on our snail mail mailing list for your annual dose of quirky science with our once-a-year printed catalog!</p>",
             "button_text": "Put us on your mailing list!",
             "button_link": "#"
