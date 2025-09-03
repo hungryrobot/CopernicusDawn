@@ -26,9 +26,9 @@
           "type": "card",
           "settings": {
             "show_image": true,
-            "headline": "Feature title",
-            "body": "<p>Share details about your wholesale options.</p>",
-            "button_text": "Learn more",
+            "headline": "Register to buy directly",
+            "body": "<ul><li>Minimum order: $200</li><li>5% discount on orders over $500</li><li>Ships in 2–3 days from receipt</li></ul>",
+            "button_text": "Apply here",
             "button_link": "#"
           }
         }
@@ -95,10 +95,79 @@
         "heading": "Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs",
         "subheading": ""
       }
+    },
+    "sales_rep_finder_ryzfkf": {
+      "type": "sales-rep-finder",
+      "blocks": {
+        "rep_aJDPeA": {
+          "type": "rep",
+          "settings": {
+            "territory_group": "Pacific Northwest",
+            "name": "Sharon Van Pelt",
+            "group": "Regional Rep",
+            "coverage_display": "Idaho, Montana, Oregon, Washington, Wyoming",
+            "photo_url": ""
+          }
+        },
+        "rep_LKNx8T": {
+          "type": "rep",
+          "settings": {
+            "territory_group": "Pacific Northwest",
+            "name": "Steve Kuta",
+            "group": "Regional Rep",
+            "coverage_display": "Colorado, Utah",
+            "photo_url": ""
+          }
+        },
+        "rep_DxQVUj": {
+          "type": "rep",
+          "settings": {
+            "territory_group": "New England",
+            "name": "Anna Rainone",
+            "group": "Independent Rep",
+            "coverage_display": "Massachusetts, Maine, New Hampshire, Rhode Island, Vermont",
+            "photo_url": ""
+          }
+        },
+        "rep_9XJwVT": {
+          "type": "rep",
+          "settings": {
+            "territory_group": "New England",
+            "name": "Zachary Levin",
+            "group": "Independent Rep",
+            "coverage_display": "Connecticut, Massachusetts, Maine, New Hampshire, Rhode Island, Vermont",
+            "photo_url": ""
+          }
+        },
+        "rep_kX3FCk": {
+          "type": "rep",
+          "settings": {
+            "territory_group": "Mid-Atlantic",
+            "name": "Donna Reilly",
+            "group": "Independent Rep",
+            "coverage_display": "Maryland, Virginia, District of Columbia",
+            "photo_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "rep_aJDPeA",
+        "rep_LKNx8T",
+        "rep_DxQVUj",
+        "rep_9XJwVT",
+        "rep_kX3FCk"
+      ],
+      "name": "Sales rep finder (grouped)",
+      "settings": {
+        "heading": "Find the sales representative in your territory.",
+        "banner_url": "",
+        "placeholder": "— Select your territory —"
+      }
     }
   },
   "order": [
     "wholesale_hub_cards_8x4RWU",
-    "main"
+    "main",
+    "sales_rep_finder_ryzfkf"
   ]
 }
