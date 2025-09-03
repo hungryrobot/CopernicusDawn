@@ -75,9 +75,166 @@
         "button_border_radius": 6,
         "button_padding": 12
       }
+    },
+    "sales_rep_grid_12_qganWE": {
+      "type": "sales-rep-grid-12",
+      "blocks": {
+        "rep_Kq3fD3": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep09.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT",
+            "name": "ANDREA FRIEDMAN",
+            "email": "andreafriedman22@gmail.com",
+            "territory": "CONNECTICUT"
+          }
+        },
+        "rep_H3BTwp": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep02.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT / NOTHING BUT THE BEST",
+            "name": "PAUL FRANZ",
+            "email": "nothingbutthebest@comcast.net",
+            "territory": "VERMONT"
+          }
+        },
+        "rep_6MhGLq": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep01.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT",
+            "name": "LISA GRIER",
+            "email": "lgriersales@gmail.com",
+            "territory": "DELAWARE"
+          }
+        },
+        "rep_pLnj4c": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep08.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT",
+            "name": "BRUCE KLICKSTEIN",
+            "email": "emoments2@verizon.net",
+            "territory": "NORTHERN MASSACHUSETTS, NEW HAMPSHIRE, MAINE, CAPE COD"
+          }
+        },
+        "rep_Qyttm7": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep10.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT",
+            "name": "SCOTT KENERLY",
+            "email": "sksales.rf1@gmail.com",
+            "territory": "NORTH CAROLINA (WESTERN), SELECT SOUTH CAROLINA, TENNESSEE, GEORGIA"
+          }
+        },
+        "rep_c3fFrK": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep03.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT",
+            "name": "KAREN STAHL",
+            "email": "kstahl9837@aol.com",
+            "territory": "UPSTATE NEW YORK"
+          }
+        },
+        "rep_UFGNqH": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep12.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT",
+            "name": "MARC STEINSLOFER",
+            "email": "repintoys@aol.com",
+            "territory": "PENNSYLVANIA, CONNECTICUT, NEW JERSEY"
+          }
+        },
+        "rep_X8NcnP": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep05.jpg",
+            "photo_url": "",
+            "group": "KINFETTI SALES DIVISION / ENCHANTED",
+            "name": "JOHN GRAVES",
+            "email": "john@kinfetti.com",
+            "territory": "IDAHO, MONTANA, WYOMING"
+          }
+        },
+        "rep_VTmGFb": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep04.jpg",
+            "photo_url": "",
+            "group": "KINFETTI SALES DIVISION / ENCHANTED",
+            "name": "MARY MORRISON",
+            "email": "mary@enchantedmoments.com",
+            "territory": "OREGON"
+          }
+        },
+        "rep_hT9QPU": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep07.jpg",
+            "photo_url": "",
+            "group": "KETZ",
+            "name": "LU KETZ",
+            "email": "lu@ketzassociates.com",
+            "territory": "IOWA, MINNESOTA, NEBRASKA, NORTH DAKOTA, SOUTH DAKOTA"
+          }
+        },
+        "rep_xfXgFg": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep11.jpg",
+            "photo_url": "",
+            "group": "RBIZ",
+            "name": "JERRY PINSKY",
+            "email": "rbiz.south@gte.net",
+            "territory": "LOS ANGELES, PHOENIX"
+          }
+        },
+        "rep_6M7YRg": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep13.jpg",
+            "photo_url": "",
+            "group": "RBIZ",
+            "name": "SHARLA LLOYD",
+            "email": "lloydshar@yahoo.com",
+            "territory": "NORTHERN / CENTRAL CALIFORNIA"
+          }
+        }
+      },
+      "block_order": [
+        "rep_Kq3fD3",
+        "rep_H3BTwp",
+        "rep_6MhGLq",
+        "rep_pLnj4c",
+        "rep_Qyttm7",
+        "rep_c3fFrK",
+        "rep_UFGNqH",
+        "rep_X8NcnP",
+        "rep_VTmGFb",
+        "rep_hT9QPU",
+        "rep_xfXgFg",
+        "rep_6M7YRg"
+      ],
+      "name": "Sales rep grid (12)",
+      "settings": {
+        "heading": "Our sales representatives",
+        "subheading": "<p>Copernicus Toys works with various independent toy and gift rep agencies across the US. They have loads of experience to help you fill your merchandising needs.</p>"
+      }
     }
   },
   "order": [
-    "wholesale_hub_cards_8x4RWU"
+    "wholesale_hub_cards_8x4RWU",
+    "sales_rep_grid_12_qganWE"
   ]
 }
