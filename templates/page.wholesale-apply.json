@@ -41,7 +41,7 @@
         "text_HVbcFY": {
           "type": "text",
           "settings": {
-            "text": "<p>Still need to register? Please fill out this quick form and tell us about your fantastic store</p>"
+            "text": "<p><strong>Still need to register? </strong><br/>Please take a moment to fill out this quick form and tell us about your fantastic store.</p>"
           }
         }
       },
