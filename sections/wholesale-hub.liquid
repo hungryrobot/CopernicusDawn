@@ -6,8 +6,8 @@
 
   <div class="wh-grid">
     <div class="wh-card">
-      <a class="wh-btn" href="{{ section.settings.faire_link | default: '#' }}" target="_blank" rel="noopener">
-        {{ section.settings.faire_button_label | default: 'Shop on Faire' }}
+      <a class="wh-btn" href="{{ section.settings.faire_url | default: '/pages/wholesale-hub' }}" target="_blank" rel="noopener">
+        {{ section.settings.faire_button | default: 'Open Faire Portal' }}
       </a>
       <h2>Order on Faire</h2>
 
@@ -25,8 +25,8 @@
     </div>
 
     <div class="wh-card">
-      <a class="wh-btn" href="{{ section.settings.b2b_url | default: '/pages/wholesale-apply' }}">
-        {{ section.settings.direct_button_label | default: 'Apply for access' }}
+      <a class="wh-btn" href="{{ section.settings.direct_url | default: '/pages/b2b-login' }}">
+        {{ section.settings.direct_button | default: 'Go to Wholesale Login' }}
       </a>
       {%- comment -%} Secondary login + catalog buttons (debug-hardened) {%- endcomment -%}
       <div class="mt-2 space-y-2">
@@ -42,10 +42,11 @@
           </a>
         {%- endif -%}
 
-        <a href="{{ section.settings.catalog_signup_url | default: '/pages/wholesale-catalog' }}"
-           class="button button--tertiary">
-          {{ section.settings.catalog_signup_label | default: 'Get on our print catalog mailing list' }}
-        </a>
+        {%- if section.settings.show_catalog_button -%}
+          <a class="button button--tertiary" href="{{ section.settings.catalog_url | default: '/pages/wholesale-catalog' }}">
+            {{ section.settings.catalog_button | default: 'Get Catalog' }}
+          </a>
+        {%- endif -%}
       </div>
       <h2>Register to buy direct</h2>
 
@@ -103,19 +104,20 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Wholesale" },
     { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Choose how you’d like to order wholesale.</p>" },
-
-    { "type": "url", "id": "faire_link", "label": "Faire Direct link (button link)" },
+    { "type": "text", "id": "faire_button", "label": "Faire button label", "default": "Open Faire Portal" },
+    { "type": "url",  "id": "faire_url",    "label": "Faire button link" },
     { "type": "textarea", "id": "faire_embed", "label": "Faire embed code (optional widget)" },
-    { "type": "url", "id": "b2b_url", "label": "B2B registration URL" },
+    { "type": "text", "id": "direct_button", "label": "Direct button label", "default": "Go to Wholesale Login" },
+    { "type": "url",  "id": "direct_url",    "label": "Direct button link" },
 
-    { "type": "text", "id": "faire_button_label", "label": "Faire button text", "default": "Shop on Faire" },
-    { "type": "text", "id": "direct_button_label", "label": "Direct button text", "default": "Apply for access" },
     { "type": "text", "id": "direct_login_label", "label": "Login button label", "default": "Already registered? Log in" },
-    { "type": "text", "id": "direct_login_url", "label": "Login button URL", "default": "/pages/b2b-login#login" },
+    { "type": "url",  "id": "direct_login_url", "label": "Login button URL", "default": "/pages/b2b-login#login" },
     { "type": "text", "id": "direct_start_label", "label": "Approved (B2B) button label", "default": "Start shopping" },
-    { "type": "text", "id": "direct_start_url", "label": "Approved (B2B) start URL", "default": "/" },
-    { "type": "text", "id": "catalog_signup_label", "label": "Catalog mailing list button label", "default": "Get on our print catalog mailing list" },
-    { "type": "text", "id": "catalog_signup_url", "label": "Catalog signup page URL", "default": "/pages/wholesale-catalog" },
+    { "type": "url",  "id": "direct_start_url", "label": "Approved (B2B) start URL", "default": "/" },
+
+    { "type": "checkbox", "id": "show_catalog_button", "label": "Show Catalog button", "default": true },
+    { "type": "text",     "id": "catalog_button",      "label": "Catalog button label", "default": "Get Catalog" },
+    { "type": "url",      "id": "catalog_url",         "label": "Catalog button link", "default": "/pages/wholesale-catalog" },
 
     { "type": "richtext", "id": "faire_terms", "label": "Faire incentives (left card)" },
     { "type": "richtext", "id": "direct_terms", "label": "Direct B2B terms (right card)" }
