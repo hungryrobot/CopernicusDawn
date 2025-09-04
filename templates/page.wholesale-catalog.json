@@ -1,6 +1,68 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": { "type": "main-page", "settings": {} }
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_Ft7X9i": {
+      "type": "rich-text",
+      "blocks": {
+        "text_TVzmLH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Claim your analog catalog—printed just once a year, and absolutely essential for your terrestrial adventures. Don’t miss your copy!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_TVzmLH"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "17570181377c8d3b16": {
+      "type": "apps",
+      "blocks": {
+        "helium_customer_fields_app_block_c39TAd": {
+          "type": "shopify://apps/helium-customer-fields/blocks/app-block/bab58598-3e6a-4377-aaaa-97189b15f131",
+          "settings": {
+            "form_id": "zytqX8",
+            "width": 600,
+            "vertical_spacing": 60,
+            "horizontal_spacing": 0
+          }
+        }
+      },
+      "block_order": [
+        "helium_customer_fields_app_block_c39TAd"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "rich_text_Ft7X9i",
+    "17570181377c8d3b16"
+  ]
 }
