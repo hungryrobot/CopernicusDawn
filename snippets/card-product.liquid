@@ -265,7 +265,6 @@
                               {{- 'products.product.quantity.multiples_of' | t: quantity: quantity_rule.increment -}}
                             </span>
                           {%- endif -%}
-            {% endunless %}
                           {%- if quantity_rule.min > 1 -%}
                             <span class="divider">
                               {{- 'products.product.quantity.min_of' | t: quantity: quantity_rule.min -}}

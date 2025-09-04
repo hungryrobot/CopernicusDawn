@@ -43,10 +43,9 @@ Author: Copernicus — Wholesale Hub utility
           {% if has_img %}
             <div class="mc-card__media">
               {%- assign img = block.settings.image -%}
-              {{ img | image_url: width: 1000 | image_tag:
-                loading: 'lazy',
-                alt: block.settings.title | escape,
-                style: 'width: var(--mc-img-scale); max-width: 100%; height: auto;'
+              {{ img
+                | image_url: width: 1000
+                | image_tag: alt: block.settings.title | escape, loading: 'lazy', style: 'width: var(--mc-img-scale); max-width: 100%; height: auto;' 
               }}
             </div>
           {% endif %}
