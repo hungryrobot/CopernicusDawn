@@ -45,7 +45,7 @@ Author: Copernicus — Wholesale Hub utility
               {%- assign img = block.settings.image -%}
               {{ img
                 | image_url: width: 1000
-                | image_tag: alt: block.settings.title | escape, loading: 'lazy', style: 'width: var(--mc-img-scale); max-width: 100%; height: auto;' 
+                | image_tag: alt: block.settings.title, loading: 'lazy', style: 'width: var(--mc-img-scale); max-width: 100%; height: auto;' 
               }}
             </div>
           {% endif %}
