@@ -68,7 +68,7 @@
             "headline": "Register to buy directly",
             "body": "<ul><li>Minimum order: $200</li><li>5% discount on orders over $500</li><li>Ships in 2–3 days from receipt</li></ul>",
             "button_text": "Apply here",
-            "button_link": "#"
+            "button_link": "pages/wholesale-apply"
           }
         }
       },
