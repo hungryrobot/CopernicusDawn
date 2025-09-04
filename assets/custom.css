@@ -1,0 +1,51 @@
+/* ================================================
+   Product cards: keep buttons aligned bottom
+   Works on home page (featured collections) + collection pages
+   Compatible with Dawn (v8–v15+) and SparkLayer widgets
+================================================= */
+
+/* 1) Ensure the card grows to full height inside grid items */
+.grid__item .card-wrapper,
+.grid__item .card {
+  height: 100%;
+}
+
+/* 2) Turn the product card content into a vertical flex stack */
+.card--product .card__content,
+.card--product .card__information {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 3) Let the title and meta use natural height; no clipping */
+.card--product .card__heading,
+.card--product .card-information,
+.card--product .price {
+  /* no fixed heights; allow wrapping */
+}
+
+/* 4) Push the CTA (Quick add / View product / SparkLayer add) to bottom */
+.card--product .quick-add,
+.card--product form[action*="/cart/add"],
+.card--product .card__cta,
+.card--product .sl-add-to-cart,           /* SparkLayer button */
+.card--product .sl-quick-order__add,      /* SparkLayer quick-order buttons (if present in cards) */
+.card--product .button--full-width {
+  margin-top: auto;
+}
+
+/* 5) Even if the product is OOS and shows a different CTA, keep alignment */
+.card--product .card__badge,
+.card--product .badge,
+.card--product .sold-out-message {
+  /* don’t affect layout flow; they’ll sit above the button */
+}
+
+/* 6) Minor polish: keep cards equal height on small screens too */
+@media (max-width: 749px) {
+  .card--product .card__content,
+  .card--product .card__information {
+    min-height: 100%;
+  }
+}
