@@ -18,12 +18,6 @@
   height: 100%;
 }
 
-/* 3) Let the title and meta use natural height; no clipping */
-.card--product .card__heading,
-.card--product .card-information,
-.card--product .price {
-  /* no fixed heights; allow wrapping */
-}
 
 /* 4) Push the CTA (Quick add / View product / SparkLayer add) to bottom */
 .card--product .quick-add,
@@ -36,11 +30,7 @@
 }
 
 /* 5) Even if the product is OOS and shows a different CTA, keep alignment */
-.card--product .card__badge,
-.card--product .badge,
-.card--product .sold-out-message {
-  /* don’t affect layout flow; they’ll sit above the button */
-}
+
 
 /* 6) Minor polish: keep cards equal height on small screens too */
 @media (max-width: 749px) {
