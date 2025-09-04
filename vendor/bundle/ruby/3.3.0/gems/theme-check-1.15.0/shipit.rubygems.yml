@@ -1,3 +1,0 @@
-deploy:
-  pre:
-    - bundle exec rake download_theme_liquid_docs

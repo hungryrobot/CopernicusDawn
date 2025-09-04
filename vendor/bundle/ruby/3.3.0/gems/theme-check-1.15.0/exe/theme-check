@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
-
-require "theme_check"
-
-ThemeCheck::Cli.parse_and_run(ARGV)
