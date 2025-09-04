@@ -1,4 +1,12 @@
-{% comment %} Generic Customer Fields form section (by form_id) {% endcomment %}
+{% comment %}
+NOTE for Windsurf / future maintainers:
+We intentionally render Helium Customer Fields via the app embed snippet:
+  {% render 'customer-fields', form_id: ... %}
+Do NOT replace this with an apps block or UUID.
+The Customer Fields app embed must be toggled ON in the Theme Editor
+for this to render properly.
+{% endcomment %}
+
 <section class="page-width section-{{ section.id }}-padding">
   {% if section.settings.title != blank %}
     <h1 class="h1">{{ section.settings.title }}</h1>
@@ -7,10 +15,6 @@
     <div class="rte">{{ section.settings.intro }}</div>
   {% endif %}
 
-  {%- comment -%}
-    Renders a specific Customer Fields form via form_id.
-    Requires the Customer Fields app embed to be enabled in the theme.
-  {%- endcomment -%}
   {% render "customer-fields", form_id: section.settings.form_id %}
 </section>
 
