@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "cf-form",
+      "settings": {
+        "title": "Get Our Wholesale Catalog",
+        "intro": "<p>Join our wholesale catalog mailing list for new releases.</p>",
+        "form_id": "zytqX8"
+      }
+    }
+  },
+  "order": ["main"]
+}

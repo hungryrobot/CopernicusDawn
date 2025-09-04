@@ -1,0 +1,31 @@
+{% comment %}
+NOTE for Windsurf / future maintainers:
+We intentionally render Helium Customer Fields via the app embed snippet:
+  {% render 'customer-fields', form_id: ... %}
+Do NOT replace this with an apps block or UUID.
+The Customer Fields app embed must be toggled ON in the Theme Editor
+for this to render properly.
+{% endcomment %}
+
+<section class="page-width section-{{ section.id }}-padding">
+  {% if section.settings.title != blank %}
+    <h1 class="h1">{{ section.settings.title }}</h1>
+  {% endif %}
+  {% if section.settings.intro != blank %}
+    <div class="rte">{{ section.settings.intro }}</div>
+  {% endif %}
+
+  {% render "customer-fields", form_id: section.settings.form_id %}
+</section>
+
+{% schema %}
+{
+  "name": "Customer Fields - Form (by ID)",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "richtext", "id": "intro", "label": "Intro text" },
+    { "type": "text", "id": "form_id", "label": "Customer Fields form ID", "default": "abc123" }
+  ],
+  "presets": [{ "name": "Customer Fields - Form (by ID)" }]
+}
+{% endschema %}

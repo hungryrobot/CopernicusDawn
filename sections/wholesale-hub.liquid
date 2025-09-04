@@ -42,7 +42,7 @@
           </a>
         {%- endif -%}
 
-        <a href="{{ section.settings.catalog_signup_url | default: '/pages/catalog-signup' }}"
+        <a href="{{ section.settings.catalog_signup_url | default: '/pages/wholesale-catalog' }}"
            class="button button--tertiary">
           {{ section.settings.catalog_signup_label | default: 'Get on our print catalog mailing list' }}
         </a>
@@ -115,7 +115,7 @@
     { "type": "text", "id": "direct_start_label", "label": "Approved (B2B) button label", "default": "Start shopping" },
     { "type": "text", "id": "direct_start_url", "label": "Approved (B2B) start URL", "default": "/" },
     { "type": "text", "id": "catalog_signup_label", "label": "Catalog mailing list button label", "default": "Get on our print catalog mailing list" },
-    { "type": "text", "id": "catalog_signup_url", "label": "Catalog signup page URL", "default": "/pages/catalog-signup" },
+    { "type": "text", "id": "catalog_signup_url", "label": "Catalog signup page URL", "default": "/pages/wholesale-catalog" },
 
     { "type": "richtext", "id": "faire_terms", "label": "Faire incentives (left card)" },
     { "type": "richtext", "id": "direct_terms", "label": "Direct B2B terms (right card)" }

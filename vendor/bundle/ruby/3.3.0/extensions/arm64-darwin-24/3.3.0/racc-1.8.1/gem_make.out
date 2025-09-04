@@ -1,0 +1,18 @@
+current directory: /Users/avrom/Documents/Work/Programs/Copernicus Dawn Theme/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+/Users/avrom/.rbenv/versions/3.3.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/avrom/Documents/Work/Programs/Copernicus Dawn Theme/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250904-42375-q324ra sitelibdir\=./.gem.20250904-42375-q324ra clean
+
+current directory: /Users/avrom/Documents/Work/Programs/Copernicus Dawn Theme/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250904-42375-q324ra sitelibdir\=./.gem.20250904-42375-q324ra
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/avrom/Documents/Work/Programs/Copernicus Dawn Theme/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250904-42375-q324ra sitelibdir\=./.gem.20250904-42375-q324ra install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20250904-42375-q324ra/racc
+
+current directory: /Users/avrom/Documents/Work/Programs/Copernicus Dawn Theme/vendor/bundle/ruby/3.3.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250904-42375-q324ra sitelibdir\=./.gem.20250904-42375-q324ra clean
