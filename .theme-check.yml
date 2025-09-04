@@ -1,0 +1,10 @@
+extends: theme-check:recommended
+
+exclude:
+  - node_modules/**
+  - vendor/**
+
+checks:
+  MissingSnippet:
+    exclude:
+      - sections/cf-form.liquid
