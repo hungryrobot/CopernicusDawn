@@ -314,6 +314,7 @@
                {%- endif -%}
           </div>
         </div>
+        {% endunless %}
         {% unless is_b2b %}
           {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
           {% if quick_add == 'standard' %}
@@ -465,7 +466,7 @@
                 </button>
               </modal-opener>
               <modal-dialog
-                id="QuickAddBulk-{{ card_product.id }}-{{ section_id }}"
+                id="QuickAddBulk-{{ card_product.id }}-{{ section.id }}"
                 class="quick-add-modal color-{{ section.settings.color_scheme }}"
               >
                 <div
@@ -644,4 +645,4 @@
       </div>
     </div>
   </div>
-{%- endif -%}
+{%- endunless -%}

@@ -1,5 +1,11 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Sync marker: announcement-bar.liquid updated on 2025-09-05 11:15 EDT
+  Expected features in this file:
+  - Audience-specific colors via --ab-bg and --ab-text
+  - Audience gating per block using settings.audience (all/b2b/retail)
+{%- endcomment -%}
 
 {%- liquid
   assign social_icons = true
@@ -15,9 +21,21 @@
 -%}
 -%}
 
+{%- comment -%}
+  Dawn v15 — per-audience announcement bar colors
+  We keep audience-gated content as-is and only set colors via section pickers.
+{%- endcomment -%}
+
 {%- assign is_b2b = false -%}
 {%- if customer and customer.tags contains 'b2b' -%}
   {%- assign is_b2b = true -%}
+{%- endif -%}
+
+{%- assign ab_bg = section.settings.retail_bar_bg -%}
+{%- assign ab_text = section.settings.retail_bar_text -%}
+{%- if is_b2b -%}
+  {%- assign ab_bg = section.settings.b2b_bar_bg -%}
+  {%- assign ab_text = section.settings.b2b_bar_text -%}
 {%- endif -%}
 
 {%- capture bar_text -%}
@@ -50,6 +68,7 @@
 
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
+  style="--ab-bg: {{ ab_bg }}; --ab-text: {{ ab_text }};"
   {{ block.shopify_attributes }}
 >
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
@@ -57,17 +76,28 @@
       {%- render 'social-icons' -%}
     {%- endif -%}
     {%- if section.blocks.size == 1 -%}
+      {%- liquid
+        assign show_block = true
+        assign aud = section.blocks.first.settings.audience | default: 'all'
+        if aud == 'b2b' and is_b2b == false
+          assign show_block = false
+        elsif aud == 'retail' and is_b2b
+          assign show_block = false
+        endif
+      -%}
       <div
         class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
         aria-label="{{ 'sections.header.announcement' | t }}"
-        {{ block.shopify_attributes }}
+        {{ section.blocks.first.shopify_attributes }}
+        style="background: var(--ab-bg); color: var(--ab-text);"
       >
-        {%- if section.blocks.first.settings.text != blank -%}
+        {%- if show_block and section.blocks.first.settings.text != blank -%}
           {%- if section.blocks.first.settings.link != blank -%}
             <a
               href="{{ section.blocks.first.settings.link }}"
               class="announcement-bar__link link link--text focus-inset animate-arrow"
+              style="color: var(--ab-text);"
             >
           {%- endif -%}
           <p class="announcement-bar__message h5">
@@ -88,7 +118,7 @@
         aria-roledescription="{{ 'sections.announcements.carousel' | t }}"
         aria-label="{{ 'sections.announcements.announcement_bar' | t }}"
       >
-        <div class="announcement-bar-slider slider-buttons">
+        <div class="announcement-bar-slider slider-buttons" style="background: var(--ab-bg); color: var(--ab-text);">
           <button
             type="button"
             class="slider-button slider-button--prev"
@@ -107,6 +137,15 @@
             data-speed="{{ section.settings.change_slides_speed }}"
           >
             {%- for block in section.blocks -%}
+              {%- liquid
+                assign show_block = true
+                assign aud = block.settings.audience | default: 'all'
+                if aud == 'b2b' and is_b2b == false
+                  assign show_block = false
+                elsif aud == 'retail' and is_b2b
+                  assign show_block = false
+                endif
+              -%}
               <div
                 class="slideshow__slide slider__slide grid__item grid--1-col"
                 id="Slide-{{ section.id }}-{{ forloop.index }}"
@@ -121,12 +160,14 @@
                   role="region"
                   aria-label="{{ 'sections.header.announcement' | t }}"
                   {{ block.shopify_attributes }}
+                  style="color: var(--ab-text);"
                 >
-                  {%- if block.settings.text != blank -%}
+                  {%- if show_block and block.settings.text != blank -%}
                     {%- if block.settings.link != blank -%}
                       <a
                         href="{{ block.settings.link }}"
                         class="announcement-bar__link link link--text focus-inset animate-arrow"
+                        style="color: var(--ab-text);"
                       >
                     {%- endif -%}
                     <p class="announcement-bar__message h5">
@@ -204,12 +245,18 @@
     { "type": "header", "content": "B2B audience" },
     { "type": "checkbox", "id": "b2b_bar_enable", "label": "Enable B2B-specific bar", "default": true },
     { "type": "text", "id": "b2b_text", "label": "B2B text", "default": "Wholesale: net terms, case packs & quick order." },
-    { "type": "url", "id": "b2b_link", "label": "B2B link", "default": "/pages/wholesale-hub" },
+    { "type": "url", "id": "b2b_link", "label": "B2B link" },
 
     { "type": "header", "content": "Retail audience" },
     { "type": "checkbox", "id": "retail_bar_enable", "label": "Enable Retail bar", "default": true },
     { "type": "text", "id": "retail_text", "label": "Retail text", "default": "Free US shipping $49+ • New kits in stock" },
-    { "type": "url", "id": "retail_link", "label": "Retail link", "default": "/collections/new" },
+    { "type": "url", "id": "retail_link", "label": "Retail link" },
+    { "type": "header", "content": "B2B colors" },
+    { "type": "color", "id": "b2b_bar_bg", "label": "B2B bar background", "default": "#000000" },
+    { "type": "color", "id": "b2b_bar_text", "label": "B2B bar text/link color", "default": "#ffffff" },
+    { "type": "header", "content": "Retail colors" },
+    { "type": "color", "id": "retail_bar_bg", "label": "Retail bar background", "default": "#ffffff" },
+    { "type": "color", "id": "retail_bar_text", "label": "Retail bar text/link color", "default": "#000000" },
     {
       "type": "color_scheme",
       "id": "color_scheme",
