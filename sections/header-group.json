@@ -26,6 +26,16 @@
         "announcement-bar-0"
       ],
       "settings": {
+        "b2b_bar_enable": true,
+        "b2b_text": "Wholesale: net terms, case packs & quick order.",
+        "b2b_link": "",
+        "retail_bar_enable": true,
+        "retail_text": "Free US shipping $75+",
+        "retail_link": "",
+        "b2b_bar_bg": "#000000",
+        "b2b_bar_text": "#ffffff",
+        "retail_bar_bg": "#ffffff",
+        "retail_bar_text": "#000000",
         "color_scheme": "scheme-5",
         "show_line_separator": true,
         "show_social": false,
