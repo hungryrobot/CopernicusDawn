@@ -87,6 +87,7 @@ body.b2b .announcement-bar a.announcement-bar__link {
   line-height: 1.25;
   min-height: 2.5em;               /* 2 lines × 1.25 */
   display: -webkit-box;
+  line-clamp: 2;                   /* standard prop for lint compatibility */
   -webkit-line-clamp: 2;           /* clamp to 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;

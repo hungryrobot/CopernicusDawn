@@ -162,7 +162,17 @@
       endif
     -%}
 
-    {%- if section.settings.logo_position != 'middle-center' -%}
+    {%- comment -%}
+  Dawn v15 — B2B logo helper:
+  We’ll show a section-configured B2B logo only when the customer has the 'b2b' tag
+  AND a B2B logo has been set in the Header section settings.
+{%- endcomment -%}
+{%- assign show_b2b_logo = false -%}
+{%- if is_b2b and section.settings.b2b_logo != blank -%}
+  {%- assign show_b2b_logo = true -%}
+{%- endif -%}
+
+{%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
@@ -170,7 +180,7 @@
             Show alternate logo for B2B if configured; fallback to theme logo
           {%- endcomment -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if is_b2b and section.settings.b2b_logo != blank -%}
+            {%- if show_b2b_logo -%}
               <div class="header__heading-logo-wrapper">
                 {{ section.settings.b2b_logo | image_url: width: 600 | image_tag:
                   class: 'header__heading-logo motion-reduce',
