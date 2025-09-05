@@ -26,6 +26,19 @@
         "announcement-bar-0"
       ],
       "settings": {
+        "color_scheme": "scheme-5",
+        "show_line_separator": true,
+        "show_social": false,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "announcement_bar_iiTa9f": {
+      "type": "announcement-bar",
+      "name": "t:sections.announcement-bar.presets.name",
+      "settings": {
         "color_scheme": "",
         "show_line_separator": true,
         "show_social": false,
@@ -39,6 +52,7 @@
       "type": "header",
       "settings": {
         "b2b_logo": "shopify://shop_images/logo-wholesale.svg",
+        "b2b_logo_width": 300,
         "logo_position": "middle-center",
         "menu": "main-menu",
         "menu_type_desktop": "drawer",
@@ -58,6 +72,7 @@
   },
   "order": [
     "announcement-bar",
+    "announcement_bar_iiTa9f",
     "header"
   ]
 }
