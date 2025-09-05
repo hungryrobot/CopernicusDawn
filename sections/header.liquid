@@ -182,12 +182,17 @@
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             {%- if show_b2b_logo -%}
               <div class="header__heading-logo-wrapper">
+                {%- assign b2b_w = section.settings.b2b_logo_width | default: settings.logo_width -%}
+                {%- assign b2b_h = b2b_w | divided_by: section.settings.b2b_logo.aspect_ratio -%}
+                {% capture b2b_sizes %}(max-width: {{ b2b_w | times: 2 }}px) 50vw, {{ b2b_w }}px{% endcapture %}
+                {% capture b2b_widths %}{{ b2b_w }}, {{ b2b_w | times: 1.5 | round }}, {{ b2b_w | times: 2 }}{% endcapture %}
                 {{ section.settings.b2b_logo | image_url: width: 600 | image_tag:
                   class: 'header__heading-logo motion-reduce',
-                  widths: '120,160,200,240,300,360,400,600',
-                  width: 200,
-                  alt: shop.name,
-                  sizes: '(min-width: 990px) 200px, 160px',
+                  widths: b2b_widths,
+                  height: b2b_h,
+                  width: b2b_w,
+                  alt: shop.name | append: ' Wholesale',
+                  sizes: b2b_sizes,
                   preload: true
                 }}
               </div>
@@ -234,14 +239,19 @@
             Show alternate logo for B2B if configured; fallback to theme logo
           {%- endcomment -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if is_b2b and section.settings.b2b_logo != blank -%}
+            {%- if show_b2b_logo -%}
               <div class="header__heading-logo-wrapper">
+                {%- assign b2b_w = section.settings.b2b_logo_width | default: settings.logo_width -%}
+                {%- assign b2b_h = b2b_w | divided_by: section.settings.b2b_logo.aspect_ratio -%}
+                {% capture b2b_sizes_mid %}(min-width: 750px) {{ b2b_w }}px, 50vw{% endcapture %}
+                {% capture b2b_widths %}{{ b2b_w }}, {{ b2b_w | times: 1.5 | round }}, {{ b2b_w | times: 2 }}{% endcapture %}
                 {{ section.settings.b2b_logo | image_url: width: 600 | image_tag:
                   class: 'header__heading-logo',
-                  widths: '120,160,200,240,300,360,400,600',
-                  width: 200,
-                  alt: shop.name,
-                  sizes: '(min-width: 990px) 200px, 160px',
+                  widths: b2b_widths,
+                  height: b2b_h,
+                  width: b2b_w,
+                  alt: shop.name | append: ' Wholesale',
+                  sizes: b2b_sizes_mid,
                   preload: true
                 }}
               </div>
@@ -514,6 +524,7 @@
   "settings": [
     { "type": "header", "content": "B2B (Wholesale)" },
     { "type": "image_picker", "id": "b2b_logo", "label": "B2B logo (shown only to B2B-tagged customers)" },
+    { "type": "range", "id": "b2b_logo_width", "label": "B2B logo width", "min": 60, "max": 300, "step": 10, "default": 300, "unit": "px" },
     {
       "type": "select",
       "id": "logo_position",

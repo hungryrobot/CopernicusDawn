@@ -112,3 +112,42 @@ body.b2b .announcement-bar a.announcement-bar__link {
   .card--product .card__content,
   .card--product .card__information { min-height: 100%; }
 }
+
+/* ==== B2B header/menu legibility (Dawn v15) ==== */
+body.b2b .header,
+body.b2b .header-wrapper,
+body.b2b .section-header { background: #000; color: #fff; }
+
+/* Top-level nav links (inline menu) */
+body.b2b .header .list-menu__item--link,
+body.b2b .header summary.list-menu__item,
+body.b2b .header .header__menu-item {
+  color: #fff !important;
+}
+body.b2b .header .list-menu__item--link:hover,
+body.b2b .header .list-menu__item--link:focus {
+  color: #fff !important;
+  opacity: .9;
+}
+
+/* Icons (search, account, cart) */
+body.b2b .header .header__icon,
+body.b2b .header .header__icon .icon,
+body.b2b .header .icon {
+  color: #fff !important;
+  fill: #fff !important;
+  stroke: #fff !important;
+}
+
+/* Mega menu panel + links */
+body.b2b .mega-menu { background: #000; }
+body.b2b .mega-menu__list .list-menu__item--link,
+body.b2b .mega-menu__link,
+body.b2b .mega-menu__link .icon {
+  color: #fff !important;
+  fill: #fff !important;
+  stroke: #fff !important;
+}
+
+/* Utility: prevent scheme tokens from overriding B2B header */
+body.b2b .section-header .color-scheme:where(:not(.force-retail)) { color: inherit; }
