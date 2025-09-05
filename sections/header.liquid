@@ -186,12 +186,12 @@
                 {%- assign b2b_h = b2b_w | divided_by: section.settings.b2b_logo.aspect_ratio -%}
                 {% capture b2b_sizes %}(max-width: {{ b2b_w | times: 2 }}px) 50vw, {{ b2b_w }}px{% endcapture %}
                 {% capture b2b_widths %}{{ b2b_w }}, {{ b2b_w | times: 1.5 | round }}, {{ b2b_w | times: 2 }}{% endcapture %}
+                {%- assign b2b_alt = shop.name | append: ' Wholesale' -%}
                 {{ section.settings.b2b_logo | image_url: width: 600 | image_tag:
                   class: 'header__heading-logo motion-reduce',
                   widths: b2b_widths,
-                  height: b2b_h,
                   width: b2b_w,
-                  alt: shop.name | append: ' Wholesale',
+                  alt: b2b_alt,
                   sizes: b2b_sizes,
                   preload: true
                 }}
@@ -245,12 +245,12 @@
                 {%- assign b2b_h = b2b_w | divided_by: section.settings.b2b_logo.aspect_ratio -%}
                 {% capture b2b_sizes_mid %}(min-width: 750px) {{ b2b_w }}px, 50vw{% endcapture %}
                 {% capture b2b_widths %}{{ b2b_w }}, {{ b2b_w | times: 1.5 | round }}, {{ b2b_w | times: 2 }}{% endcapture %}
+                {%- assign b2b_alt = shop.name | append: ' Wholesale' -%}
                 {{ section.settings.b2b_logo | image_url: width: 600 | image_tag:
                   class: 'header__heading-logo',
                   widths: b2b_widths,
-                  height: b2b_h,
                   width: b2b_w,
-                  alt: shop.name | append: ' Wholesale',
+                  alt: b2b_alt,
                   sizes: b2b_sizes_mid,
                   preload: true
                 }}
