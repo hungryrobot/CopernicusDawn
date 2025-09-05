@@ -81,3 +81,33 @@ body.b2b .announcement-bar a.announcement-bar__link {
     min-height: 100%;
   }
 }
+
+/* ===== Dawn v15 — Product cards: 2-line titles + aligned CTA ===== */
+.card--product .card__heading {
+  line-height: 1.25;
+  min-height: 2.5em;               /* 2 lines × 1.25 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;           /* clamp to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.grid__item .card-wrapper,
+.grid__item .card { height: 100%; }
+.card--product .card__content,
+.card--product .card__information {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.card--product .quick-add,
+.card--product form[action*="/cart/add"],
+.card--product .card__cta,
+.card--product .sl-add-to-cart,
+.card--product .sl-quick-order__add,
+.card--product .button--full-width {
+  margin-top: auto;
+}
+@media (max-width: 749px) {
+  .card--product .card__content,
+  .card--product .card__information { min-height: 100%; }
+}
