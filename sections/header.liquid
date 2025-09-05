@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- assign is_b2b = customer and customer.tags contains 'b2b' -%}
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
@@ -162,8 +163,22 @@
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
+          {%- comment -%}
+            Show alternate logo for B2B if configured; fallback to theme logo
+          {%- endcomment -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if settings.logo != blank -%}
+            {%- if is_b2b and section.settings.b2b_logo != blank -%}
+              <div class="header__heading-logo-wrapper">
+                {{ section.settings.b2b_logo | image_url: width: 600 | image_tag:
+                  class: 'header__heading-logo motion-reduce',
+                  widths: '120,160,200,240,300,360,400,600',
+                  width: 200,
+                  alt: shop.name,
+                  sizes: '(min-width: 990px) 200px, 160px',
+                  preload: true
+                }}
+              </div>
+            {%- elsif settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">
                 {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
                 {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
@@ -202,8 +217,22 @@
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
+          {%- comment -%}
+            Show alternate logo for B2B if configured; fallback to theme logo
+          {%- endcomment -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if settings.logo != blank -%}
+            {%- if is_b2b and section.settings.b2b_logo != blank -%}
+              <div class="header__heading-logo-wrapper">
+                {{ section.settings.b2b_logo | image_url: width: 600 | image_tag:
+                  class: 'header__heading-logo',
+                  widths: '120,160,200,240,300,360,400,600',
+                  width: 200,
+                  alt: shop.name,
+                  sizes: '(min-width: 990px) 200px, 160px',
+                  preload: true
+                }}
+              </div>
+            {%- elsif settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">
                 {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
                 {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
@@ -470,6 +499,8 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
+    { "type": "header", "content": "B2B (Wholesale)" },
+    { "type": "image_picker", "id": "b2b_logo", "label": "B2B logo (shown only to B2B-tagged customers)" },
     {
       "type": "select",
       "id": "logo_position",

@@ -13,6 +13,33 @@
     assign announcement_bar = true
   endif
 -%}
+-%}
+
+{% assign is_b2b = customer and customer.tags contains 'b2b' %}
+
+{%- capture bar_text -%}
+  {%- if is_b2b and section.settings.b2b_bar_enable -%}
+    {{ section.settings.b2b_text | escape }}
+  {%- elsif section.settings.retail_bar_enable -%}
+    {{ section.settings.retail_text | escape }}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture bar_link -%}
+  {%- if is_b2b and section.settings.b2b_bar_enable -%}
+    {{ section.settings.b2b_link }}
+  {%- elsif section.settings.retail_bar_enable -%}
+    {{ section.settings.retail_link }}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if bar_text != blank -%}
+  <div class="announcement-bar">
+    <a{% unless bar_link == blank %} href="{{ bar_link }}"{% endunless %} class="announcement-bar__link">
+      {{ bar_text }}
+    </a>
+  </div>
+{%- endif -%}
 
 {% if social_icons %}
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
@@ -171,6 +198,15 @@
     ]
   },
   "settings": [
+    { "type": "header", "content": "B2B audience" },
+    { "type": "checkbox", "id": "b2b_bar_enable", "label": "Enable B2B-specific bar", "default": true },
+    { "type": "text", "id": "b2b_text", "label": "B2B text", "default": "Wholesale: net terms, case packs & quick order." },
+    { "type": "url", "id": "b2b_link", "label": "B2B link", "default": "/pages/wholesale-hub" },
+
+    { "type": "header", "content": "Retail audience" },
+    { "type": "checkbox", "id": "retail_bar_enable", "label": "Enable Retail bar", "default": true },
+    { "type": "text", "id": "retail_text", "label": "Retail text", "default": "Free US shipping $49+ • New kits in stock" },
+    { "type": "url", "id": "retail_link", "label": "Retail link", "default": "/collections/new" },
     {
       "type": "color_scheme",
       "id": "color_scheme",
