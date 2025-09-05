@@ -37,6 +37,16 @@
 
     {{ content_for_header }}
 
+    {%- comment -%} B2B color variables (Theme settings → B2B group) {%- endcomment -%}
+    <style id="b2b-theme-vars">
+      body.b2b{
+        --b2b-header-bg: {{ settings.b2b_header_bg | default: '#000000' }};
+        --b2b-header-text: {{ settings.b2b_header_text | default: '#ffffff' }};
+        --b2b-bar-bg: {{ settings.b2b_bar_bg | default: '#000000' }};
+        --b2b-bar-text: {{ settings.b2b_bar_text | default: '#ffffff' }};
+      }
+    </style>
+
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
@@ -425,7 +435,7 @@ window.sparkOptions = {
 
   <body
     {{- body_attributes -}}
-    class="{{ body_class }}{% if liq_is_b2b %} b2b{% endif %}"
+    class="{{ body_class }}{% if liq_is_b2b %} b2b{% else %} retail{% endif %}"
     data-b2b="{{ liq_is_b2b }}"
   >
     {% render 'b2b-flags', is_b2b: liq_is_b2b %}

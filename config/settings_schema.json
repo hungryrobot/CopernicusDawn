@@ -1465,5 +1465,16 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "B2B (Wholesale) – Header & Bar",
+    "settings": [
+      { "type": "header", "content": "Header (B2B only)" },
+      { "type": "color", "id": "b2b_header_bg", "label": "Header background", "default": "#000000" },
+      { "type": "color", "id": "b2b_header_text", "label": "Header text & icons", "default": "#ffffff" },
+      { "type": "header", "content": "Announcement bar (B2B only)" },
+      { "type": "color", "id": "b2b_bar_bg", "label": "Bar background", "default": "#000000" },
+      { "type": "color", "id": "b2b_bar_text", "label": "Bar text & links", "default": "#ffffff" }
+    ]
   }
 ]

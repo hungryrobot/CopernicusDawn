@@ -1,4 +1,33 @@
 /* ================================================
+   B2B header + announcement bar (Theme settings)
+   Uses CSS variables emitted in theme.liquid
+================================================= */
+body.b2b .header-wrapper,
+body.b2b .section-header,
+body.b2b header.header {
+  background: var(--b2b-header-bg, #000);
+  color: var(--b2b-header-text, #fff);
+}
+body.b2b .header a,
+body.b2b .header .header__menu-item,
+body.b2b .header .header__icon,
+body.b2b .header .icon {
+  color: var(--b2b-header-text, #fff);
+  fill: var(--b2b-header-text, #fff);
+}
+body.b2b .announcement-bar {
+  background: var(--b2b-bar-bg, #000);
+  color: var(--b2b-bar-text, #fff);
+  text-align: center;
+}
+body.b2b .announcement-bar a.announcement-bar__link {
+  color: var(--b2b-bar-text, #fff);
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 14px;
+}
+
+/* ================================================
    Product cards: keep buttons aligned bottom
    Works on home page (featured collections) + collection pages
    Compatible with Dawn (v8–v15+) and SparkLayer widgets
@@ -10,23 +39,36 @@
   height: 100%;
 }
 
-/* 2) Turn the product card content into a vertical flex stack */
-.card--product .card__content,
-.card--product .card__information {
+/* Make outer product card wrapper a flex column so the card can stretch */
+.product-card-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
+/* 2) Make the product card a vertical flex stack */
+.product-card-wrapper > .card {
+  display: flex !important;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 1 auto;
+}
+
 
 /* 4) Push the CTA (Quick add / View product / SparkLayer add) to bottom */
-.card--product .quick-add,
-.card--product form[action*="/cart/add"],
-.card--product .card__cta,
-.card--product .sl-add-to-cart,           /* SparkLayer button */
-.card--product .sl-quick-order__add,      /* SparkLayer quick-order buttons (if present in cards) */
-.card--product .button--full-width {
-  margin-top: auto;
+.product-card-wrapper .quick-add,
+.product-card-wrapper product-form.form,
+.product-card-wrapper form[action*="/cart/add"],
+.product-card-wrapper .card__cta,
+.product-card-wrapper .sl-add-to-cart,           /* SparkLayer button */
+.product-card-wrapper .sl-quick-order__add,      /* SparkLayer quick-order buttons (if present in cards) */
+.product-card-wrapper .button--full-width {
+  margin-top: auto !important;
+}
+
+/* If the badge is in normal flow in this theme, don't let it push the CTA up */
+.product-card-wrapper .card__badge {
+  order: 99;
 }
 
 /* 5) Even if the product is OOS and shows a different CTA, keep alignment */
