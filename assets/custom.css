@@ -113,65 +113,42 @@ body.b2b .announcement-bar a.announcement-bar__link {
   .card--product .card__information { min-height: 100%; }
 }
 
-/* ==== B2B header/menu legibility (Dawn v15) ==== */
-body.b2b .header,
-body.b2b .header-wrapper,
-body.b2b .section-header { background: var(--b2b-header-bg, #000) !important; color: var(--b2b-header-text, #fff) !important; }
+/* ===========================
+   Dawn v15 — Cards & B2B Nav
+   =========================== */
 
-/* Top-level nav links (inline menu) */
-body.b2b .header .list-menu__item--link,
-body.b2b .header summary.list-menu__item,
-body.b2b .header .header__menu-item {
-  color: var(--b2b-header-text, #fff) !important;
-}
-body.b2b .header .list-menu__item--link:hover,
-body.b2b .header .list-menu__item--link:focus {
-  color: #fff !important;
-  opacity: .9;
-}
-
-/* Icons (search, account, cart) */
-body.b2b .header .header__icon,
-body.b2b .header .header__icon .icon,
-body.b2b .header .icon {
-  color: var(--b2b-header-text, #fff) !important;
-  fill: var(--b2b-header-text, #fff) !important;
-  stroke: var(--b2b-header-text, #fff) !important;
-}
-
-/* Mega menu panel + links */
-body.b2b .mega-menu { background: var(--b2b-header-bg, #000) !important; }
-body.b2b .mega-menu__list .list-menu__item--link,
-body.b2b .mega-menu__link,
-body.b2b .mega-menu__link .icon {
-  color: var(--b2b-header-text, #fff) !important;
-  fill: var(--b2b-header-text, #fff) !important;
-  stroke: var(--b2b-header-text, #fff) !important;
-}
-
-/* === B2B product cards: ensure CTA exists, is visible, and aligns === */
-/* Keep our 2-line clamp + pinned CTA layout */
+/* 1) Product cards: reserve exactly two lines for titles so CTAs align */
 .card--product .card__heading {
   line-height: 1.25;
-  min-height: 2.5em;
+  min-height: 2.5em;                 /* 2 lines × 1.25 line-height */
   display: -webkit-box;
   line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Make card content a column so the CTA can pin to the bottom */
 .grid__item .card-wrapper,
 .grid__item .card { height: 100%; }
 .card--product .card__content,
-.card--product .card__information { display: flex; flex-direction: column; height: 100%; }
+.card--product .card__information {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Pin all CTA rows/elements to the bottom of the card column */
 .card--product .quick-add,
 .card--product form[action*="/cart/add"],
 .card--product .card__cta,
-.card--product .sl-add-to-cart,
-.card--product .sl-quick-order__add,
-.card--product .button--full-width { margin-top: auto; }
+.card--product .button--full-width,
+/* SparkLayer widget container should sit at the bottom as well */
+.card--product .sprkl-product-card {
+  margin-top: auto;
+}
 
-/* In B2B, some themes/apps hide quick-add; force it back and make it readable */
+/* Ensure B2B CTAs aren’t hidden by app CSS (safety) */
 body.b2b .card--product .quick-add,
 body.b2b .card--product form[action*="/cart/add"],
 body.b2b .card--product .card__cta,
@@ -182,7 +159,8 @@ body.b2b .card--product .sl-cta {
   visibility: visible !important;
   opacity: 1 !important;
 }
-/* CTA colors use Theme Editor variables (fallbacks keep behavior if unset) */
+
+/* If you set B2B CTA colors in Header settings, use those variables (fallbacks included) */
 body.b2b .card--product .button,
 body.b2b .card--product .button--primary {
   background: var(--b2b-cta-bg, #000) !important;
@@ -190,7 +168,32 @@ body.b2b .card--product .button--primary {
   border-color: var(--b2b-cta-bg, #000) !important;
 }
 
-/* ==== B2B: mobile drawer nav (variable-driven) ==== */
+/* 2) B2B primary nav: visible hover/rollover (desktop) */
+body.b2b .header .list-menu__item--link,
+body.b2b .header summary.list-menu__item,
+body.b2b .header .header__menu-item {
+  color: var(--b2b-header-text, #fff) !important;
+}
+body.b2b .header .list-menu__item--link:hover,
+body.b2b .header summary.list-menu__item:hover,
+body.b2b .header .header__menu-item:hover,
+body.b2b .header .list-menu__item--link:focus-visible,
+body.b2b .header summary.list-menu__item:focus-visible,
+body.b2b .header .header__menu-item:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--b2b-header-text, #fff) !important;
+}
+
+/* Mega menu links hover */
+body.b2b .mega-menu__link:hover,
+body.b2b .mega-menu__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--b2b-header-text, #fff) !important;
+}
+
+/* 3) B2B mobile drawer: readable text + hover feedback */
 body.b2b .menu-drawer,
 body.b2b .menu-drawer__menu {
   background: var(--b2b-header-bg, #000) !important;
@@ -200,10 +203,13 @@ body.b2b .menu-drawer summary.list-menu__item,
 body.b2b .menu-drawer .header__menu-item {
   color: var(--b2b-header-text, #fff) !important;
 }
-body.b2b .menu-drawer .icon {
-  fill: var(--b2b-header-text, #fff) !important;
-  stroke: var(--b2b-header-text, #fff) !important;
+body.b2b .menu-drawer .list-menu__item--link:hover,
+body.b2b .menu-drawer summary.list-menu__item:hover,
+body.b2b .menu-drawer .header__menu-item:hover,
+body.b2b .menu-drawer .list-menu__item--link:focus-visible,
+body.b2b .menu-drawer summary.list-menu__item:focus-visible,
+body.b2b .menu-drawer .header__menu-item:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--b2b-header-text, #fff) !important;
 }
-
-/* Utility: prevent scheme tokens from overriding B2B header */
-body.b2b .section-header .color-scheme:where(:not(.force-retail)) { color: inherit; }
