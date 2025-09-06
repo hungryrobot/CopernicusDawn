@@ -100,6 +100,7 @@ body.b2b .announcement-bar a.announcement-bar__link {
   flex-direction: column;
   height: 100%;
 }
+.card--product .card-information { margin-bottom: 0; }
 .card--product .quick-add,
 .card--product form[action*="/cart/add"],
 .card--product .card__cta,
@@ -120,6 +121,7 @@ body.b2b .announcement-bar a.announcement-bar__link {
 /* 1) Product cards: reserve exactly two lines for titles so CTAs align */
 .card--product .card__heading {
   line-height: 1.25;
+  margin-bottom: 0.5rem;             /* normalize spacing */
   min-height: 2.5em;                 /* 2 lines × 1.25 line-height */
   display: -webkit-box;
   line-clamp: 2;
