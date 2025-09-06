@@ -180,16 +180,17 @@ body.b2b .header .header__menu-item:hover,
 body.b2b .header .list-menu__item--link:focus-visible,
 body.b2b .header summary.list-menu__item:focus-visible,
 body.b2b .header .header__menu-item:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  color: var(--b2b-header-text, #fff) !important;
+  background: color-mix(in srgb, var(--b2b-header-text, #fff) 16%, transparent);
+  border-radius: 6px;
+  text-decoration: none !important;
 }
 
 /* Mega menu links hover */
 body.b2b .mega-menu__link:hover,
 body.b2b .mega-menu__link:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  background: color-mix(in srgb, var(--b2b-header-text, #fff) 16%, transparent);
+  border-radius: 6px;
+  text-decoration: none !important;
   color: var(--b2b-header-text, #fff) !important;
 }
 
@@ -209,7 +210,8 @@ body.b2b .menu-drawer .header__menu-item:hover,
 body.b2b .menu-drawer .list-menu__item--link:focus-visible,
 body.b2b .menu-drawer summary.list-menu__item:focus-visible,
 body.b2b .menu-drawer .header__menu-item:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  background: color-mix(in srgb, var(--b2b-header-text, #fff) 16%, transparent);
+  border-radius: 6px;
+  text-decoration: none !important;
   color: var(--b2b-header-text, #fff) !important;
 }

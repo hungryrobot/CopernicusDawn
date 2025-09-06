@@ -218,9 +218,14 @@
             {%- endif -%}
 
             {% if is_b2b %}
-              {% comment %} === SPARKLAYER PRODUCT CARD MOUNT (B2B) — SparkLayer-only CTA === {% endcomment %}
-              <div class="sprkl-product-card" style="position: relative; z-index: 1;">
-                <spark-product-card parent-id="{{ card_product.id }}"></spark-product-card>
+              {% comment %} === SPARKLAYER PRODUCT CARD MOUNT (B2B) — treat as CTA row pinned bottom === {% endcomment %}
+              {%- comment -%}
+                CTA row: wrap SparkLayer card in .card__cta so our layout can pin it to bottom.
+              {%- endcomment -%}
+              <div class="card__cta">
+                <div class="sprkl-product-card" style="position: relative; z-index: 1;">
+                  <spark-product-card parent-id="{{ card_product.id }}"></spark-product-card>
+                </div>
               </div>
             {% endif %}
             {% unless is_b2b %}
