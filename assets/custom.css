@@ -155,6 +155,7 @@ body.b2b .mega-menu__link .icon {
   line-height: 1.25;
   min-height: 2.5em;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -175,7 +176,8 @@ body.b2b .card--product .quick-add,
 body.b2b .card--product form[action*="/cart/add"],
 body.b2b .card--product .card__cta,
 body.b2b .card--product .sl-add-to-cart,
-body.b2b .card--product .sl-quick-order__add {
+body.b2b .card--product .sl-quick-order__add,
+body.b2b .card--product .sl-cta {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -186,6 +188,21 @@ body.b2b .card--product .button--primary {
   background: #000 !important;
   color: #fff !important;
   border-color: #000 !important;
+}
+
+/* ==== B2B: mobile drawer nav legibility ==== */
+body.b2b .menu-drawer,
+body.b2b .menu-drawer__menu {
+  background: #000 !important;
+}
+body.b2b .menu-drawer .list-menu__item--link,
+body.b2b .menu-drawer summary.list-menu__item,
+body.b2b .menu-drawer .header__menu-item {
+  color: #fff !important;
+}
+body.b2b .menu-drawer .icon {
+  fill: #fff !important;
+  stroke: #fff !important;
 }
 
 /* Utility: prevent scheme tokens from overriding B2B header */
