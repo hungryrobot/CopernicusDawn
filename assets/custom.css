@@ -197,13 +197,14 @@ body.b2b .mega-menu__link:focus-visible {
 }
 
 /* 3) B2B mobile drawer: readable text + hover feedback */
-body.b2b .menu-drawer,
-body.b2b .menu-drawer__menu {
-  background: var(--b2b-header-bg, #000) !important;
-}
+body.b2b .header .list-menu__item--link,
+body.b2b .header summary.list-menu__item,
+body.b2b .header .header__menu-item,
 body.b2b .menu-drawer .list-menu__item--link,
 body.b2b .menu-drawer summary.list-menu__item,
-body.b2b .menu-drawer .header__menu-item {
+body.b2b .menu-drawer .header__menu-item,
+/* cover <li> wrappers used for plain links in drawer */
+body.b2b .menu-drawer .menu-drawer__menu-item {
   color: var(--b2b-header-text, #fff) !important;
 }
 body.b2b .menu-drawer .list-menu__item--link:hover,
@@ -211,9 +212,32 @@ body.b2b .menu-drawer summary.list-menu__item:hover,
 body.b2b .menu-drawer .header__menu-item:hover,
 body.b2b .menu-drawer .list-menu__item--link:focus-visible,
 body.b2b .menu-drawer summary.list-menu__item:focus-visible,
-body.b2b .menu-drawer .header__menu-item:focus-visible {
+body.b2b .menu-drawer .header__menu-item:focus-visible,
+/* also apply hover bg when the cursor is over the <li> wrapper */
+body.b2b .menu-drawer .menu-drawer__menu-item:hover,
+body.b2b .menu-drawer .menu-drawer__menu-item:focus-within {
   background: color-mix(in srgb, var(--b2b-header-text, #fff) 16%, transparent);
   border-radius: 6px;
   text-decoration: none !important;
   color: var(--b2b-header-text, #fff) !important;
 }
+
+/* 3a) SparkLayer widget: normalize internal stack so height is consistent
+   - Reserve space for the optional one-line helper (e.g., "Qty rules apply") */
+.card--product .sprkl-product-card { display: flex; flex-direction: column; gap: .5rem; }
+.card--product .sprkl-product-card [class*="qty"][class*="rule"],
+.card--product .sprkl-product-card [data-sprkl*="qty"],
+.card--product .sprkl-product-card .sl-qty,
+.card--product .sprkl-product-card .sl-qty-note,
+.card--product .sprkl-product-card .sl-qty-rules {
+  min-height: 1.25rem; /* one text line; keeps CTAs aligned when the note is absent */
+  line-height: 1.25;
+}
+.card--product .sprkl-product-card .button,
+.card--product .sprkl-product-card .button--primary { width: 100%; }
+
+.card--product .sprkl-product-card,
+.card--product .quick-add,
+.card--product form[action*="/cart/add"],
+.card--product .card__cta,
+.card--product .button--full-width { margin-top: auto; }
