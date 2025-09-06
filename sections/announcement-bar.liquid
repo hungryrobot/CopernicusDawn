@@ -19,22 +19,16 @@
     assign announcement_bar = true
   endif
 -%}
+-%}
 
-{%- comment -%}
-  Dawn v15 — per-audience announcement bar colors
-  We keep audience-gated content as-is and only set colors via section pickers.
-{%- endcomment -%}
-
-{%- assign is_b2b = false -%}
-{%- if customer and customer.tags contains 'b2b' -%}
-  {%- assign is_b2b = true -%}
-{%- endif -%}
-
-{%- assign ab_bg = section.settings.retail_bar_bg -%}
-{%- assign ab_text = section.settings.retail_bar_text -%}
+{%- comment -%} Dawn v15 — audience color variables with safe defaults {%- endcomment -%}
+{%- assign is_b2b = customer and customer.tags contains 'b2b' -%}
 {%- if is_b2b -%}
-  {%- assign ab_bg = section.settings.b2b_bar_bg -%}
-  {%- assign ab_text = section.settings.b2b_bar_text -%}
+  {%- assign ab_bg = section.settings.b2b_bar_bg | default: '#FFCE03' -%}
+  {%- assign ab_text = section.settings.b2b_bar_text | default: '#000000' -%}
+{%- else -%}
+  {%- assign ab_bg = section.settings.retail_bar_bg | default: '#FFCE03' -%}
+  {%- assign ab_text = section.settings.retail_bar_text | default: '#000000' -%}
 {%- endif -%}
 
 {%- capture bar_text -%}
@@ -69,8 +63,7 @@
 {%- if bar_text == blank -%}
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
-  style="--ab-bg: {{ ab_bg }}; --ab-text: {{ ab_text }}; background: {{ ab_bg }} !important; color: {{ ab_text }} !important;"
-  {{ block.shopify_attributes }}
+  style="background: {{ ab_bg }} !important; color: {{ ab_text }} !important;"
 >
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.show_social and social_icons -%}
