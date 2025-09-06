@@ -218,24 +218,9 @@
             {%- endif -%}
 
             {% if is_b2b %}
-              {% comment %} === SPARKLAYER PRODUCT CARD MOUNT (B2B) === {% endcomment %}
-              <div class="sprkl-product-card" data-sprkl="product-card" data-product-id="{{ card_product.id }}"></div>
-
-              {%- comment -%}
-                B2B-only fallback CTA:
-                - Renders only for B2B customers (tagged 'b2b').
-                - Uses common SparkLayer selectors so their script can hook/replace.
-                - Lives in the card CTA area so theme CSS can pin it bottom.
-              {%- endcomment -%}
-              <div class="card__cta">
-                <button
-                  type="button"
-                  class="button button--primary sl-add-to-cart sl-quick-order__add"
-                  data-sprkl-product="{{ card_product.id }}"
-                  data-sprkl-variant="{{ card_product.selected_or_first_available_variant.id }}"
-                  data-sprkl-qty="1">
-                  {{ 'products.product.add_to_cart' | t }}
-                </button>
+              {% comment %} === SPARKLAYER PRODUCT CARD MOUNT (B2B) — SparkLayer-only CTA === {% endcomment %}
+              <div class="sprkl-product-card" style="position: relative; z-index: 1;">
+                <spark-product-card parent-id="{{ card_product.id }}"></spark-product-card>
               </div>
             {% endif %}
             {% unless is_b2b %}
