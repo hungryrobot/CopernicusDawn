@@ -22,6 +22,18 @@
   {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
+{%- comment -%} Dawn v15 — B2B color variables (only set for B2B customers) {%- endcomment -%}
+{%- if is_b2b -%}
+  <style>
+    :root{
+      --b2b-header-bg: {{ section.settings.b2b_header_bg }};
+      --b2b-header-text: {{ section.settings.b2b_header_text }};
+      --b2b-cta-bg: {{ section.settings.b2b_cta_bg }};
+      --b2b-cta-text: {{ section.settings.b2b_cta_text }};
+    }
+  </style>
+{%- endif -%}
+
 <style>
   header-drawer {
     justify-self: start;
@@ -525,6 +537,11 @@
     { "type": "header", "content": "B2B (Wholesale)" },
     { "type": "image_picker", "id": "b2b_logo", "label": "B2B logo (shown only to B2B-tagged customers)" },
     { "type": "range", "id": "b2b_logo_width", "label": "B2B logo width", "min": 60, "max": 300, "step": 10, "default": 300, "unit": "px" },
+    { "type": "header", "content": "B2B color overrides" },
+    { "type": "color", "id": "b2b_header_bg", "label": "B2B header & drawer background", "default": "#000000" },
+    { "type": "color", "id": "b2b_header_text", "label": "B2B header & drawer text/icons", "default": "#ffffff" },
+    { "type": "color", "id": "b2b_cta_bg", "label": "B2B product CTA background", "default": "#000000" },
+    { "type": "color", "id": "b2b_cta_text", "label": "B2B product CTA text", "default": "#ffffff" },
     {
       "type": "select",
       "id": "logo_position",
