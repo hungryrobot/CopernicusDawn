@@ -21,7 +21,10 @@
 -%}
 
 {%- comment -%} Dawn v15 — audience color variables with safe defaults {%- endcomment -%}
-{%- assign is_b2b = customer and customer.tags contains 'b2b' -%}
+{%- assign is_b2b = false -%}
+{%- if customer and customer.tags contains 'b2b' -%}
+  {%- assign is_b2b = true -%}
+{%- endif -%}
 {%- if is_b2b -%}
   {%- assign ab_bg = section.settings.b2b_bar_bg | default: '#FFCE03' -%}
   {%- assign ab_text = section.settings.b2b_bar_text | default: '#000000' -%}
