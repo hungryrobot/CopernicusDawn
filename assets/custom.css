@@ -116,13 +116,13 @@ body.b2b .announcement-bar a.announcement-bar__link {
 /* ==== B2B header/menu legibility (Dawn v15) ==== */
 body.b2b .header,
 body.b2b .header-wrapper,
-body.b2b .section-header { background: #000 !important; color: #fff !important; }
+body.b2b .section-header { background: var(--b2b-header-bg, #000) !important; color: var(--b2b-header-text, #fff) !important; }
 
 /* Top-level nav links (inline menu) */
 body.b2b .header .list-menu__item--link,
 body.b2b .header summary.list-menu__item,
 body.b2b .header .header__menu-item {
-  color: #fff !important;
+  color: var(--b2b-header-text, #fff) !important;
 }
 body.b2b .header .list-menu__item--link:hover,
 body.b2b .header .list-menu__item--link:focus {
@@ -134,19 +134,19 @@ body.b2b .header .list-menu__item--link:focus {
 body.b2b .header .header__icon,
 body.b2b .header .header__icon .icon,
 body.b2b .header .icon {
-  color: #fff !important;
-  fill: #fff !important;
-  stroke: #fff !important;
+  color: var(--b2b-header-text, #fff) !important;
+  fill: var(--b2b-header-text, #fff) !important;
+  stroke: var(--b2b-header-text, #fff) !important;
 }
 
 /* Mega menu panel + links */
-body.b2b .mega-menu { background: #000 !important; }
+body.b2b .mega-menu { background: var(--b2b-header-bg, #000) !important; }
 body.b2b .mega-menu__list .list-menu__item--link,
 body.b2b .mega-menu__link,
 body.b2b .mega-menu__link .icon {
-  color: #fff !important;
-  fill: #fff !important;
-  stroke: #fff !important;
+  color: var(--b2b-header-text, #fff) !important;
+  fill: var(--b2b-header-text, #fff) !important;
+  stroke: var(--b2b-header-text, #fff) !important;
 }
 
 /* === B2B product cards: ensure CTA exists, is visible, and aligns === */
@@ -182,27 +182,27 @@ body.b2b .card--product .sl-cta {
   visibility: visible !important;
   opacity: 1 !important;
 }
-/* Button styling for contrast on typical white card backgrounds */
+/* CTA colors use Theme Editor variables (fallbacks keep behavior if unset) */
 body.b2b .card--product .button,
 body.b2b .card--product .button--primary {
-  background: #000 !important;
-  color: #fff !important;
-  border-color: #000 !important;
+  background: var(--b2b-cta-bg, #000) !important;
+  color: var(--b2b-cta-text, #fff) !important;
+  border-color: var(--b2b-cta-bg, #000) !important;
 }
 
-/* ==== B2B: mobile drawer nav legibility ==== */
+/* ==== B2B: mobile drawer nav (variable-driven) ==== */
 body.b2b .menu-drawer,
 body.b2b .menu-drawer__menu {
-  background: #000 !important;
+  background: var(--b2b-header-bg, #000) !important;
 }
 body.b2b .menu-drawer .list-menu__item--link,
 body.b2b .menu-drawer summary.list-menu__item,
 body.b2b .menu-drawer .header__menu-item {
-  color: #fff !important;
+  color: var(--b2b-header-text, #fff) !important;
 }
 body.b2b .menu-drawer .icon {
-  fill: #fff !important;
-  stroke: #fff !important;
+  fill: var(--b2b-header-text, #fff) !important;
+  stroke: var(--b2b-header-text, #fff) !important;
 }
 
 /* Utility: prevent scheme tokens from overriding B2B header */
