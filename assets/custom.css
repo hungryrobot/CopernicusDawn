@@ -94,12 +94,13 @@ body.b2b .announcement-bar a.announcement-bar__link {
 }
 .grid__item .card-wrapper,
 .grid__item .card { height: 100%; }
-.card--product .card__content,
-.card--product .card__information {
+.card--product { display: flex; flex-direction: column; }
+.card--product .card__content:last-of-type {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+.card--product .card__information { display: flex; flex-direction: column; }
 .card--product .card-information { margin-bottom: 0; }
 .card--product .quick-add,
 .card--product form[action*="/cart/add"],
@@ -222,6 +223,22 @@ body.b2b .menu-drawer .menu-drawer__menu-item:focus-within {
   color: var(--b2b-header-text, #fff) !important;
 }
 
+/* 7) B2B drawer: some Dawn builds color inner containers separately — force them */
+body.b2b .menu-drawer,
+body.b2b .menu-drawer__inner-container,
+body.b2b .menu-drawer__navigation-container,
+body.b2b .menu-drawer__menu {
+  background: var(--b2b-header-bg, #000) !important;
+  color: var(--b2b-header-text, #fff) !important;
+}
+body.b2b .menu-drawer a,
+body.b2b .menu-drawer button,
+body.b2b .menu-drawer .icon {
+  color: var(--b2b-header-text, #fff) !important;
+  fill: var(--b2b-header-text, #fff) !important;
+  stroke: var(--b2b-header-text, #fff) !important;
+}
+
 /* 3a) SparkLayer widget: normalize internal stack so height is consistent
    - Reserve space for the optional one-line helper (e.g., "Qty rules apply") */
 .card--product .sprkl-product-card { display: flex; flex-direction: column; gap: .5rem; }
@@ -241,3 +258,19 @@ body.b2b .menu-drawer .menu-drawer__menu-item:focus-within {
 .card--product form[action*="/cart/add"],
 .card--product .card__cta,
 .card--product .button--full-width { margin-top: auto; }
+
+/* Ensure Quick Add shows on collection templates */
+.template-collection .quick-add,
+.template-collection .quick-add__submit,
+.collection .quick-add,
+.collection .quick-add__submit {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Keep Quick Add visible for wholesale customers too */
+body.b2b.template-collection .quick-add,
+body.b2b .template-collection .quick-add__submit {
+  display: inline-flex !important;
+}
