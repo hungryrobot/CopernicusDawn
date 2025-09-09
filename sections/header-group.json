@@ -55,7 +55,7 @@
         "b2b_cta_bg": "#000000",
         "b2b_cta_text": "#ffffff",
         "logo_position": "middle-center",
-        "menu": "main-menu",
+        "menu": "b2b-main",
         "menu_type_desktop": "drawer",
         "sticky_header_type": "reduce-logo-size",
         "show_line_separator": true,
