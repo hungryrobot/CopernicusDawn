@@ -22,7 +22,7 @@
         "heading_xBmdaL": {
           "type": "heading",
           "settings": {
-            "heading": "All the best store carry Copernicus Toys",
+            "heading": "",
             "heading_size": "h1"
           }
         },
@@ -63,8 +63,14 @@
         "heading_wq4GfN": {
           "type": "heading",
           "settings": {
-            "heading": "I am not seeing my awesome store listed",
+            "heading": "All the best stores carry Copernicus Toys",
             "heading_size": "h1"
+          }
+        },
+        "text_kV6Vjn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>I am not seeing my awesome store listed</p>"
           }
         },
         "button_xBzYrk": {
@@ -81,6 +87,7 @@
       },
       "block_order": [
         "heading_wq4GfN",
+        "text_kV6Vjn",
         "button_xBzYrk"
       ],
       "name": "t:sections.rich-text.presets.name",
