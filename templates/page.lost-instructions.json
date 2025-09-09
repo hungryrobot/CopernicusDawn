@@ -11,13 +11,137 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "collapsible_content_Gc3epQ": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_3aAqig": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Make your own Bubble gum kit",
+            "icon": "clipboard",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/gf7PMh\" target=\"_blank\" title=\"https://copernicus.d.pr/f/gf7PMh\">https://copernicus.d.pr/f/gf7PMh</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_rR3UEF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Brew your own Root Beer",
+            "icon": "bottle",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/8k6ivg\" target=\"_blank\" title=\"https://copernicus.d.pr/f/8k6ivg\">https://copernicus.d.pr/f/8k6ivg</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_cDteiB": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Mini Crossbow Kit",
+            "icon": "check_mark",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/B3EPeb\" target=\"_blank\" title=\"https://copernicus.d.pr/f/B3EPeb\">https://copernicus.d.pr/f/B3EPeb</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_BKVBFD": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Make a Catapult - large kit",
+            "icon": "check_mark",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/6fSOJQ\" target=\"_blank\" title=\"https://copernicus.d.pr/f/6fSOJQ\">https://copernicus.d.pr/f/6fSOJQ</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DXgPwh": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Make a Catapult - mini kit",
+            "icon": "star",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/6fSOJQ\" target=\"_blank\" title=\"https://copernicus.d.pr/f/6fSOJQ\">https://copernicus.d.pr/f/6fSOJQ</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_fhCzAM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Edible Chemistry Kit",
+            "icon": "apple",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/aljZZA\" target=\"_blank\" title=\"https://copernicus.d.pr/f/aljZZA\">https://copernicus.d.pr/f/aljZZA</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8tcLMt": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Glowing Gels and Slime kit",
+            "icon": "eye",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/1kE0E\" target=\"_blank\" title=\"https://copernicus.d.pr/f/1kE0E\">https://copernicus.d.pr/f/1kE0E</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_QQJ4dq": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Cool Blue Light Kit",
+            "icon": "lightning_bolt",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/Gsc8U2\" target=\"_blank\" title=\"https://copernicus.d.pr/f/Gsc8U2\">https://copernicus.d.pr/f/Gsc8U2</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_7qGjzg": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Bouncing Ball Making Kit",
+            "icon": "heart",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/2M3cWJ\" target=\"_blank\" title=\"https://copernicus.d.pr/f/2M3cWJ\">https://copernicus.d.pr/f/2M3cWJ</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_LnXxjV": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Make a robotic arm kit",
+            "icon": "box",
+            "row_content": "<p><a href=\"https://copernicus.d.pr/f/oWJX\" target=\"_blank\" title=\"https://copernicus.d.pr/f/oWJX\">https://copernicus.d.pr/f/oWJX</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_3aAqig",
+        "collapsible_row_rR3UEF",
+        "collapsible_row_cDteiB",
+        "collapsible_row_BKVBFD",
+        "collapsible_row_DXgPwh",
+        "collapsible_row_fhCzAM",
+        "collapsible_row_8tcLMt",
+        "collapsible_row_QQJ4dq",
+        "collapsible_row_7qGjzg",
+        "collapsible_row_LnXxjV"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "Let us at sales@copernicustoys.com know if your instructions are not listed here and we will get those out to you ASAP",
+        "heading": "I lost my instructions.",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "row",
+        "color_scheme": "",
+        "container_color_scheme": "scheme-5",
+        "open_first_collapsible_row": false,
+        "image_ratio": "small",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "collapsible_content_Gc3epQ"
   ]
 }
