@@ -17,6 +17,29 @@
         "padding_bottom": 28
       }
     },
+    "rich_text_REKjEd": {
+      "type": "rich-text",
+      "blocks": {
+        "text_YLXFHX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Let us at sales@copernicustoys.com know if your instructions are not listed here and we will get those out to you ASAP</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_YLXFHX"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "collapsible_content_Gc3epQ": {
       "type": "collapsible-content",
       "blocks": {
@@ -125,7 +148,7 @@
       ],
       "name": "t:sections.collapsible_content.presets.name",
       "settings": {
-        "caption": "Let us at sales@copernicustoys.com know if your instructions are not listed here and we will get those out to you ASAP",
+        "caption": "",
         "heading": "I lost my instructions.",
         "heading_size": "h1",
         "heading_alignment": "center",
@@ -142,6 +165,7 @@
   },
   "order": [
     "main",
-    "collapsible_content_Gc3epQ"
+    "collapsible_content_Gc3epQ",
+    "rich_text_REKjEd"
   ]
 }
