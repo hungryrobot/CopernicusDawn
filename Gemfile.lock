@@ -43,7 +43,6 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  nokogiri
   theme-check
 
 BUNDLED WITH
