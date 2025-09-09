@@ -154,7 +154,7 @@
         "show_separators": false,
         "separator_width": 1,
         "separator_color": "#e0e0e0",
-        "hover_background_color": "#ffc715",
+        "hover_background_color": "#f8f8f8",
         "hover_lift": 0,
         "hover_shadow_blur": 0,
         "hover_shadow_spread": 0,
@@ -200,7 +200,7 @@
           "settings": {
             "photo": "shopify://shop_images/rep02.jpg",
             "photo_url": "",
-            "group": "INDEPENDENT / NOTHING BUT THE BEST",
+            "group": "NOTHING BUT THE BEST",
             "name": "PAUL FRANZ",
             "email": "nothingbutthebest@comcast.net",
             "territory": "VERMONT",
@@ -275,7 +275,7 @@
             "group": "KINFETTI SALES DIVISION / ENCHANTED",
             "name": "JOHN GRAVES",
             "email": "john@kinfetti.com",
-            "territory": "IDAHO, MONTANA, WYOMING",
+            "territory": "IDAHO, MONTANA, WYOMING, WASHINGTION",
             "bg_color": "#ebf987"
           }
         },
