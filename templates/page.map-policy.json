@@ -15,53 +15,9 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
-    },
-    "rich_text_Bg8dLh": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_jxTTQh": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>MAP= MSRP</strong>",
-            "heading_size": "hxl"
-          }
-        },
-        "text_f9VLBF": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We've made our MAPP so it's simple, easy and fair for all!</p><p>Don't sell below MSRP. That is our MAP policy</p><p>------------------------------------------------------------------------------------------------<br/>This MAP policy has been established to protect and support all resellers as well as consumers of Copernicus Toys products.</p><p>The intention is not to interfere with the businesses of our online resellers, but rather to enable our customers to have sustainable business practices by allowing for a reasonable profit margin combined with the elevated level of service we believe our brand deserves.</p><p>Copernicus Toys reserves the right not to sell to any reseller found to be in violation of this policy which is now inclusive of our wholesale conditions of sale. Copernicus Toys will hold distributors who sell to resellers responsible for the MAP policy compliance of their customers and any business entities that they are supplying. Copernicus Toys will act on this policy when deemed necessary and when legal. <em>Copernicus</em> Toys, and only Copernicus Toys, will decide when and what enforcement action is necessary. Copernicus Toys may enforce its MAP policy on specific MAP violators by holding shipments, limiting order quantities, requiring prepayment terms, denying discounts, and/or denying sales altogether.</p><p>------------------------------------------------------------------------------------------------</p><p>For general information about MAP policies, please see the following web pages on the Federal Trade Commission's web site: <a href=\"http://ftc.gov/bc/antitrust/refusal_to_supply.shtm\" target=\"_blank\">http://ftc.gov/bc/antitrust/refusal_to_supply.shtm</a></p><p><a href=\"http://ftc.gov/bc/antitrust/manufacturer_requirements.shtm\" target=\"_blank\">http://ftc.gov/bc/antitrust/manufacturer_requirements.shtm</a></p>"
-          }
-        },
-        "button_dcjNtQ": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_jxTTQh",
-        "text_f9VLBF",
-        "button_dcjNtQ"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
     }
   },
   "order": [
-    "main",
-    "rich_text_Bg8dLh"
+    "main"
   ]
 }
