@@ -16,29 +16,50 @@
         "padding_bottom": 28
       }
     },
-    "1756741885daef8585": {
-      "type": "apps",
+    "image_banner_494EEi": {
+      "type": "image-banner",
       "blocks": {
-        "helium_customer_fields_app_block_bY4PD8": {
-          "type": "shopify://apps/helium-customer-fields/blocks/app-block/bab58598-3e6a-4377-aaaa-97189b15f131",
+        "heading_xBmdaL": {
+          "type": "heading",
           "settings": {
-            "form_id": "zytqX8",
-            "width": 600,
-            "vertical_spacing": 60,
-            "horizontal_spacing": 0
+            "heading": "All the best store carry Copernicus Toys",
+            "heading_size": "h1"
+          }
+        },
+        "buttons_geRJcP": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Launch Map",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
-        "helium_customer_fields_app_block_bY4PD8"
+        "heading_xBmdaL",
+        "buttons_geRJcP"
       ],
+      "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "include_margins": true
+        "image": "shopify://shop_images/MapArtLocal.png",
+        "image_overlay_opacity": 50,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
       }
     }
   },
   "order": [
     "main",
-    "1756741885daef8585"
+    "image_banner_494EEi"
   ]
 }
