@@ -45,21 +45,58 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/MapArtLocal.png",
-        "image_overlay_opacity": 50,
+        "image_overlay_opacity": 0,
         "image_height": "small",
-        "desktop_content_position": "middle-center",
+        "desktop_content_position": "bottom-center",
         "show_text_box": true,
         "desktop_content_alignment": "center",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "image_behavior": "none",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": true,
         "show_text_below": true
       }
+    },
+    "rich_text_fKHMab": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_wq4GfN": {
+          "type": "heading",
+          "settings": {
+            "heading": "I am not seeing my awesome store listed",
+            "heading_size": "h1"
+          }
+        },
+        "button_xBzYrk": {
+          "type": "button",
+          "settings": {
+            "button_label": "Let us know and we will add it for you",
+            "button_link": "https://form.typeform.com/to/wps22kNG?typeform-source=copernicus.typeform.com",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_wq4GfN",
+        "button_xBzYrk"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "main",
-    "image_banner_494EEi"
+    "image_banner_494EEi",
+    "rich_text_fKHMab"
   ]
 }
