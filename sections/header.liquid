@@ -4,9 +4,10 @@
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- comment -%}
-  B2B menu switch (hardened):
-  - Only true for logged-in customers who have the 'b2b' tag
-  - Choose B2B menu only when configured
+  Unified menu selection:
+    1) section.settings.retail_menu (Retail / public)
+    2) section.settings.menu (legacy Dawn fallback)
+    3) If B2B customer and b2b_menu set → use b2b_menu
 {%- endcomment -%}
 {% assign is_b2b = false %}
 {% if customer and customer.tags contains 'b2b' %}
@@ -16,7 +17,7 @@
 {% if is_b2b and section.settings.b2b_menu != blank %}
   {% assign chosen_menu = section.settings.b2b_menu %}
 {% endif %}
-<!-- debug: is_b2b={{ is_b2b }} | menu={{ chosen_menu.title | default: 'none' }} -->
+<!-- debug header: is_b2b={{ is_b2b }} | chosen_menu={{ chosen_menu.title | default: 'none' }} -->
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
@@ -576,6 +577,10 @@
       "default": "middle-left",
       "label": "t:sections.header.settings.logo_position.label",
       "info": "t:sections.header.settings.logo_help.content"
+    },
+    {
+      "type": "header",
+      "content": "Retail (Public)"
     },
     {
       "type": "link_list",
