@@ -4,7 +4,10 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%} Only load Shopify Quick Add for B2B {%- endcomment -%}
-{% assign is_b2b = customer and customer.tags contains 'b2b' %}
+{% assign is_b2b = false %}
+{% if customer and customer.tags contains 'b2b' %}
+  {% assign is_b2b = true %}
+{% endif %}
 {%- if section.settings.enable_quick_add and is_b2b -%}
   {{ 'quick-add.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
