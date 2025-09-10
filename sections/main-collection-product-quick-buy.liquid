@@ -3,16 +3,17 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
-{%- comment -%} Only load Shopify Quick Add for B2B {%- endcomment -%}
+{%- comment -%}
+  SparkLayer Quick Buy Mode
+  ------------------------------------------------------------
+  We are NOT using Dawn's "Quick Add" (quick-add.js / product-form.js).
+  SparkLayer handles pricing & add-to-cart. We just expose the hook
+  and gate it to B2B customers.
+{%- endcomment -%}
 {% assign is_b2b = false %}
 {% if customer and customer.tags contains 'b2b' %}
   {% assign is_b2b = true %}
 {% endif %}
-{%- if section.settings.enable_quick_add and is_b2b -%}
-  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -260,7 +261,7 @@
                     show_vendor: section.settings.show_vendor,
                     show_rating: section.settings.show_rating,
                     lazy_load: lazy_load,
-                    show_quick_add: section.settings.enable_quick_add and is_b2b,
+                    show_quick_add: is_b2b,
                     section_id: section.id
 
                   %}
@@ -277,7 +278,7 @@
                   show_vendor: section.settings.show_vendor,
                   show_rating: section.settings.show_rating,
                   lazy_load: lazy_load,
-                  show_quick_add: section.settings.enable_quick_add and is_b2b,
+                  show_quick_add: is_b2b,
                   section_id: section.id
 
                 %}
@@ -366,7 +367,8 @@
       "type": "checkbox",
       "id": "enable_quick_add",
       "default": false,
-      "label": "Enable quick buy"
+      "label": "Enable quick buy (SparkLayer)",
+      "info": "SparkLayer renders B2B quick-buy on this template; Dawn quick-add is not used."
     },
     {
       "type": "header",
