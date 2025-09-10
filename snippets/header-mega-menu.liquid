@@ -7,23 +7,12 @@
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
-    {% assign showB2BNav = false %}
-        
-        {%- if showB2BNav == true -%}
+    {%- comment -%}
+      Respect a passed-in menu object from the header; fallback to retail_menu then legacy menu.
+    {%- endcomment -%}
+    {% assign _menu = menu | default: section.settings.retail_menu | default: section.settings.menu %}
 
-          {%- if customer.metafields.sparklayer.authentication -%}
-            {% assign menu = linklists.b2b-menu | default: linklists[section.settings.menu] %}
-          {%- else -%}
-            {% assign menu = linklists[section.settings.menu] %}
-          {%- endif -%}
-
-        {%- else -%}
-
-          {% assign menu = linklists[section.settings.menu] %}
-
-        {%- endif -%}
-
-      {%- for link in menu.links -%}
+    {%- for link in _menu.links -%}
       <li>
         {%- if link.links != blank -%}
           <header-menu>

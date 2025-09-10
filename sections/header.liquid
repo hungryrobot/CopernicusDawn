@@ -3,20 +3,20 @@
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- assign is_b2b = false -%}
-{%- if customer and customer.tags contains 'b2b' -%}
-  {%- assign is_b2b = true -%}
-{%- endif -%}
 {%- comment -%}
-  B2B menu switcher:
-  - If the customer has the 'b2b' tag AND a B2B menu is configured in the header settings,
-    use that menu instead of the default one.
-  - Falls back to retail menu when no B2B menu is selected.
+  B2B menu switch (hardened):
+  - Only true for logged-in customers who have the 'b2b' tag
+  - Choose B2B menu only when configured
 {%- endcomment -%}
-{% assign chosen_menu = section.settings.menu %}
+{% assign is_b2b = false %}
+{% if customer and customer.tags contains 'b2b' %}
+  {% assign is_b2b = true %}
+{% endif %}
+{%- assign chosen_menu = section.settings.retail_menu | default: section.settings.menu -%}
 {% if is_b2b and section.settings.b2b_menu != blank %}
   {% assign chosen_menu = section.settings.b2b_menu %}
 {% endif %}
+<!-- debug: is_b2b={{ is_b2b }} | menu={{ chosen_menu.title | default: 'none' }} -->
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
@@ -329,7 +329,7 @@
       {% render 'header-search', input_id: 'Search-In-Modal' %}
 
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if chosen_menu != blank %} small-hide{% endif %}">
           {%- if section.settings.enable_customer_avatar -%}
             <account-icon>
               {%- if customer and customer.has_avatar? -%}
@@ -579,15 +579,22 @@
     },
     {
       "type": "link_list",
+      "id": "retail_menu",
+      "label": "Retail menu",
+      "info": "Shown to logged-out customers and logged-in customers without the ‘b2b’ tag."
+    },
+    {
+      "type": "link_list",
       "id": "menu",
       "default": "main-menu",
-      "label": "t:sections.header.settings.menu.label"
+      "label": "Legacy menu (fallback)",
+      "info": "Optional. Used only if ‘Retail menu’ is empty. This is Dawn’s original setting."
     },
     {
       "type": "link_list",
       "id": "b2b_menu",
-      "label": "B2B menu (optional)",
-      "info": "Shown to customers tagged ‘b2b’. Leave empty to use the default Menu for all customers."
+      "label": "B2B menu",
+      "info": "Shown only to customers tagged ‘b2b’."
     },
     {
       "type": "select",
