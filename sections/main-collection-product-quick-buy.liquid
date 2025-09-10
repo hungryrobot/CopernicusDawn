@@ -1,14 +1,9 @@
-{% assign is_b2b = customer and customer.tags contains 'b2b' %}
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
-{%- comment -%}
-  Retail keeps native Quick Add; B2B uses SparkLayer CTAs.
-  So only load Shopify quick-add assets for non-B2B.
-{%- endcomment -%}
-{%- if not is_b2b -%}
+{%- if section.settings.enable_quick_add -%}
   {{ 'quick-add.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
@@ -240,7 +235,7 @@
           <div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
             <div class="loading-overlay gradient"></div>
 
-            <ul id="product-grid" data-id="{{ section.id }}" class="quick-buy-wrapper{% if is_b2b %} sl-collection{% endif %}">
+            <ul id="product-grid" data-id="{{ section.id }}" class="quick-buy-wrapper">
           {%- for product in collection.products -%}
             {% assign lazy_load = false %}
             {%- if forloop.index > 2 -%}
@@ -248,28 +243,11 @@
             {%- endif -%}
               
             {% assign productTags = product.tags | join: ', ' %}
-            {%- comment -%} Hide b2b-only products from non-B2B users {%- endcomment -%}
-            {% if productTags contains 'b2b-only' and not is_b2b %}
-              
-            {% else %}
-              <li class="quick-buy-item">
-                {% if is_b2b %}
-                  {%- comment -%}
-                    B2B: use the standard card where SparkLayer mounts its price + CTA.
-                    Explicitly disable Shopify quick add.
-                  {%- endcomment -%}
-                  {% render 'card-product',
-                    card_product: product,
-                    media_aspect_ratio: section.settings.image_ratio,
-                    show_secondary_image: section.settings.show_secondary_image,
-                    show_vendor: section.settings.show_vendor,
-                    show_rating: section.settings.show_rating,
-                    lazy_load: lazy_load,
-                    quick_add: 'none',
-                    section_id: section.id
-                  %}
-                {% else %}
-                  {%- comment -%} Retail / non-B2B keeps native quick-buy {%- endcomment -%}
+            {% assign customerTags = customer.tags | join: ', ' %}
+
+            {% if productTags contains 'b2b-only' %}
+              {% if customerTags contains 'b2b' %}
+                <li class="quick-buy-item">
                   {% render 'card-product-quick-buy',
                     card_product: product,
                     media_aspect_ratio: section.settings.image_ratio,
@@ -277,10 +255,27 @@
                     show_vendor: section.settings.show_vendor,
                     show_rating: section.settings.show_rating,
                     lazy_load: lazy_load,
-                    show_quick_add: true,
+                    show_quick_add: section.settings.enable_quick_add,
                     section_id: section.id
+
                   %}
-                {% endif %}
+                </li>
+              {% else %}
+          			<!-- Don't show anything for logged out customers-->
+              {% endif %}
+            {% else %}
+              <li class="quick-buy-item">
+                {% render 'card-product-quick-buy',
+                  card_product: product,
+                  media_aspect_ratio: section.settings.image_ratio,
+                  show_secondary_image: section.settings.show_secondary_image,
+                  show_vendor: section.settings.show_vendor,
+                  show_rating: section.settings.show_rating,
+                  lazy_load: lazy_load,
+                  show_quick_add: section.settings.enable_quick_add,
+                  section_id: section.id
+
+                %}
               </li>
             {% endif %}
           {%- endfor -%}
