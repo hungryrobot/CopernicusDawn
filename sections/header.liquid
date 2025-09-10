@@ -13,9 +13,9 @@
 {% if customer and customer.tags contains 'b2b' %}
   {% assign is_b2b = true %}
 {% endif %}
-{%- assign chosen_menu = section.settings.retail_menu | default: section.settings.menu -%}
-{% if is_b2b and section.settings.b2b_menu != blank %}
-  {% assign chosen_menu = section.settings.b2b_menu %}
+{%- assign chosen_menu = section.settings.retail_menu -%}
+{% if is_b2b and section.settings.b2b_menu_handle != blank %}
+  {% assign chosen_menu = linklists[section.settings.b2b_menu_handle] %}
 {% endif %}
 <!-- debug header: is_b2b={{ is_b2b }} | chosen_menu={{ chosen_menu.title | default: 'none' }} -->
 {%- if settings.predictive_search_enabled -%}
@@ -585,14 +585,15 @@
     {
       "type": "link_list",
       "id": "retail_menu",
+      "default": "main-menu",
       "label": "Retail menu",
       "info": "Shown to logged-out customers and logged-in customers without the ‘b2b’ tag."
     },
     {
-      "type": "link_list",
-      "id": "b2b_menu",
-      "label": "B2B menu",
-      "info": "Shown only to customers tagged ‘b2b’."
+      "type": "text",
+      "id": "b2b_menu_handle",
+      "label": "B2B menu handle",
+      "info": "Enter the handle of the navigation menu to show only to customers tagged ‘b2b’."
     },
     {
       "type": "select",
