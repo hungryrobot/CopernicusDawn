@@ -220,6 +220,10 @@
       If SparkLayer’s global Product List widget is enabled, this data-spark attribute
       ensures their UI won’t display on retail grids.
     {%- endcomment -%}
+    {%- comment -%}
+      Retail collections should render Dawn-only UI.
+      Prevent SparkLayer from enhancing this grid.
+    {%- endcomment -%}
     <div class="product-grid-container" id="ProductGridContainer" data-spark="b2c-only">
       {%- paginate collection.products by section.settings.products_per_page -%}
         {%- if collection.products.size == 0 -%}
