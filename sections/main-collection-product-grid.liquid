@@ -215,7 +215,12 @@
       </aside>
     {%- endif -%}
 
-    <div class="product-grid-container" id="ProductGridContainer">
+    {%- comment -%}
+      Retail collections should use Dawn only; prevent SparkLayer CTAs mounting here.
+      If SparkLayer’s global Product List widget is enabled, this data-spark attribute
+      ensures their UI won’t display on retail grids.
+    {%- endcomment -%}
+    <div class="product-grid-container" id="ProductGridContainer" data-spark="b2c-only">
       {%- paginate collection.products by section.settings.products_per_page -%}
         {%- if collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
