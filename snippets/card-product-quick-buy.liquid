@@ -1,5 +1,5 @@
-{% render 'b2b-flags' %}
 
+ 
 <div class="list-view-item">
   <div class="list-view-name-image">
     <div class="list-view-image">
@@ -26,22 +26,21 @@
   </div>
 
   <div class="list-view-purchase">
-    {% if is_b2b %}
-      {% comment %} === SPARKLAYER PRODUCT CARD MOUNT (B2B QUICK BUY) === {% endcomment %}
-      <div class="sprkl-product-card" data-sprkl="product-card" data-product-id="{{ card_product.id }}"></div>
-    {% endif %}
-
-    {% unless is_b2b %}
-      <div data-spark="b2c-only">
-        {% assign hidePricesLoggedOut = true %}
-        {%- if hidePricesLoggedOut == true -%}
-          <div style="font-size: 14px; position: relative; z-index: 10">
-            Please <a href="/account" style="color: #000; text-decoration: underline">sign in</a> to see pricing
-          </div>
-        {%- else -%}
-          {% render 'price', product: card_product, price_class: '' %}
-        {%- endif -%}
-      </div>
-    {% endunless %}
+    
+    <div style="position: relative; z-index: 1;">
+      <spark-product-card show-stock mode-quick-buy parent-id="{{ card_product.id }}"></spark-product-card>
+    </div>
+    <div data-spark="b2c-only">
+      {% assign hidePricesLoggedOut = true %}
+      {%- if hidePricesLoggedOut == true -%}
+        <div style="font-size: 14px; position: relative; z-index: 10">
+          Please <a href="/account" style="color: #000; text-decoration: underline">sign in</a>  to see  pricing
+        </div>
+      {%- else -%}
+        {% render 'price', product: card_product, price_class: '' %}
+      {%- endif -%}
+    </div>
+    
+    
   </div>
 </div>  

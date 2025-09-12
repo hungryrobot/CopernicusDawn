@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main-collection-product-grid": {
+      "settings": {
+        "enable_quick_buy": {
+          "label": "Enable quick buy"
+        }
+      }
+    }
+  }
+}

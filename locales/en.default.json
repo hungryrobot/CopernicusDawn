@@ -332,6 +332,13 @@
       "title": "Collection",
       "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>"
     },
+    "main-collection-product-grid": {
+      "settings": {
+        "enable_quick_buy": {
+          "label": "Enable quick buy"
+        }
+      }
+    },
     "video": {
       "load_video": "Load video: {{ description }}"
     },
