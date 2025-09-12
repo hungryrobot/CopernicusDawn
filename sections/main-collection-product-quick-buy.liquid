@@ -3,11 +3,15 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
-{%- if section.settings.enable_quick_add -%}
-  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
+{%- comment -%}
+  SparkLayer Quick Buy Mode (B2B-only)
+  Use SparkLayer's own authentication signal rather than a plain tag.
+  Docs: https://docs.sparklayer.io/shopify-b2b-content
+{%- endcomment -%}
+{% assign is_b2b = false %}
+{% if customer and customer.metafields.sparklayer and customer.metafields.sparklayer.authentication %}
+  {% assign is_b2b = true %}
+{% endif %}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -243,10 +247,9 @@
             {%- endif -%}
               
             {% assign productTags = product.tags | join: ', ' %}
-            {% assign customerTags = customer.tags | join: ', ' %}
 
             {% if productTags contains 'b2b-only' %}
-              {% if customerTags contains 'b2b' %}
+              {% if is_b2b %}
                 <li class="quick-buy-item">
                   {% render 'card-product-quick-buy',
                     card_product: product,
@@ -255,13 +258,13 @@
                     show_vendor: section.settings.show_vendor,
                     show_rating: section.settings.show_rating,
                     lazy_load: lazy_load,
-                    show_quick_add: section.settings.enable_quick_add,
+                    show_quick_add: is_b2b,
                     section_id: section.id
 
                   %}
                 </li>
               {% else %}
-          			<!-- Don't show anything for logged out customers-->
+          				<!-- Don't show anything for logged out customers-->
               {% endif %}
             {% else %}
               <li class="quick-buy-item">
@@ -272,7 +275,7 @@
                   show_vendor: section.settings.show_vendor,
                   show_rating: section.settings.show_rating,
                   lazy_load: lazy_load,
-                  show_quick_add: section.settings.enable_quick_add,
+                  show_quick_add: is_b2b,
                   section_id: section.id
 
                 %}
