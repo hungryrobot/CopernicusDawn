@@ -123,8 +123,7 @@
   }
 </style>
 
-<!-- SparkLayer Quick Buy should only appear for authenticated B2B -->
-<div class="section-{{ section.id }}-padding" data-spark="b2b-only">
+<div class="section-{{ section.id }}-padding">
   {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
   {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
     <facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
