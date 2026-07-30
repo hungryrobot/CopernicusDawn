@@ -255,6 +255,18 @@
             "bg_color": "#e6f5f2"
           }
         },
+        "rep_Xad7QN": {
+          "type": "rep",
+          "settings": {
+            "photo": "shopify://shop_images/rep04.jpg",
+            "photo_url": "",
+            "group": "INDEPENDENT",
+            "name": "MARY MORRISON",
+            "email": "toyloftmary@gmail.com",
+            "territory": "OREGON",
+            "bg_color": "#e6f5f2"
+          }
+        },
         "rep_UFGNqH": {
           "type": "rep",
           "settings": {
@@ -265,30 +277,6 @@
             "email": "repintoys@aol.com",
             "territory": "PENNSYLVANIA, CONNECTICUT, NEW JERSEY",
             "bg_color": "#e6f5f2"
-          }
-        },
-        "rep_X8NcnP": {
-          "type": "rep",
-          "settings": {
-            "photo": "shopify://shop_images/rep05.jpg",
-            "photo_url": "",
-            "group": "KINFETTI SALES DIVISION / ENCHANTED",
-            "name": "JOHN GRAVES",
-            "email": "john@kinfetti.com",
-            "territory": "IDAHO, MONTANA, WYOMING, WASHINGTION",
-            "bg_color": "#ebf987"
-          }
-        },
-        "rep_VTmGFb": {
-          "type": "rep",
-          "settings": {
-            "photo": "shopify://shop_images/rep04.jpg",
-            "photo_url": "",
-            "group": "KINFETTI SALES DIVISION / ENCHANTED",
-            "name": "MARY MORRISON",
-            "email": "mary@enchantedmoments.com",
-            "territory": "OREGON",
-            "bg_color": "#ebf987"
           }
         },
         "rep_hT9QPU": {
@@ -335,9 +323,8 @@
         "rep_pLnj4c",
         "rep_Qyttm7",
         "rep_c3fFrK",
+        "rep_Xad7QN",
         "rep_UFGNqH",
-        "rep_X8NcnP",
-        "rep_VTmGFb",
         "rep_hT9QPU",
         "rep_xfXgFg",
         "rep_6M7YRg"
@@ -358,7 +345,7 @@
             "show_collections": false,
             "show_reviews": true,
             "appearance": "faireDefault",
-            "background_color": "#FFFFFF",
+            "background_color": "#ffffff",
             "corner_radius": 0,
             "heading_font": "merriweather_n4",
             "heading_color": "#333333",
@@ -368,14 +355,14 @@
             "button_background_color": "#333333",
             "button_font": "sans_serif_n4",
             "button_font_size_scale": 100,
-            "button_text_color": "#FFFFFF",
+            "button_text_color": "#ffffff",
             "button_text_case": "none",
             "button_corner_radius": 0,
-            "button_border_color": "#FFFFFF",
+            "button_border_color": "#ffffff",
             "button_border_thickness": 0,
             "banner_heading_font": "merriweather_n4",
             "banner_secondary_font": "sans_serif_n4",
-            "banner_background_color": "#FBF8F6",
+            "banner_background_color": "#fbf8f6",
             "review_text_and_star_color": "#333333"
           }
         }
