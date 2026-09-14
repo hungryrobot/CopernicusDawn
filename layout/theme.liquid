@@ -553,7 +553,7 @@ window.sparkOptions = {
       {%- comment -%} SparkLayer core (manual include fallback). 
         If App Embed is not listed for this theme, keep this include.
         If you *do* have the App Embed, you can remove this block. {%- endcomment -%}
-      {%- if 'sprkl-core.js' | asset_url -%}
+      {%- if 'sprkl-core.js' -%}
         {{ 'sprkl-core.js' | asset_url | script_tag }}
       {%- endif -%}
 
@@ -585,3 +585,13 @@ window.sparkOptions = {
   {% comment %} END {% endcomment %}
   </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- if 'sprkl-core.js' | asset_url -%}"
+  to: "{%- if 'sprkl-core.js' -%}"
+  position: 29025..29051
+{% endcomment %}
